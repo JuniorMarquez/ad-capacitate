@@ -5,9 +5,9 @@
 app
   // Flot Chart controller 
   .controller('FlotChartDemoCtrl', ['$scope', '$http','$modal','MyService','$state','$filter','datepickerConfig','toaster',function($scope,$http,$modal,MyService,$state,$filter,datepickerConfi,toaster) {
-      if (typeof MyService.data.email==="undefined"){
-  $state.go('access.signin');
-}
+//       if (typeof MyService.data.email==="undefined"){
+//   $state.go('access.signin');
+// }
   $scope.toaster = {
     title: 'Exito',
     type: 'success',
@@ -39,10 +39,7 @@ if ($scope.app.status=="actualizado"){$scope.vigilante="si"};
   });
 $scope.estados = ['soltero(a)','casado(a)','divorciado(a)','viudo(a)'];
  $scope.nacionalidades = ['V','E'];
-// $scope.municipios = ['libertad','independencia','cordova','san cristobal'];
-// $scope.universidades =[ 'ULA','LUZ'];
-// $scope.especialidades = [ 'Ortodoncia','Endodoncia'];
-        
+
         $scope.anos=[];
         for (var i = 0; i < 88; ++i)
           {
