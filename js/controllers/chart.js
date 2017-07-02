@@ -22,21 +22,13 @@ if ($scope.app.status=="actualizado"){$scope.vigilante="si"};
     $scope.item={};
         var result = [];
 
-  $http.get('http://54.202.62.62:1345/municipio').then(function (resp) {
-    $scope.municipios = resp.data.results;
+  $http.get('http://54.202.62.62:1346/obligacion').then(function (resp) {
+    $scope.obligaciones = resp.data.results;
   });
-   $http.get('http://54.202.62.62:1345/directiva').then(function (resp) {
+   $http.get('http://54.202.62.62:1346/equipodirectivo').then(function (resp) {
     $scope.listadoDirectiva = resp.data.results;
   });
-    $http.get('http://54.202.62.62:1345/comite').then(function (resp) {
-    $scope.listadoComite = resp.data.results;
-  });
-  $http.get('http://54.202.62.62:1345/universidad').then(function (resp) {
-    $scope.universidades = resp.data.results;
-  });
-  $http.get('http://54.202.62.62:1345/especialidad').then(function (resp) {
-    $scope.especialidades = resp.data.results;
-  });
+
 $scope.estados = ['soltero(a)','casado(a)','divorciado(a)','viudo(a)'];
  $scope.nacionalidades = ['V','E'];
 
@@ -65,7 +57,7 @@ $scope.consultaMiembroDeArchivo=function(){
     elemento=$scope.item2[i];
           
               // alert("elemento:"+elemento.primerNombre);
-            $http.post('http://54.202.62.62:1345/miembro/',elemento);
+            $http.post('http://54.202.62.62:1346/miembro/',elemento);
             
            
           // a=a+1;
@@ -95,7 +87,7 @@ $scope.cargaInicial=function  () {
  var totalValidados=0;
  var pendientes=0;
  var agenda = 0;
-    $http.get('http://54.202.62.62:1345/miembro').then(function (resp) {
+    $http.get('http://54.202.62.62:1346/miembro').then(function (resp) {
     $scope.miembros = resp.data.results;
  var numero = $scope.miembros.length;
  var letra = "";
@@ -129,14 +121,14 @@ $scope.cargaInicial=function  () {
   });
 };
 
-$scope.cargaInicial();
+// $scope.cargaInicial();
 
 
 
 $scope.guardar = function(item){
     $scope.pop();
     item.status='actualizado';
-    $http.put('http://54.202.62.62:1345/miembro/'+MyService.data.idUsuario, item)
+    $http.put('http://54.202.62.62:1346/miembro/'+MyService.data.idUsuario, item)
     $state.go('app.dashboard-v1');
 };
   $scope.today = function() {
@@ -160,7 +152,7 @@ $scope.guardar = function(item){
     $scope.totalMiembros=0;
     $scope.consultores=[];
     $scope.cargaMiembros = function(){
-      $http.get('http://54.202.62.62:1345/miembro/').then(function (resp) {
+      $http.get('http://54.202.62.62:1346/miembro/').then(function (resp) {
         $scope.miembros = resp.data.results;
         // for (var i=0;i<$scope.consultores.length;++i){
         //   if($scope.consultores[i].sexo=='Macho'){
@@ -170,14 +162,14 @@ $scope.guardar = function(item){
         $scope.totalMiembros=$scope.miembros.length;
       });
     };
-  $scope.cargaMiembros();
-  $scope.openMision = function () {
+  // $scope.cargaMiembros();
+  $scope.openContacto = function () {
 
 // var dato="";
       var datosCuenta="";
       var item={};
 //     $scope.item={};
-    // $http.get('http://54.202.62.62:1345/configuracion').success(function(respuesta){
+    // $http.get('http://54.202.62.62:1346/configuracion').success(function(respuesta){
     //     $scope.configuracion = respuesta.results[0];
     //     $scope.item.mision=respuesta.results[0].mision; 
     // });
@@ -197,9 +189,9 @@ $scope.guardar = function(item){
         //  datosCuenta=item;
         //  alert(""+datosCuenta.mision);
         var modalInstance = $modal.open({
-        templateUrl: 'modalMision.html',
+        templateUrl: 'modalContacto.html',
         controller: 'ModalInstanceCtrl',
-        size: 'md',
+        size: 'lg',
         resolve: {
             dato: function  () {
             return item;
@@ -222,11 +214,11 @@ $scope.guardar = function(item){
 
 };
 
-    $scope.openListadoEspecialidades = function (item) {
+    $scope.openListadoTiposCapacitaciones = function (item) {
     // var identificador=item.id;
     // MyService.data.identificador = identificador;
       var modalInstance = $modal.open({
-        templateUrl: 'modalListadoEspecialidades.html',
+        templateUrl: 'modalListadoTiposCapacitaciones.html',
         controller: 'ModalInstanceCtrl',
         size: 'md',
         resolve: {
@@ -251,10 +243,10 @@ $scope.guardar = function(item){
     });
   };
 
-    $scope.openDeporte = function (item) {
+    $scope.openEmail = function (item) {
 
       var modalInstance = $modal.open({
-        templateUrl: 'modalDeporte.html',
+        templateUrl: 'modalEmail.html',
         controller: 'ModalInstanceCtrl',
         size: 'lg',
         resolve: {
@@ -365,10 +357,10 @@ $scope.guardar = function(item){
 
 
 
-  $scope.openEspecialidad = function (item) {
+  $scope.openTipoCapacitacion= function (item) {
 
       var modalInstance = $modal.open({
-        templateUrl: 'modalEspecialidad.html',
+        templateUrl: 'modalTipoCapacitacion.html',
         controller: 'ModalInstanceCtrl',
         size: 'sm',
         resolve: {
@@ -420,11 +412,11 @@ $scope.guardar = function(item){
       // $log.info('Modal dismissed at: ' + new Date());
     });
   };
-   $scope.openListadoDeporte = function (item) {
+   $scope.openListadoEmail = function (item) {
     // var identificador=item.id;
     // MyService.data.identificador = identificador;
       var modalInstance = $modal.open({
-        templateUrl: 'modalListadoDeporte.html',
+        templateUrl: 'modalListadoEmail.html',
         controller: 'ModalInstanceCtrl',
         size: 'lg',
         resolve: {
@@ -507,11 +499,11 @@ $scope.guardar = function(item){
     });
   };
 
-    $scope.openListadoUniversidades = function (item) {
+    $scope.openListadoAreasConocimiento = function (item) {
     // var identificador=item.id;
     // MyService.data.identificador = identificador;
       var modalInstance = $modal.open({
-        templateUrl: 'modalListadoUniversidades.html',
+        templateUrl: 'modalListadoAreasConocimiento.html',
         controller: 'ModalInstanceCtrl',
         size: 'md',
         resolve: {
@@ -536,10 +528,10 @@ $scope.guardar = function(item){
     });
   };
 
-  $scope.openUniversidad = function (item) {
+  $scope.openAreaConocimiento = function (item) {
 
       var modalInstance = $modal.open({
-        templateUrl: 'modalUniversidad.html',
+        templateUrl: 'modalAreaConocimiento.html',
         controller: 'ModalInstanceCtrl',
         size: 'md',
         resolve: {
@@ -566,13 +558,13 @@ $scope.guardar = function(item){
 
   // Municipios 
 
-    $scope.openListadoMunicipios = function (item) {
+    $scope.openListadoObligaciones = function (item) {
     // var identificador=item.id;
     // MyService.data.identificador = identificador;
       var modalInstance = $modal.open({
-        templateUrl: 'modalListadoMunicipios.html',
+        templateUrl: 'modalListadoObligaciones.html',
         controller: 'ModalInstanceCtrl',
-        size: 'sm',
+        size: 'md',
         resolve: {
 
            dato: function  () {
@@ -595,10 +587,10 @@ $scope.guardar = function(item){
     });
   };
 
-  $scope.openMunicipio = function (item) {
+  $scope.openObligacion = function (item) {
 
       var modalInstance = $modal.open({
-        templateUrl: 'modalMunicipio.html',
+        templateUrl: 'modalObligacion.html',
         controller: 'ModalInstanceCtrl',
         size: 'sm',
         resolve: {

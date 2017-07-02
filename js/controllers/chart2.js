@@ -35,19 +35,19 @@ app
     $scope.item={};
         var result = [];
 
-  $http.get('http://54.202.62.62:1345/municipio').then(function (resp) {
-    $scope.municipios = resp.data.results;
-  });
-  $http.get('http://54.202.62.62:1345/universidad').then(function (resp) {
-    $scope.universidades = resp.data.results;
-  });
-  $http.get('http://54.202.62.62:1345/especialidad').then(function (resp) {
-    $scope.especialidades = resp.data.results;
-  });
-   $http.get('http://54.202.62.62:1345/directiva').then(function (resp) {
+  // $http.get('http://54.202.62.62:1346/municipio').then(function (resp) {
+  //   $scope.municipios = resp.data.results;
+  // });
+  // $http.get('http://54.202.62.62:1346/universidad').then(function (resp) {
+  //   $scope.universidades = resp.data.results;
+  // });
+  // $http.get('http://54.202.62.62:1346/especialidad').then(function (resp) {
+  //   $scope.especialidades = resp.data.results;
+  // });
+   $http.get('http://54.202.62.62:1346/equipodirectivo').then(function (resp) {
     $scope.listadoDirectiva = resp.data.results;
   });
-    $http.get('http://54.202.62.62:1345/comite').then(function (resp) {
+    $http.get('http://54.202.62.62:1346/comite').then(function (resp) {
     $scope.listadoComite = resp.data.results;
   });
 $scope.estados = ['soltero(a)','casado(a)','divorciado(a)','viudo(a)'];
@@ -81,7 +81,7 @@ var totalOdontologos=0;
  var totalClinicasConsultorios=0;
  var totalPendientes=0;
  var pendientes=0;
-    $http.get('http://54.202.62.62:1345/miembro').then(function (resp) {
+    $http.get('http://54.202.62.62:1346/miembro').then(function (resp) {
     $scope.miembros = resp.data.results;
  var numero = $scope.miembros.length;
  $scope.total= numero;
@@ -98,7 +98,7 @@ var totalOdontologos=0;
   });
 };
 
-$scope.cargaInicial();
+// $scope.cargaInicial();
 
 
 
@@ -109,7 +109,7 @@ $scope.guardar = function(item){
       
       item.nivel=3;
     item.status='actualizado';
-    $http.put('http://54.202.62.62:1345/miembro/'+MyService.data.idUsuario, item)
+    $http.put('http://54.202.62.62:1346/miembro/'+MyService.data.idUsuario, item)
     $modalInstance.close();
      $state.go('app.ok');
 };
@@ -134,7 +134,7 @@ $scope.guardar = function(item){
     $scope.totalMiembros=0;
     $scope.consultores=[];
     $scope.cargaMiembros = function(){
-      $http.get('http://54.202.62.62:1345/miembro/').then(function (resp) {
+      $http.get('http://54.202.62.62:1346/miembro/').then(function (resp) {
         $scope.miembros = resp.data.results;
         // for (var i=0;i<$scope.consultores.length;++i){
         //   if($scope.consultores[i].sexo=='Macho'){
@@ -144,14 +144,14 @@ $scope.guardar = function(item){
         $scope.totalMiembros=$scope.miembros.length;
       });
     };
-  $scope.cargaMiembros();
-  $scope.openMision = function () {
+  // $scope.cargaMiembros();
+  $scope.openContacto = function () {
 
 // var dato="";
       var datosCuenta="";
       var item={};
 //     $scope.item={};
-    // $http.get('http://54.202.62.62:1345/configuracion').success(function(respuesta){
+    // $http.get('http://54.202.62.62:1346/configuracion').success(function(respuesta){
     //     $scope.configuracion = respuesta.results[0];
     //     $scope.item.mision=respuesta.results[0].mision; 
     // });
@@ -171,7 +171,7 @@ $scope.guardar = function(item){
         //  datosCuenta=item;
         //  alert(""+datosCuenta.mision);
         var modalInstance = $modal.open({
-        templateUrl: 'modalMision.html',
+        templateUrl: 'modalContacto.html',
         controller: 'ModalInstanceCtrl',
         size: 'lg',
         resolve: {
@@ -196,179 +196,16 @@ $scope.guardar = function(item){
 
 };
 
-    $scope.openListadoEspecialidades = function (item) {
-    // var identificador=item.id;
-    // MyService.data.identificador = identificador;
-      var modalInstance = $modal.open({
-        templateUrl: 'modalListadoEspecialidades.html',
-        controller: 'ModalInstanceCtrl',
-        size: 'md',
-        resolve: {
-
-           dato: function  () {
-            return item;
-            // body...
-          },
-           datosCuenta: function  () {
-            return datosCuenta;
-            // body...
-          },
-          items: function () {
-            return $scope.items;
-          }
-        }
-      });
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      // $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-
-  $scope.openEspecialidad = function (item) {
-
-      var modalInstance = $modal.open({
-        templateUrl: 'modalEspecialidad.html',
-        controller: 'ModalInstanceCtrl',
-        size: 'sm',
-        resolve: {
-              dato: function  () {
-            return item;
-            // body...
-          },
-           datosCuenta: function  () {
-            return datosCuenta;
-            // body...
-          },
-          items: function () {
-            return $scope.items;
-          }
-        }
-      });
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
+   
 
 
-    $scope.openListadoUniversidades = function (item) {
-    // var identificador=item.id;
-    // MyService.data.identificador = identificador;
-      var modalInstance = $modal.open({
-        templateUrl: 'modalListadoUniversidades.html',
-        controller: 'ModalInstanceCtrl',
-        size: 'md',
-        resolve: {
 
-           dato: function  () {
-            return item;
-            // body...
-          },
-           datosCuenta: function  () {
-            return datosCuenta;
-            // body...
-          },
-          items: function () {
-            return $scope.items;
-          }
-        }
-      });
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      // $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-
-  $scope.openUniversidad = function (item) {
-
-      var modalInstance = $modal.open({
-        templateUrl: 'modalUniversidad.html',
-        controller: 'ModalInstanceCtrl',
-        size: 'md',
-        resolve: {
-              dato: function  () {
-            return item;
-            // body...
-          },
-           datosCuenta: function  () {
-            return datosCuenta;
-            // body...
-          },
-          items: function () {
-            return $scope.items;
-          }
-        }
-      });
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
+   
 
 
   // Municipios 
 
-    $scope.openListadoMunicipios = function (item) {
-    // var identificador=item.id;
-    // MyService.data.identificador = identificador;
-      var modalInstance = $modal.open({
-        templateUrl: 'modalListadoMunicipios.html',
-        controller: 'ModalInstanceCtrl',
-        size: 'sm',
-        resolve: {
-
-           dato: function  () {
-            return item;
-            // body...
-          },
-           datosCuenta: function  () {
-            return datosCuenta;
-            // body...
-          },
-          items: function () {
-            return $scope.items;
-          }
-        }
-      });
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      // $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-
-  $scope.openMunicipio = function (item) {
-
-      var modalInstance = $modal.open({
-        templateUrl: 'modalMunicipio.html',
-        controller: 'ModalInstanceCtrl',
-        size: 'sm',
-        resolve: {
-              dato: function  () {
-            return item;
-            // body...
-          },
-           datosCuenta: function  () {
-            return datosCuenta;
-            // body...
-          },
-          items: function () {
-            return $scope.items;
-          }
-        }
-      });
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-
-   // Fin municipios 
+   
 
 
     $scope.open = function($event) {

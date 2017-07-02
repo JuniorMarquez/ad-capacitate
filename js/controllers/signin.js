@@ -30,11 +30,11 @@ app.controller('SigninFormController', ['$scope', '$filter','$http', '$state', '
         item.editing = true;
       }
     };
-    $http.get('http://54.202.62.62:1345/configuracion').success(function(respuesta){
-        $scope.configuracion = respuesta.results[0];
-        $scope.item.mision=respuesta.results[0].mision; 
-        MyService.data.mision=$scope.item.mision;
-        MyService.data.idConfig=respuesta.results[0].id;
+    $http.get('http://54.202.62.62:1346/contacto').success(function(respuesta){
+        $scope.contacto = respuesta.results[0];
+        $scope.item.direccion=respuesta.results[0].direccion; 
+        MyService.data.direccion=$scope.item.direccion;
+        MyService.data.idContacto=respuesta.results[0].id;
     });
 
   $scope.doneEditingDatos = function(item){
@@ -45,7 +45,7 @@ app.controller('SigninFormController', ['$scope', '$filter','$http', '$state', '
     usuarioAct.email=item.email;
     usuarioAct.password=item.password;
     $scope.app.nombre=item.nombre;
-    $http.put('http://54.202.62.62:1345/userCot/'+MyService.data.idUsuario , usuarioAct)
+    $http.put('http://54.202.62.62:1346/userCap/'+MyService.data.idUsuario , usuarioAct)
     MyService.data.datos=item;
     item.editing = false;
     $scope.pop();
@@ -53,13 +53,13 @@ app.controller('SigninFormController', ['$scope', '$filter','$http', '$state', '
 
   $scope.consultaUsers=function(){
     
-    $http.get('http://54.202.62.62:1345/userCot/' ).success(function(respuesta){
+    $http.get('http://54.202.62.62:1346/userCap/' ).success(function(respuesta){
     $scope.users = respuesta.results;    
         });
   };
   $scope.consultaMiembros=function(){
     // var existente="no";
-    $http.get('http://54.202.62.62:1345/miembro/' ).success(function(respuesta){
+    $http.get('http://54.202.62.62:1346/miembro/' ).success(function(respuesta){
       $scope.miembros = respuesta.results; 
         MyService.data.miembros=$scope.miembros;
     });
@@ -134,7 +134,7 @@ $scope.comprobador=MyService.data.existente;
       }
 };
   $scope.consultaUsers();
-  $scope.consultaMiembros();
+  // $scope.consultaMiembros();
   $scope.login = function() {
     MyService.data.existente="no";
      $scope.authError = '';

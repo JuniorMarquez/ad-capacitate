@@ -4,7 +4,7 @@
 </script>
 
 <div class="modal-header">
-    <h3 class="modal-title">Delegados de deporte</h3>
+    <h3 class="modal-title">Listado de tipos de Capacitacion</h3>
 </div>
 <div class="modal-body">
    
@@ -14,28 +14,27 @@
 
 
 
-              <table class="table" ui-refresh="listadoDeporte">
+              <table class="table" ui-refresh="listadoTiposCapacitaciones">
     <tr>
        
-     
+        <th>Nombre del tipo de capacitacion
+        </th>
        
        <!--  <th>Tipo
         </th>
         <th>Observaciones</th> -->
-        <th>Delegado</th>
         <th></th>
     </tr>
-    <tr ng-repeat="deporte in listadoDeporte">
+    <tr ng-repeat="tipo in listadoTiposCapacitaciones">
         
-       
-        <td>{{deporte.miembro}}
+        <td>{{tipo.nombre}}
         </td>
 <!--         <td>
           {{medicamento.tipoMedicamento}}
         </td>
         <td>{{medicamento.observaciones}}</td> -->
         <td>
-        <input type="button" value="Borrar" class="btn btn-danger btn-xs" ng-click="borrarDeporte(deporte)"/>
+        <input type="button" value="Borrar" class="btn btn-danger btn-xs" ng-click="borrarTipoCapacitacion(tipo)"/>
         </td>
     </tr>
 </table>

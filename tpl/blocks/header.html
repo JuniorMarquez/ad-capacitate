@@ -1,52 +1,44 @@
-     <script type="text/ng-template" id="modalUniversidad.html">
-            <div ng-include="'tpl/modalUniversidad.html'"></div>
-          </script>
-           <script type="text/ng-template" id="modalMunicipio.html">
-            <div ng-include="'tpl/modalMunicipio.html'"></div>
-          </script>
-           <script type="text/ng-template" id="modalEspecialidad.html">
-            <div ng-include="'tpl/modalEspecialidad.html'"></div>
-          </script>
+ 
           <script type="text/ng-template" id="modalDirectiva.html">
             <div ng-include="'tpl/modalDirectiva.html'"></div>
           </script>
           <script type="text/ng-template" id="modalListadoDirectiva.html">
             <div ng-include="'tpl/modalListadoDirectiva.html'"></div>
           </script> 
-
-                    <script type="text/ng-template" id="modalElectoral.html">
-            <div ng-include="'tpl/modalElectoral.html'"></div>
+          <script type="text/ng-template" id="modalEmail.html">
+            <div ng-include="'tpl/modalEmail.html'"></div>
           </script>
-          <script type="text/ng-template" id="modalListadoElectoral.html">
-            <div ng-include="'tpl/modalListadoElectoral.html'"></div>
+          <script type="text/ng-template" id="modalListadoEmail.html">
+            <div ng-include="'tpl/modalListadoEmail.html'"></div>
           </script> 
-
-                    <script type="text/ng-template" id="modalDeporte.html">
-            <div ng-include="'tpl/modalDeporte.html'"></div>
+          <script type="text/ng-template" id="modalContacto.html">
+            <div ng-include="'tpl/modalContacto.html'"></div>
           </script>
-          <script type="text/ng-template" id="modalListadoDeporte.html">
-            <div ng-include="'tpl/modalListadoDeporte.html'"></div>
+
+
+           <script type="text/ng-template" id="modalListadoTiposCapacitaciones.html">
+            <div ng-include="'tpl/modalListadoTiposCapacitaciones.html'"></div>
           </script> 
+          <script type="text/ng-template" id="modalTipoCapacitacion.html">
+            <div ng-include="'tpl/modalTipoCapacitacion.html'"></div>
+          </script>
 
-           <script type="text/ng-template" id="modalComite.html">
-            <div ng-include="'tpl/modalComite.html'"></div>
+          <script type="text/ng-template" id="modalListadoAreasConocimiento.html">
+            <div ng-include="'tpl/modalListadoAreasConocimiento.html'"></div>
+          </script> 
+          <script type="text/ng-template" id="modalAreaConocimiento.html">
+            <div ng-include="'tpl/modalAreaConocimiento.html'"></div>
           </script>
-          <script type="text/ng-template" id="modalListadoComite.html">
-            <div ng-include="'tpl/modalListadoComite.html'"></div>
-          </script>             
+          
+           <script type="text/ng-template" id="modalListadoObligaciones.html">
+            <div ng-include="'tpl/modalListadoObligaciones.html'"></div>
+          </script> 
+          <script type="text/ng-template" id="modalObligacion.html">
+            <div ng-include="'tpl/modalObligacion.html'"></div>
+          </script>
 
-          <script type="text/ng-template" id="modalListadoUniversidades.html">
-            <div ng-include="'tpl/modalListadoUniversidades.html'"></div>
-          </script>
-          <script type="text/ng-template" id="modalListadoMunicipios.html">
-            <div ng-include="'tpl/modalListadoMunicipios.html'"></div>
-          </script>
-           <script type="text/ng-template" id="modalListadoEspecialidades.html">
-            <div ng-include="'tpl/modalListadoEspecialidades.html'"></div>
-          </script>
-                <script type="text/ng-template" id="modalMision.html">
-            <div ng-include="'tpl/modalMision.html'"></div>
-          </script>
+        
+          
           
       <div class="navbar-header {{app.settings.navbarHeaderColor}}">
         <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
@@ -74,10 +66,11 @@
             <i class="icon-user fa-fw"></i>
           </a> -->
         </div>
-           <ul class="nav navbar-nav hidden-sm" ng-show="{{app.nivel == '1'}}">
+        <!-- <ul class="nav navbar-nav hidden-sm" ng-show="{{app.nivel == '1'}}"> -->
+           <ul class="nav navbar-nav hidden-sm" >
           <li class="dropdown pos-stc" dropdown>
             <a href class="dropdown-toggle" dropdown-toggle>
-              <span><i class=" icon-settings " tooltip-placement="bottom" tooltip="Configuración de la organización"></i></span> 
+              <span><i class="fa fa-desktop " tooltip-placement="bottom" tooltip="Configuración Front-end"></i></span> 
               <span class="caret"></span>
             </a>
             <div class="dropdown-menu wrapper w-full bg-white" ng-controller="FlotChartDemoCtrl">
@@ -86,7 +79,7 @@
                  
 
                 <div class="col-sm-4" >
-                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="icon-star text-muted m-r-xs"></i>Junta directiva <!-- <span class="badge badge-sm bg-success">10</span> --></div>
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="fa fa-sitemap text-muted m-r-xs"></i>Equipo directivo <!-- <span class="badge badge-sm bg-success">10</span> --></div>
                   <div class="row">
                     <div class="col-xs-12">
                       <ul class="list-unstyled l-h-2x">
@@ -94,7 +87,26 @@
                           <a ng-click="openDirectiva()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar directivo</a>
                         </li>
                         <li>
-                          <a ng-click="openListadoDirectiva()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver junta directiva</a>
+                          <a ng-click="openListadoDirectiva()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver equipo directivo</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+
+               
+
+                <div class="col-sm-4" >
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="glyphicon glyphicon-envelope  text-muted m-r-xs"></i>Emails corporativos <!-- <span class="badge badge-sm bg-success">10</span> --></div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <ul class="list-unstyled l-h-2x">
+                        <li>
+                          <a ng-click="openEmail()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar email</a>
+                        </li>
+                        <li>
+                          <a ng-click="openListadoEmail()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>listado de emails corporativos</a>
                         </li>
                       </ul>
                     </div>
@@ -102,60 +114,12 @@
                 </div>
 
                 <div class="col-sm-4" >
-                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="fa fa-gavel  text-muted m-r-xs"></i>Tribunal disciplinario <!-- <span class="badge badge-sm bg-success">10</span> --></div>
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="fa fa-edit  text-muted m-r-xs"></i>Información de contacto </div>
                   <div class="row">
                     <div class="col-xs-12">
                       <ul class="list-unstyled l-h-2x">
                         <li>
-                          <a ng-click="openComite()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar integrante</a>
-                        </li>
-                        <li>
-                          <a ng-click="openListadoComite()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver tribunal disciplinario</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-sm-4" >
-                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="fa fa-stack-overflow text-muted m-r-xs"></i>Comisión electoral <!-- <span class="badge badge-sm bg-success">10</span> --></div>
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <ul class="list-unstyled l-h-2x">
-                        <li>
-                          <a ng-click="openElectoral()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar integrante</a>
-                        </li>
-                        <li>
-                          <a ng-click="openListadoElectoral()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver comisión electoral</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-sm-4" >
-                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="fa fa-dribbble  text-muted m-r-xs"></i>Delegados de deporte <!-- <span class="badge badge-sm bg-success">10</span> --></div>
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <ul class="list-unstyled l-h-2x">
-                        <li>
-                          <a ng-click="openDeporte()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar delegado</a>
-                        </li>
-                        <li>
-                          <a ng-click="openListadoDeporte()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver delegados</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-sm-4" >
-                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="fa fa-edit  text-muted m-r-xs"></i>Información de la organización </div>
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <ul class="list-unstyled l-h-2x">
-                        <li>
-                          <a ng-click="openMision()"><i class="fa fa-fw fa-angle-right  text-muted m-r-xs"></i>Misión, visión, horario.</a>
+                          <a ng-click="openContacto()"><i class="fa fa-fw fa-angle-right  text-muted m-r-xs"></i>Teléfonos, dirección, redes.</a>
                         </li>
                         
                       </ul>
@@ -173,7 +137,8 @@
         <!-- / buttons -->
 
         <!-- link and dropdown -->
-        <ul class="nav navbar-nav hidden-sm" ng-show="{{app.nivel == '1'}}">
+        <!-- <ul class="nav navbar-nav hidden-sm" ng-show="{{app.nivel == '1'}}"> -->
+                <ul class="nav navbar-nav hidden-sm" >
           <li class="dropdown pos-stc" dropdown>
             <a href class="dropdown-toggle" dropdown-toggle>
               <span><i class="fa fa-sliders" tooltip-placement="bottom" tooltip="Parametros de la aplicación"></i></span> 
@@ -183,45 +148,45 @@
               <div class="row">
                 <!-- <div class="col-sm-4" ng-show="{{app.tipoEstablecimiento=='1'}}"> -->
                  <div class="col-sm-4" >
-                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="fa fa-graduation-cap  text-muted m-r-xs"></i>Especialidades <!-- <span class="badge badge-sm bg-success">10</span> --></div>
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="glyphicon glyphicon-tags  text-muted m-r-xs"></i>Tipos de capacitación <!-- <span class="badge badge-sm bg-success">10</span> --></div>
                   <div class="row">
                     <div class="col-xs-12">
                       <ul class="list-unstyled l-h-2x">
                         <li>
-                          <a ng-click="openEspecialidad()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar especialidad</a>
+                          <a ng-click="openTipoCapacitacion()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar Tipo de Capacitación</a>
                         </li>
                         <li>
-                          <a ng-click="openListadoEspecialidades()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver listado</a>
+                          <a ng-click="openListadoTiposCapacitaciones()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver listado</a>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-4" >
-                  <div class="m-l-xs m-t-xs m-b-xs font-bold"><i class="fa fa-bank  text-muted m-r-xs"></i>Universidades de egreso <!-- <span class="badge badge-sm bg-success">10</span> --></div>
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold"><i class="icon icon-magic-wand   text-muted m-r-xs"></i>Areas de conocimiento <!-- <span class="badge badge-sm bg-success">10</span> --></div>
                   <div class="row">
                     <div class="col-xs-12">
                       <ul class="list-unstyled l-h-2x">
                         <li>
-                          <a ng-click="openUniversidad()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar Universidad</a>
+                          <a ng-click="openAreaConocimiento()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar Área</a>
                         </li>
                         <li>
-                          <a ng-click="openListadoUniversidades()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver listado</a>
+                          <a ng-click="openListadoAreasConocimiento()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver listado</a>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-4" >
-                  <div class="m-l-xs m-t-xs m-b-xs font-bold"><i class="fa fa-flag  text-muted m-r-xs"></i>Municipios <!-- <span class="badge badge-sm bg-success">10</span> --></div>
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold"><i class="fa fa-shield  text-muted m-r-xs"></i>Obligaciones Empresariales</div>
                   <div class="row">
                     <div class="col-xs-12">
                       <ul class="list-unstyled l-h-2x">
                         <li>
-                          <a ng-click="openMunicipio()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar municipio</a>
+                          <a ng-click="openObligacion()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar obligación</a>
                         </li>
                         <li>
-                          <a ng-click="openListadoMunicipios()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver listado</a>
+                          <a ng-click="openListadoObligaciones()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver listado</a>
                         </li>
                       </ul>
                     </div>

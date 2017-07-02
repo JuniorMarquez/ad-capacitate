@@ -4,7 +4,7 @@
 </script>
 
 <div class="modal-header">
-    <h3 class="modal-title">Listado de municipios</h3>
+    <h3 class="modal-title">Listado emails corporativos</h3>
 </div>
 <div class="modal-body">
    
@@ -14,27 +14,34 @@
 
 
 
-              <table class="table" ui-refresh="municipios">
+              <table class="table" ui-refresh="listadoEmailCorporativo">
     <tr>
        
-        <th>Municipio
-        </th>
+     
        
        <!--  <th>Tipo
         </th>
         <th>Observaciones</th> -->
-        <th></th>
+        <th>Usuario</th>
+        <th>Email</th>
+        <th>Contraseña</th>
+           <th></th>
     </tr>
-    <tr ng-repeat="municipio in municipios">
- 
-        <td>{{municipio.name}}
+    <tr ng-repeat="email in listadoEmailCorporativo">
+        
+       
+        <td>{{email.usuario}}
+        </td>
+         <td>{{email.email}}
+        </td>
+         <td>{{email.password}}
         </td>
 <!--         <td>
           {{medicamento.tipoMedicamento}}
         </td>
         <td>{{medicamento.observaciones}}</td> -->
         <td>
-        <input type="button" value="Borrar" class="btn btn-danger btn-xs" ng-click="borrarMunicipio(municipio)"/>
+        <input type="button" value="Borrar" class="btn btn-danger btn-xs" ng-click="borrarEmail(email)"/>
         </td>
     </tr>
 </table>

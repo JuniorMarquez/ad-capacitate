@@ -72,25 +72,25 @@ angular.module('app')
                       }]
                   }
                   })
-               .state('app.miembros', {
-                  url: '/miembros',
-                  templateUrl: 'tpl/apps_miembros.html',
-                  resolve: {
-                      deps: ['$ocLazyLoad',
-                        function( $ocLazyLoad ){
-                          return $ocLazyLoad.load(['ui.select','toaster','ngGrid']).then(
-                              function(){
-                                  return $ocLazyLoad.load([
-                                    'js/controllers/chart.js',
-                                                  'js/controllers/bootstrap.js',
-                                                  'js/app/miembros/miembros.js'
-                                                  ]);
-                              }
-                          );
-                      }]
-                  }
+              //  .state('app.capacitaciones', {
+              //     url: '/capacitaciones',
+              //     templateUrl: 'tpl/apps_capacitaciones.html',
+              //     resolve: {
+              //         deps: ['$ocLazyLoad',
+              //           function( $ocLazyLoad ){
+              //             return $ocLazyLoad.load(['ui.select','toaster','ngGrid']).then(
+              //                 function(){
+              //                     return $ocLazyLoad.load([
+              //                       'js/controllers/chart.js',
+              //                                     'js/controllers/bootstrap.js',
+              //                                     'js/app/capacitaciones/capacitaciones.js'
+              //                                     ]);
+              //                 }
+              //             );
+              //         }]
+              //     }
 
-              })
+              // })
               .state('app.enlaces', {
                   url: '/enlaces',
                   templateUrl: 'tpl/apps_enlaces.html',
@@ -718,9 +718,9 @@ angular.module('app')
                   }
                  
               })
-.state('apps.profesionales', {
-                  url: '/profesionales',
-                  templateUrl: 'tpl/apps_profesionales.html',
+.state('apps.capacitaciones', {
+                  url: '/capacitaciones',
+                  templateUrl: 'tpl/apps_capacitaciones.html',
                    resolve: {
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad ){
@@ -729,7 +729,7 @@ angular.module('app')
                                 return $ocLazyLoad.load( [
                                   'js/controllers/chart2.js',
                                 'js/controllers/bootstrap.js',
-                                'js/app/profesionales/profesionales.js'
+                                'js/app/capacitaciones/capacitaciones.js'
                                                   ]);
                               }
                           );

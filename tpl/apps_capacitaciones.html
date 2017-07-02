@@ -7,8 +7,8 @@
            <script type="text/ng-template" id="modalConfirm.html">
             <div ng-include="'tpl/modalConfirm.html'"></div>
           </script>
-              <script type="text/ng-template" id="modalConfirmBorrarProfesional.html">
-            <div ng-include="'tpl/modalConfirmBorrarProfesional.html'"></div>
+              <script type="text/ng-template" id="modalConfirmBorrarCapacitacion.html">
+            <div ng-include="'tpl/modalConfirmBorrarCapacitacion.html'"></div>
           </script>
           <script type="text/ng-template" id="modalConfirm2.html">
             <div ng-include="'tpl/modalConfirm2.html'"></div>
@@ -22,34 +22,34 @@
   app.hideAside = false;
   app.hideFooter = true;
   app.settings.asideFolded = true;" 
-  ng-controller="ProfesionalesCtrl">
+  ng-controller="CapacitacionesCtrl">
 
   <!-- column -->
   <div class="col w b-r">
     <div class="vbox">
       <div class="row-row">
         <div class="cell scrollable hover">
-          <div class="cell-inner" ui-refresh="especialidades">
-            <div class="list-group no-radius no-border no-bg m-b-none" ui-refresh="especialidades">
+          <div class="cell-inner" ui-refresh="tiposCapacitaciones">
+            <div class="list-group no-radius no-border no-bg m-b-none" ui-refresh="tiposCapacitaciones">
 
 
 
 
-              <a class="list-group-item b-b" ng-dblclick="selectEspecialidad({nombre:''})" ng-class="{'focus': (filter == '')}" ng-click="carga()">Especialidad<span  tooltip-placement="bottom"  tooltip="Doble click para actualizar" class="pull-right text-muted inline wrapper-xs m-r-sm"><i class="fa fa-question"></i></span></a>
-              <a ng-repeat="item in especialidades | orderBy:'nombre'" ng-dblclick="editItem(item)" class="list-group-item m-l hover-anchor b-a " ng-class="{'focus m-l-none': item.selected}" ng-click="selectEspecialidad(item)" ui-refresh="especialidades">   
+              <a class="list-group-item b-b" ng-dblclick="selectCapacitacion({nombre:''})" ng-class="{'focus': (filter == '')}" ng-click="carga()">Tipo de Capacitacion<span  tooltip-placement="bottom"  tooltip="Doble click para actualizar" class="pull-right text-muted inline wrapper-xs m-r-sm"><i class="fa fa-question"></i></span></a>
+              <a ng-repeat="item in tiposCapacitaciones | orderBy:'nombre'" ng-dblclick="editItem(item)" class="list-group-item m-l hover-anchor b-a " ng-class="{'focus m-l-none': item.selected}" ng-click="selectCapacitacion(item)" ui-refresh="tiposCapacitaciones">   
                 <span  ng-click="openConfirm2(item)" tooltip-placement="left" tooltip="Borrar" class="pull-right text-muted hover-action">
                   <i class="fa fa-times"></i>
                 </span>
                 <span class="block text-ellipsis m-l-n text-md" ng-class="{'m-l-none': item.selected }" popover="{{item.nombre}}" popover-trigger="mouseenter" popover-placement="bottom">               
                 <span class="block" ng-class="{'m-n': item.selected }">{{ item.nombre ? item.nombre : 'Por definir' }}</span>
-                <input type="text" class="form-control pos-abt" ng-show="item.editing" ng-blur="doneEditingEspecialidad(item)" ng-model="item.nombre" style="top:3px;left:2px;width:98%" ui-focus="item.editing">
+                <input type="text" class="form-control pos-abt" ng-show="item.editing" ng-blur="doneEditingCapacitacion(item)" ng-model="item.nombre" style="top:3px;left:2px;width:98%" ui-focus="item.editing">
               </a>
             </div>
           </div>
         </div>
       </div>
       <div class="wrapper b-t">
-        <a tooltip="Agregar especialidad" href class="btn btn-xs btn-default btn-addon" ng-click="createEspecialidad()"><i class="fa fa-plus fa-fw m-r-xs"></i> Especialidad</a>
+        <!-- <a tooltip="Agregar tipo" href class="btn btn-xs btn-default btn-addon" ng-click="createCapacitacion()"><i class="fa fa-plus fa-fw m-r-xs"></i> Capacitacion</a> -->
       </div>
     </div>
   </div>
@@ -60,7 +60,7 @@
       <div class="wrapper-xs b-b">
         <div class="input-group m-b-xxs">
           <span class="input-group-addon input-sm no-border no-bg"><i class="icon-magnifier text-md m-t-xxs"></i></span>
-          <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="{{especialidad.nombre ? especialidad.nombre : 'Todos'}}" ng-model="query">  
+          <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="{{tipoCapacitacion.nombre ? tipoCapacitacion.nombre : 'Todos'}}" ng-model="query">  
         </div>
       </div>
       <div class="row-row">
@@ -68,7 +68,7 @@
           <div class="cell-inner">
             <div class="m-t-n-xxs">
               <div class="list-group list-group-lg no-radius no-border no-bg m-b-none">
-                <a ng-repeat="item in items | filter:{especialidad:filter} | filter:query | orderBy:'primerNombre'" class="list-group-item m-l" ng-class="{'select m-l-none': item.selected }" ng-click="selectItem(item)">
+                <a ng-repeat="item in items | filter:{tipoCapacitacion:filter} | filter:query | orderBy:'primerNombre'" class="list-group-item m-l" ng-class="{'select m-l-none': item.selected }" ng-click="selectItem(item)">
                   <span class="block text-ellipsis m-l-n text-md" ng-class="{'m-l-none': item.selected }" popover="{{item.cedula}}" popover-trigger="mouseenter" popover-placement="bottom">
                     {{ item.primerNombre }} <strong>{{ item.primerApellido }}</strong>
                     <span ng-hide="item.primerNombre || item.primerApellido">sin nombre</span>
@@ -76,7 +76,7 @@
                 </a>
               </div>
             </div>
-            <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:{especialidad:filter} | filter:query).length">Vacío</div>
+            <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:{tipoCapacitacion:filter} | filter:query).length">Vacío</div>
           </div>
         </div>
       </div>
@@ -282,7 +282,7 @@
               </div>
             
             <div class="col-sm-9" ng-hide="{{item.especialidad=='ODONTOLOGÍA GENERAL'}}"> 
-               {{item.especialidad}}
+               {{<item class="especialidad"></item>}}
                  
               </div>
 
@@ -334,7 +334,7 @@
                     <i class="icon-drawer "></i> Especialidad
                     <ui-select ng-model="item.especialidad" theme="bootstrap" ng-show="item.editing">
                       <ui-select-match placeholder="Seleccione...">{{$select.selected.nombre}}</ui-select-match>
-                      <ui-select-choices group-by="'nombre'" repeat="item.nombre as item in especialidades | filter: $select.search">
+                      <ui-select-choices group-by="'nombre'" repeat="item.nombre as item in tiposCapacitaciones | filter: $select.search">
                         <span ng-bind-html="item.nombre | highlight: $select.search"></span>
                       </ui-select-choices>
                     </ui-select>

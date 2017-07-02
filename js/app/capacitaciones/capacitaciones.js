@@ -3,22 +3,22 @@
 app.controller('IndexController', ['$scope', '$http', '$filter', '$modal', 'MyService', 'filterFilter', 'datepickerConfig','dato','datosCuenta',function($scope, $http, $filter,$modal, MyService,filterFilter, datepickerConfig,dato,datosCuenta) {
 $scope.date = moment();
 }]);
-app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$modal', 'MyService', 'filterFilter', 'toaster','$timeout',  function($scope,  $state ,$http, $filter,$modal, MyService, filterFilter, toaster,$timeout) {
+app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$modal', 'MyService', 'filterFilter', 'toaster','$timeout',  function($scope,  $state ,$http, $filter,$modal, MyService, filterFilter, toaster,$timeout) {
  $scope.nivel=MyService.data.nivel;
   var dato="";
   var datosCuenta="";
   $scope.toaster = {
         
     type3: 'info',
-    text3: 'El profesional ha sido borrado',
+    text3: 'Capacitacion borrada con éxito',
     title3: 'Información',
     
     type4: 'success',
-    text4: 'Profesional agregado con exito',
+    text4: 'Capacitacion agregada con exito',
     title4: 'Exito',
     
     type5: 'info',
-    text5: 'Profesional editado con exito',
+    text5: 'capacitacion editada con exito',
     title5: 'Información',
     
     type6: 'info',
@@ -30,7 +30,7 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
     title7: 'Cuidado',
 
     type8: 'info',
-    text8: 'Especialidad borrada con exito',
+    text8: 'Tipo de capacitacion borrada con exito',
     title8: 'Información',
   };
 
@@ -74,14 +74,14 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
   $scope.format = 'shortDate';
     $scope.nacionalidades = ['V','E'];
   $scope.carga = function (){
-    $http.get('http://54.202.62.62:1345/especialidad/').then(function (resp) {
-      $scope.especialidades = resp.data.results;
+    $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
+      $scope.tiposCapacitaciones = resp.data.results;
     });
   };
 
 
-  $http.get('http://54.202.62.62:1345/especialidad/').then(function (resp) {
-    $scope.especialidades = resp.data.results;
+  $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
+    $scope.tiposCapacitaciones = resp.data.results;
   });
 
   $scope.closeAlert = function(index) {
@@ -116,19 +116,10 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
     }
   };
 
-  $scope.consultar = function(item){
-  MyService.data.consultorConsultado = null;
-  MyService.data.consultorConsultado = item;
-  if (MyService.data.consultorConsultado.sexo==="Hembra"){
-    $state.go('apps.historicoConsultor');
-    }
-  if (MyService.data.consultorConsultado.sexo==="Macho"){
-    $state.go('apps.historicoConsultorMacho');
-    }
-  };
+ 
   $scope.carga = function(){
-    $http.get('http://54.202.62.62:1345/especialidad/').then(function (resp) {
-      $scope.especialidades = resp.data.results;
+    $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
+      $scope.tiposCapacitaciones = resp.data.results;
     });
   };
  
@@ -162,11 +153,11 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
-   $scope.openConfirmBorrarProfesional = function (item) {
+   $scope.openConfirmBorrarCapacitacion = function (item) {
     var identificador=item.id;
     MyService.data.identificador = identificador;
       var modalInstance = $modal.open({
-        templateUrl: 'modalConfirmBorrarProfesional.html',
+        templateUrl: 'modalConfirmBorrarCapacitacion.html',
         controller: 'ModalInstanceCtrl',
         size: 'sm',
         resolve: {
@@ -216,7 +207,7 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
 
     modalInstance.result.then(function (selectedItem) {
       $scope.selected = selectedItem;
-       $scope.especialidades.splice($scope.especialidades.indexOf(item), 1);
+       $scope.tiposCapacitaciones.splice($scope.tiposCapacitaciones.indexOf(item), 1);
         $scope.item = null;  
         // $scope.items = null;  
         $scope.pop8();
@@ -251,11 +242,11 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
     $scope.country.selected = undefined;
   };
 
-  $scope.createEspecialidad = function(){
-    var especialidad = {nombre: 'Nueva especialidad'};          
-    especialidad.nombre = $scope.checkItem(especialidad, $scope.especialidades, 'nombre');
-    especialidad.idUsuario = MyService.data.idUsuario;
-    $scope.especialidades.push(especialidad);
+  $scope.createTipoCapacitacion = function(){
+    var tipoCapacitacion = {nombre: 'Nuevo tipo de capacitacion'};          
+    tipoCapacitacion.nombre = $scope.checkItem(tipoCapacitacion, $scope.tiposCapacitaciones, 'nombre');
+    tipoCapacitacion.idUsuario = MyService.data.idUsuario;
+    $scope.tiposCapacitaciones.push(tipoCapacitacion);
   };
 
   $scope.checkItem = function(obj, arr, key){
@@ -273,27 +264,27 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
     return obj[key] + (i ? ' '+i : '');
   };
 
-  $scope.deleteEspecialidad = function(item){
-    $http.delete('http://54.202.62.62:1345/especialidad/'+item.id , item)
-    $scope.especialidades.splice($scope.especialidades.indexOf(item), 1);
+  $scope.deleteTipoCapacitacion = function(item){
+    $http.delete('http://54.202.62.62:1346/tipoCapacitacion/'+item.id , item)
+    $scope.tiposCapacitaciones.splice($scope.tiposCapacitaciones.indexOf(item), 1);
   };
 
-  $scope.selectEspecialidad = function(item){   
-    MyService.data.especialidad=item.nombre;
-    angular.forEach($scope.especialidades, function(item) {
+  $scope.selectTipoCapacitacion = function(item){   
+    MyService.data.tipoCapacitacion=item.nombre;
+    angular.forEach($scope.tiposCapacitaciones, function(item) {
       item.selected = false;
     });
-    $scope.especialidad = item;
-    $scope.especialidad.selected = true;
+    $scope.tipoCapacitacion = item;
+    $scope.tipoCapacitacion.selected = true;
     $scope.filter = item.nombre;
-    $http.get('http://54.202.62.62:1345/miembro/').then(function (resp) {
+    $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
       $scope.items = resp.data.results;
-      // alert("aqui");
-       for (var i = 0; i < $scope.items.length; ++i) {
-        if(typeof($scope.items[i].especialidad) == "undefined"){
-        $scope.items[i].especialidad="ODONTOLOGÍA GENERAL";
-      }
-    }    
+    //   // alert("aqui");
+    //   //  for (var i = 0; i < $scope.items.length; ++i) {
+    //   //   if(typeof($scope.items[i].tipoCapacitacion) == "undefined"){
+    //   //   $scope.items[i].tipoCapacitacion="ODONTOLOGÍA GENERAL";
+    //   // }
+    // }    
       $scope.item = null;  
     });
   };
@@ -315,13 +306,13 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
     $scope.item = item;
     $scope.item.selected = true;
 
-    $http.get('http://54.202.62.62:1345/miembro/').then(function (resp) {
-      $scope.profesionales = resp.data.results;
+    $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
+      $scope.capacitaciones = resp.data.results;
      
       });
      var pas = item.id;
-    $scope.profesionalesFiltrados = $scope.profesionales.filter(function (profesional) {
-      return (profesional.idprofesional == pas );
+    $scope.capacitacionesFiltrados = $scope.capacitaciones.filter(function (capacitacion) {
+      return (capacitacion.idcapacitacion == pas );
       });
     setTimeout(function() {}, 500);
     
@@ -330,17 +321,17 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
   
 
   $scope.deleteItem = function(item){
-    $http.delete('http://54.202.62.62:1345/miembro/'+item.id , item)
+    $http.delete('http://54.202.62.62:1346/capacitacion/'+item.id , item)
     $scope.items.splice($scope.items.indexOf(item), 1);
     $scope.item = $filter('orderBy')($scope.items, 'primerNombre')[0];
     if($scope.item) $scope.item.selected = true;
   };
 
-  $scope.deleteprofesional = function(profesional){
-    $http.delete('http://54.202.62.62:1345/miembro/'+profesional.id , profesional)
-    $scope.profesionalesFiltrados.splice($scope.profesionales.indexOf(profesional), 1);
-    $scope.profesional = $filter('orderBy')($scope.profesionales, 'nombres')[0];
-    if($scope.profesional) $scope.profesional.selected = true;
+  $scope.deleteCapacitacion = function(capacitacion){
+    $http.delete('http://54.202.62.62:1346/capacitacion/'+capacitacion.id , capacitacion)
+    $scope.capacitacionesFiltrados.splice($scope.capacitaciones.indexOf(capacitacion), 1);
+    $scope.capacitacion = $filter('orderBy')($scope.capacitaciones, 'nombres')[0];
+    if($scope.capacitacion) $scope.capacitacion.selected = true;
   };
 
   $scope.createItem = function(){
@@ -354,11 +345,11 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
     $scope.items.push(item);
     $scope.selectItem(item);
     $scope.item.editing = true;
-    $scope.item.especialidad = MyService.data.especialidad;
+    $scope.item.tipoCapacitacion = MyService.data.tipoCapacitacion;
     $scope.item.mensajeNuevo=null;
     $scope.item.idUsuario = MyService.data.idUsuario;
-    $http.get('http://54.202.62.62:1345/especialidad/').then(function (resp) {
-    $scope.especialidades = resp.data.results;
+    $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
+    $scope.tiposCapacitaciones = resp.data.results;
     }); 
   };
 
@@ -368,22 +359,22 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
     }
   };
 
-  $scope.doneEditingEspecialidad = function(item){
+  $scope.doneEditingTipoCapacitacion = function(item){
     item.editing = false;
-    var especialidadAct= {};
-    MyService.data.idenEspecialidad= item.id;
-    especialidadAct.nombre=item.nombre;
-    especialidadAct.idEstablecimiento=item.idEstablecimiento;
-    especialidadAct.idUsuario=item.idUsuario;
-    especialidadAct.idUsuarioAct=MyService.data.idUsuario;
+    var tipoCapacitacionAct= {};
+    MyService.data.idenTipoCapacitacion= item.id;
+    tipoCapacitacionAct.nombre=item.nombre;
+    tipoCapacitacionAct.idEstablecimiento=item.idEstablecimiento;
+    tipoCapacitacionAct.idUsuario=item.idUsuario;
+    tipoCapacitacionAct.idUsuarioAct=MyService.data.idUsuario;
     item.id=null;
-    especialidadAct.selected=item.selected;
-    especialidadAct.editing=item.editing;
-    if (MyService.data.idenEspecialidad){
-      $http.put('http://54.202.62.62:1345/especialidad/'+MyService.data.idenEspecialidad, especialidadAct)
+    tipoCapacitacionAct.selected=item.selected;
+    tipoCapacitacionAct.editing=item.editing;
+    if (MyService.data.idenTipoCapacitacion){
+      $http.put('http://54.202.62.62:1346/tipoCapacitacion/'+MyService.data.idenTipoCapacitacion, tipoCapacitacionAct)
     }
     else {
-      $http.post('http://54.202.62.62:1345/especialidad/', especialidadAct)
+      $http.post('http://54.202.62.62:1346/tipoCapacitacion/', tipoCapacitacionAct)
     }
   
     $scope.items = null;
@@ -393,65 +384,65 @@ app.controller('ProfesionalesCtrl', ['$scope', '$state','$http', '$filter', '$mo
   };
 
 
-  $scope.doneEditingProfesional = function(item){
-    var profesionalAct = {};
-    MyService.data.idenProfesional=item.id;
+  $scope.doneEditingCapacitacion = function(item){
+    var capacitacionAct = {};
+    MyService.data.idenCapacitacion=item.id;
     
 
-    profesionalAct.primerNombre=item.primerNombre;
-    profesionalAct.segundoNombre=item.segundoNombre;
-    profesionalAct.primerApellido=item.primerApellido;
-    profesionalAct.segundoApellido=item.segundoApellido;
-    profesionalAct.nacionalidad=item.nacionalidad;
+    capacitacionAct.primerNombre=item.primerNombre;
+    capacitacionAct.segundoNombre=item.segundoNombre;
+    capacitacionAct.primerApellido=item.primerApellido;
+    capacitacionAct.segundoApellido=item.segundoApellido;
+    capacitacionAct.nacionalidad=item.nacionalidad;
 
-    profesionalAct.fechaNacimiento=item.fechaNacimiento;
-    profesionalAct.sexo=item.sexo;
-    profesionalAct.estadoCivil=item.estadoCivil;
-    profesionalAct.cedula=item.cedula;
+    capacitacionAct.fechaNacimiento=item.fechaNacimiento;
+    capacitacionAct.sexo=item.sexo;
+    capacitacionAct.estadoCivil=item.estadoCivil;
+    capacitacionAct.cedula=item.cedula;
     
-    profesionalAct.cov=item.cov;
-    profesionalAct.msas=item.msas;
+    capacitacionAct.cov=item.cov;
+    capacitacionAct.msas=item.msas;
 
-    profesionalAct.universidadEgreso=item.universidadEgreso;
-    profesionalAct.anoDeEgreso=item.anoDeEgreso;
+    capacitacionAct.universidadEgreso=item.universidadEgreso;
+    capacitacionAct.anoDeEgreso=item.anoDeEgreso;
 
-    profesionalAct.especialidad=item.especialidad;
-    profesionalAct.anoDeEgresoEspecialidad=item.anoDeEgresoEspecialidad;
-    profesionalAct.universidadEgresoEspecialidad=item.universidadEgresoEspecialidad;
+    capacitacionAct.tipoCapacitacion=item.tipoCapacitacion;
+    capacitacionAct.anoDeEgresotipoCapacitacion=item.anoDeEgresotipoCapacitacion;
+    capacitacionAct.universidadEgresotipoCapacitacion=item.universidadEgresotipoCapacitacion;
 
-    profesionalAct.cuentaI=item.cuentaI;
-    profesionalAct.cuentaF=item.cuentaF;
-    // profesionalAct.avatar='img/avatar.png';
-    profesionalAct.direccionTrabajo=item.direccionTrabajo;
-    profesionalAct.municipio=item.municipio;
-    profesionalAct.email=item.email;
-    profesionalAct.telefonoTrabajo=item.telefonoTrabajo;
-    profesionalAct.telefonoCelular=item.telefonoCelular;
+    capacitacionAct.cuentaI=item.cuentaI;
+    capacitacionAct.cuentaF=item.cuentaF;
+    // capacitacionAct.avatar='img/avatar.png';
+    capacitacionAct.direccionTrabajo=item.direccionTrabajo;
+    capacitacionAct.municipio=item.municipio;
+    capacitacionAct.email=item.email;
+    capacitacionAct.telefonoTrabajo=item.telefonoTrabajo;
+    capacitacionAct.telefonoCelular=item.telefonoCelular;
  
-    profesionalAct.letra=item.letra;
+    capacitacionAct.letra=item.letra;
 
-    profesionalAct.tipo=item.tipo;
-    profesionalAct.nivel=item.nivel;
-    profesionalAct.status=item.status;
+    capacitacionAct.tipo=item.tipo;
+    capacitacionAct.nivel=item.nivel;
+    capacitacionAct.status=item.status;
 
-    profesionalAct.idUsuario=item.idUsuario;
+    capacitacionAct.idUsuario=item.idUsuario;
 
-    if (MyService.data.idenProfesional){
+    if (MyService.data.idenCapacitacion){
       $scope.pop4();
-      $http.put('http://54.202.62.62:1345/miembro/'+MyService.data.idenProfesional , profesionalAct)
+      $http.put('http://54.202.62.62:1346/capacitacion/'+MyService.data.idenCapacitacion , capacitacionAct)
     }
     else {
       $scope.pop3();;
-      $http.post('http://54.202.62.62:1345/miembro/', profesionalAct)
+      $http.post('http://54.202.62.62:1346/capacitacion/', capacitacionAct)
     }
-    $http.get('http://54.202.62.62:1345/especialidad/').then(function (resp) {
-      $scope.especialidades = resp.data.results;
+    $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
+      $scope.tiposCapacitaciones = resp.data.results;
     });
-    $http.get('http://54.202.62.62:1345/miembro/').then(function (resp) {
+    $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
       $scope.app.states = resp.data.results;
     });
     // $scope.items = null;
-    $scope.profesionales = null;
+    $scope.capacitaciones = null;
     // $scope.item=null;
     item.editing = false;
   };

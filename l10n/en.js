@@ -16,7 +16,7 @@
   "nav" : {
     "HEADER" : "Menu",
     "DASHBOARD" : "Dashboard",
-    "PROFESIONALES" : "Profesionals",
+    "CAPACITACIONES" : "Capacitaciones",
     "ENLACES" : "Links",
      "MIEMBROS" : "Members",
      "SOLICITUDES" : "Solcitudes de soporte",

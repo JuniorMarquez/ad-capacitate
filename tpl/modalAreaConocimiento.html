@@ -1,20 +1,17 @@
 <div class="modal-header">
-    <h3 class="modal-title">Agregar Universidad</h3>
+    <h3 class="modal-title">Agregar Area de Conocimiento</h3>
 </div>
 <div class="modal-body">
     
         <div class="row form-group">
             <div class="col-md-3">
-                <input placeholder="Abreviatura" type="text" class="form-control" 
-               ng-model="item.abr" 
-          
-               >
+               
              </div>  
              <p></p>
              <br/>
               <div class="col-md-10">
-                <input placeholder="Nombre de la Universidad" type="text" class="form-control" 
-               ng-model="item.name" 
+                <input placeholder="Area de conocimiento" type="text" class="form-control" 
+               ng-model="item.nombre" 
           
                >
              </div>  
@@ -23,5 +20,5 @@
 </div>
 <div class="modal-footer">                  
     <button class="btn btn-default" ng-click="cancel()">Cancelar</button>
-    <button class="btn btn-primary" ng-click="okUniversidad(item)">OK</button>
+    <button class="btn btn-primary" ng-click="okAreaConocimiento(item)">OK</button>
 </div>
