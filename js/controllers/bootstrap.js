@@ -182,8 +182,6 @@ $scope.okContacto= function (item) {
       configAct.facebook=item.facebook;
       configAct.contactoLineal=item.contactoLineal;
       configAct.emailContacto=item.emailContacto;
-      
-
       var iden = MyService.data.idContacto;
       $http.put('http://54.202.62.62:1346/contacto/'+MyService.data.idContacto , configAct);       
       $modalInstance.close();
