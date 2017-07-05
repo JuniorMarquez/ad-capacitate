@@ -699,8 +699,7 @@ angular.module('app')
                       }]
                   }
               })
-              
-.state('apps.solicitudes', {
+              .state('apps.solicitudes', {
                   url: '/solicitudes',
                   templateUrl: 'tpl/apps_solicitudes.html',
                    resolve: {
@@ -716,28 +715,27 @@ angular.module('app')
                           );
                       }]
                   }
-                 
               })
-.state('apps.capacitaciones', {
+              .state('apps.capacitaciones', {
                   url: '/capacitaciones',
                   templateUrl: 'tpl/apps_capacitaciones.html',
                    resolve: {
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad ){
-                          return $ocLazyLoad.load(['ui.select','toaster']).then(
+                          return $ocLazyLoad.load(['ui.select','toaster','angularFileUpload']).then(
                               function(){
                                 return $ocLazyLoad.load( [
                                   'js/controllers/chart2.js',
                                 'js/controllers/bootstrap.js',
-                                'js/app/capacitaciones/capacitaciones.js'
-                                                  ]);
+                                'js/app/capacitaciones/capacitaciones.js',
+                                'js/controllers/file-upload.js']);
                               }
                           );
                       }]
                   }
                  
               })
-.state('apps.detallesSolicitud', {
+              .state('apps.detallesSolicitud', {
                   url: '/detallesSolicitud',
                   templateUrl: 'tpl/apps_detallesSolicitud.html',
                    resolve: {
@@ -755,23 +753,6 @@ angular.module('app')
                   }
                  
               })
-// .state('apps.detallesSolicitud', {
-//                   url: '/detallesSolicitud',
-//                   templateUrl: 'tpl/apps_detallesSolicitud.html',
-//                    resolve: {
-//                       deps: ['$ocLazyLoad',
-//                         function( $ocLazyLoad ){
-//                           return $ocLazyLoad.load(['ui.select','ngGrid']).then(
-//                               function(){
-//                                   return $ocLazyLoad.load('js/app/solicitudes/detallesSolicitud.js');
-//                               }
-//                           );
-//                       }]
-//                   }
-                 
-//               })
-
-
               .state('apps.contact', {
                   url: '/contact',
                   templateUrl: 'tpl/apps_contact.html',
@@ -785,13 +766,6 @@ angular.module('app')
                           );
                       }]
                   }
-
-                  // resolve: {
-                  //     deps: ['uiLoad',
-                  //       function( uiLoad ){
-                  //         return uiLoad.load( ['js/app/contact/contact.js'] );
-                  //     }]
-                  // }
               })
               .state('app.weather', {
                   url: '/weather',

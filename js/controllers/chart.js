@@ -29,7 +29,7 @@ if ($scope.app.status=="actualizado"){$scope.vigilante="si"};
     $scope.listadoDirectiva = resp.data.results;
   });
 
-$scope.estados = ['soltero(a)','casado(a)','divorciado(a)','viudo(a)'];
+
  $scope.nacionalidades = ['V','E'];
 
         $scope.anos=[];

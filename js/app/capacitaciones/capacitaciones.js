@@ -3,7 +3,71 @@
 app.controller('IndexController', ['$scope', '$http', '$filter', '$modal', 'MyService', 'filterFilter', 'datepickerConfig','dato','datosCuenta',function($scope, $http, $filter,$modal, MyService,filterFilter, datepickerConfig,dato,datosCuenta) {
 $scope.date = moment();
 }]);
-app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$modal', 'MyService', 'filterFilter', 'toaster','$timeout',  function($scope,  $state ,$http, $filter,$modal, MyService, filterFilter, toaster,$timeout) {
+app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$modal', 'MyService', 'filterFilter', 'toaster','$timeout', 'FileUploader', function($scope,  $state ,$http, $filter,$modal, MyService, filterFilter, toaster,$timeout, FileUploader) {
+
+
+var uploader = $scope.uploader = new FileUploader({
+        url: 'js/controllers/upload.php'
+
+    });
+    // FILTERS
+
+    uploader.filters.push({
+        name: 'customFilter',
+        fn: function(item /*{File|FileLikeObject}*/, options) {
+          // alert("nombre archivo: " +item.name);
+          MyService.data.nombreImagen=item.name;
+            return this.queue.length < 10;
+
+        }
+    });
+
+    // CALLBACKS
+
+    uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+        console.info('onWhenAddingFileFailed', item, filter, options);
+    };
+    uploader.onAfterAddingFile = function(fileItem) {
+        console.info('onAfterAddingFile', fileItem);
+    };
+    uploader.onAfterAddingAll = function(addedFileItems) {
+        console.info('onAfterAddingAll', addedFileItems);
+    };
+    uploader.onBeforeUploadItem = function(item) {
+        console.info('onBeforeUploadItem', item);
+    };
+    uploader.onProgressItem = function(fileItem, progress) {
+        console.info('onProgressItem', fileItem, progress);
+    };
+    uploader.onProgressAll = function(progress) {
+        console.info('onProgressAll', progress);
+    };
+    uploader.onSuccessItem = function(fileItem, response, status, headers) {
+        console.info('onSuccessItem', fileItem, response, status, headers);
+    };
+    uploader.onErrorItem = function(fileItem, response, status, headers) {
+        console.info('onErrorItem', fileItem, response, status, headers);
+    };
+    uploader.onCancelItem = function(fileItem, response, status, headers) {
+        console.info('onCancelItem', fileItem, response, status, headers);
+    };
+    uploader.onCompleteItem = function(fileItem, response, status, headers) {
+        console.info('onCompleteItem', fileItem, response, status, headers);
+    };
+    uploader.onCompleteAll = function() {
+        console.info('onCompleteAll');
+    };
+
+    console.info('uploader', uploader);
+
+
+
+
+
+
+
+
+
  $scope.nivel=MyService.data.nivel;
   var dato="";
   var datosCuenta="";
@@ -72,18 +136,7 @@ app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$m
   $scope.initDate = new Date('2016-15-20');
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.format = 'shortDate';
-    $scope.nacionalidades = ['V','E'];
-  $scope.carga = function (){
-    $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
-      $scope.tiposCapacitaciones = resp.data.results;
-    });
-  };
-
-
-  $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
-    $scope.tiposCapacitaciones = resp.data.results;
-  });
-
+    $scope.estados = ['activo','inactivo'];
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
@@ -121,8 +174,19 @@ app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$m
     $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
       $scope.tiposCapacitaciones = resp.data.results;
     });
+      $scope.item=null;
   };
- 
+  $scope.capacitaciones=[];
+ $scope.cargaCapacitaciones=function(){
+  $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
+      $scope.capacitaciones = resp.data.results;
+      // alert("tamaño capacitaciones: "+$scope.capacitaciones.length);
+        });
+};
+
+$scope.cargaCapacitaciones();
+$scope.carga();
+
   $scope.openConfirm = function (item) {
     var identificador=item.id;
     MyService.data.identificador = identificador;
@@ -179,6 +243,7 @@ app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$m
         $scope.item = null;  
         $scope.pop2();
         $scope.items.splice($scope.items.indexOf(selectedItem), 1);
+
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
@@ -273,31 +338,79 @@ app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$m
     MyService.data.tipoCapacitacion=item.nombre;
     angular.forEach($scope.tiposCapacitaciones, function(item) {
       item.selected = false;
+      $scope.item=[];
+    });
+    $scope.items=null;
+      $http.get('http://54.202.62.62:1346/areaconocimiento/').then(function (resp) {
+      $scope.areasConocimiento = resp.data.results;
     });
     $scope.tipoCapacitacion = item;
     $scope.tipoCapacitacion.selected = true;
     $scope.filter = item.nombre;
-    $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
-      $scope.items = resp.data.results;
-    //   // alert("aqui");
-    //   //  for (var i = 0; i < $scope.items.length; ++i) {
-    //   //   if(typeof($scope.items[i].tipoCapacitacion) == "undefined"){
-    //   //   $scope.items[i].tipoCapacitacion="ODONTOLOGÍA GENERAL";
-    //   // }
-    // }    
-      $scope.item = null;  
-    });
+    $scope.items.length=0;
+    $scope.item=null;
   };
 
-
-
-  $scope.selectItem = function(item){    
+  $scope.selectAreaConocimiento = function(item){  
+  $scope.cargaCapacitaciones(); 
+    MyService.data.areaConocimiento=item.nombre;
+    angular.forEach($scope.areasConocimiento, function(item) {
+      item.selected = false;
+      $scope.item=[];
+      $scope.itemsContenido=[];
+    });
+    $scope.items=[];
+    $scope.areaConocimiento = item;
+    $scope.areaConocimiento.selected = true;
+    $scope.filter2 = item.nombre;
+       for (var i = 0; i < $scope.capacitaciones.length; ++i) {
+        if ($scope.capacitaciones[i].area == $scope.filter2){
+        $scope.items.push($scope.capacitaciones[i]);
+      }
+    }    
+  };
+  var indiceItems =0;
+  var identifItems =0;
+    $scope.tbOptionsContenido = {
+       paging:   false,
+       // ordering: false,
+        searching: false,
+    ordering: false,
+      bDestroy: true,
+       info:     false,
+      // pageLength: 150,
+      data: []                     
+    };
+  $scope.cargaItems=function(){
+    var result3 = [];
+    $scope.itemsContenido=[];
+    var indiceItems = MyService.data.identificadorItem; 
+    $http.get('http://54.202.62.62:1346/contenido/?idCapacitacion='+indiceItems).then(function (resp) {
+    $scope.itemsContenido = resp.data.results;
+      for (var i  = 0; i<$scope.itemsContenido.length;i++){
+        identifItems=$scope.itemsContenido[i].id;  
+        $scope.itemsContenido[i].acciones="<button onclick=\"angular.element(this).scope().Edicion('" +identifItems +"')\"  class=\"btn btn-info btn-xs\" ui-toggle-class=\"show inline\" target=\"#spin\"> <span class=\"text\">Editar</span>  <span class=\"text-active\">Cargando...</span></button> <i class=\"fa fa-spin fa-spinner hide\" id=\"spin\"></i><button onclick=\"angular.element(this).scope().Borrado('" +identifItems +"')\"  class=\"btn btn-danger btn-xs\" ui-toggle-class=\"show inline\" target=\"#spin\"> <span class=\"text\">Borrar</span>  <span class=\"text-active\">Cargando...</span></button> <i class=\"fa fa-spin fa-spinner hide\" id=\"spin\"></i>";                        
+        result3.push($scope.itemsContenido[i]);
+        $scope.itemsContenidoV=result3;
+        $scope.tbOptionsContenido.data = $scope.itemsContenidoV;
+        $scope.tbOptionsContenido.aaData = $scope.itemsContenidoV;
+        $scope.tbOptionsContenido.aoColumns=[
+          {mData:'descripcion'},
+          {mData:'acciones'} 
+          ];
+      };
+       // alert("tamaño: "+$scope.itemsContenidoV.length);
+    }); 
+  };  
+  $scope.selectItem = function(item){   
+  $scope.itemsContenidoV=[]; 
     $scope.alerts=null;
-    var identificador =item.id;
-    var primerNombre =item.primerNombre;
-    var primerApellido =item.primerApellido;
-    MyService.data.primerNombre = primerNombre;
-    MyService.data.identificador = identificador;
+    var identificadorItem=item.id;
+    var titulo =item.titulo;
+    var subtitulo =item.subtitulo;
+    MyService.data.titulo = titulo;
+    MyService.data.identificadorItem = identificadorItem;
+    // alert("indice: "+identificadorItem);
     angular.forEach($scope.items, function(item) {
       item.selected = false;
       item.editing = false;
@@ -305,41 +418,149 @@ app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$m
 
     $scope.item = item;
     $scope.item.selected = true;
-
-    $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
-      $scope.capacitaciones = resp.data.results;
-     
-      });
+    $scope.cargaCapacitaciones();
      var pas = item.id;
     $scope.capacitacionesFiltrados = $scope.capacitaciones.filter(function (capacitacion) {
       return (capacitacion.idcapacitacion == pas );
       });
-    setTimeout(function() {}, 500);
+    var indice = item.id;
+
+    setTimeout(function() {
+   $scope.cargaItems();
+
+    }, 500);
     
   };
 
-  
+$scope.openBorrar = function (item) {
+    var item=[];
+  var dato="";
+  var datosCuenta="";
+  var modalInstance = $modal.open({
+    templateUrl: 'modalBorrar.html',
+    controller: 'ModalInstanceCtrl',
+    size: 'lg',
+    resolve: {
+
+           dato: function  () {
+            return item;
+            // body...
+          },
+           datosCuenta: function  () {
+            return datosCuenta;
+            // body...
+          },
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+    modalInstance.result.then(function (selectedItem,timeout) {
+      $scope.cargaItems();
+      $scope.item.selected = false;
+      }, function () {
+    });
+     
+  };
+
+$scope.agregarContenido = function (item) {
+      var modalInstance = $modal.open({
+        templateUrl: 'modalNuevoContenido.html',
+        controller: 'ModalInstanceCtrl',
+        size: 'lg',
+        resolve: {
+           dato: function  () {
+            return item;
+            // body...
+          },
+           datosCuenta: function  () {
+            return datosCuenta;
+            // body...
+          },
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+      $scope.cargaItems();
+    }, function () {
+      
+      // $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+ $scope.openEdicion = function (item) {
+    // var identificador=item.id;
+    // MyService.data.identificador = identificador;
+  MyService.data.idenContenido=item;
+  var item=[];
+  var dato="";
+  var datosCuenta="";
+
+    
+      var modalInstance = $modal.open({
+        templateUrl: 'modalEdicion.html',
+        controller: 'ModalInstanceCtrl',
+        size: 'md',
+        resolve: {
+
+           dato: function  () {
+            return item;
+            // body...
+          },
+           datosCuenta: function  () {
+            return datosCuenta;
+            // body...
+          },
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+      modalInstance.result.then(function (selectedItem,timeout) {
+       // setTimeout(function() {
+         $scope.cargaItems();
+       // }, 1000);
+      }, function () {
+
+      // $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+
+
+ $scope.Edicion = function (iden) {
+  MyService.data.idenContenido=iden;
+  $scope.openEdicion(iden);
+};
+ $scope.Borrado = function (iden) {
+  MyService.data.idenContenido=iden;
+  $scope.openBorrar(iden);
+};
 
   $scope.deleteItem = function(item){
     $http.delete('http://54.202.62.62:1346/capacitacion/'+item.id , item)
     $scope.items.splice($scope.items.indexOf(item), 1);
-    $scope.item = $filter('orderBy')($scope.items, 'primerNombre')[0];
+    $scope.item = $filter('orderBy')($scope.items, 'titulo')[0];
     if($scope.item) $scope.item.selected = true;
   };
 
   $scope.deleteCapacitacion = function(capacitacion){
     $http.delete('http://54.202.62.62:1346/capacitacion/'+capacitacion.id , capacitacion)
     $scope.capacitacionesFiltrados.splice($scope.capacitaciones.indexOf(capacitacion), 1);
-    $scope.capacitacion = $filter('orderBy')($scope.capacitaciones, 'nombres')[0];
+    $scope.capacitacion = $filter('orderBy')($scope.capacitaciones, 'titulo')[0];
     if($scope.capacitacion) $scope.capacitacion.selected = true;
   };
 
   $scope.createItem = function(){
     var item = {
+      titulo:'titulo',
       avatar:'img/avatar.png',
       mensajeNuevo:"Presione \"Editar\" para ingresar datos",
-      idEstablecimiento: MyService.data.idEstablecimiento,
-      nivel:2
+      // idEstablecimiento: MyService.data.idEstablecimiento,
+      // nivel:2
     };
     
     $scope.items.push(item);
@@ -359,74 +580,38 @@ app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$m
     }
   };
 
-  $scope.doneEditingTipoCapacitacion = function(item){
-    item.editing = false;
-    var tipoCapacitacionAct= {};
-    MyService.data.idenTipoCapacitacion= item.id;
-    tipoCapacitacionAct.nombre=item.nombre;
-    tipoCapacitacionAct.idEstablecimiento=item.idEstablecimiento;
-    tipoCapacitacionAct.idUsuario=item.idUsuario;
-    tipoCapacitacionAct.idUsuarioAct=MyService.data.idUsuario;
-    item.id=null;
-    tipoCapacitacionAct.selected=item.selected;
-    tipoCapacitacionAct.editing=item.editing;
-    if (MyService.data.idenTipoCapacitacion){
-      $http.put('http://54.202.62.62:1346/tipoCapacitacion/'+MyService.data.idenTipoCapacitacion, tipoCapacitacionAct)
-    }
-    else {
-      $http.post('http://54.202.62.62:1346/tipoCapacitacion/', tipoCapacitacionAct)
-    }
-  
-    $scope.items = null;
-    $scope.item = null;
-    $scope.ingredientes = null;
- 
-  };
-
-
   $scope.doneEditingCapacitacion = function(item){
+    // $scope.items.length=0;
+    // $scope.areasConocimiento=null;
+    // $scope.tiposCapacitaciones=null;
+    // $scope.capacitaciones.length=0;
+    item.editing = false;
+    $scope.item.selected = true;
+      // $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
+      // $scope.capacitaciones = resp.data.results;
+      // });
+    // $scope.carga();
+    // $scope.cargaCapacitaciones();
     var capacitacionAct = {};
     MyService.data.idenCapacitacion=item.id;
     
-
-    capacitacionAct.primerNombre=item.primerNombre;
-    capacitacionAct.segundoNombre=item.segundoNombre;
-    capacitacionAct.primerApellido=item.primerApellido;
-    capacitacionAct.segundoApellido=item.segundoApellido;
-    capacitacionAct.nacionalidad=item.nacionalidad;
-
-    capacitacionAct.fechaNacimiento=item.fechaNacimiento;
-    capacitacionAct.sexo=item.sexo;
-    capacitacionAct.estadoCivil=item.estadoCivil;
-    capacitacionAct.cedula=item.cedula;
-    
-    capacitacionAct.cov=item.cov;
-    capacitacionAct.msas=item.msas;
-
-    capacitacionAct.universidadEgreso=item.universidadEgreso;
-    capacitacionAct.anoDeEgreso=item.anoDeEgreso;
-
-    capacitacionAct.tipoCapacitacion=item.tipoCapacitacion;
-    capacitacionAct.anoDeEgresotipoCapacitacion=item.anoDeEgresotipoCapacitacion;
-    capacitacionAct.universidadEgresotipoCapacitacion=item.universidadEgresotipoCapacitacion;
-
-    capacitacionAct.cuentaI=item.cuentaI;
-    capacitacionAct.cuentaF=item.cuentaF;
-    // capacitacionAct.avatar='img/avatar.png';
-    capacitacionAct.direccionTrabajo=item.direccionTrabajo;
-    capacitacionAct.municipio=item.municipio;
-    capacitacionAct.email=item.email;
-    capacitacionAct.telefonoTrabajo=item.telefonoTrabajo;
-    capacitacionAct.telefonoCelular=item.telefonoCelular;
- 
-    capacitacionAct.letra=item.letra;
-
-    capacitacionAct.tipo=item.tipo;
-    capacitacionAct.nivel=item.nivel;
+$scope.areasConocimiento=[];
+$scope.items=[];
+$scope.item=[];
+$scope.tiposCapacitaciones=[];
+$scope.carga();
+    capacitacionAct.titulo=item.titulo;
+    capacitacionAct.subtitulo=item.subtitulo;
     capacitacionAct.status=item.status;
-
+    capacitacionAct.codigo=item.codigo;
+    capacitacionAct.area=item.area;
+    capacitacionAct.tipoCapacitacion=item.tipoCapacitacion;
+    capacitacionAct.tipoObligacion=item.tipoObligacion;
+    capacitacionAct.img=MyService.data.nombreImagen
+    capacitacionAct.itemsContenido=item.itemsContenido;
+    
     capacitacionAct.idUsuario=item.idUsuario;
-
+ $scope.items.splice($scope.items.indexOf(item), 1);
     if (MyService.data.idenCapacitacion){
       $scope.pop4();
       $http.put('http://54.202.62.62:1346/capacitacion/'+MyService.data.idenCapacitacion , capacitacionAct)
@@ -435,16 +620,8 @@ app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$m
       $scope.pop3();;
       $http.post('http://54.202.62.62:1346/capacitacion/', capacitacionAct)
     }
-    $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
-      $scope.tiposCapacitaciones = resp.data.results;
-    });
-    $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
-      $scope.app.states = resp.data.results;
-    });
-    // $scope.items = null;
-    $scope.capacitaciones = null;
-    // $scope.item=null;
-    item.editing = false;
+    $scope.cargaCapacitaciones();
+    
   };
 
 }]);

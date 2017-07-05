@@ -5,14 +5,7 @@
   // bootstrap controller
   app.controller('AccordionDemoCtrl', ['$scope', function($scope) {
     $scope.oneAtATime = true;
-    $scope.miembros=[];
-    $scope.estados = [
-        { name: 'soltero(a)'},
-        { name: 'casado(a)'},
-        { name: 'divorciado(a)'},
-        { name: 'viudo(a)'}
-        
-        ];
+
          $scope.nacionalidades = [
         { name: 'V'},
         { name: 'E'}
@@ -109,7 +102,7 @@
   app.controller('ModalInstanceCtrl', ['$scope', '$http', '$modalInstance', 'items', 'MyService', '$filter','$modal','dato','datosCuenta','toaster', '$state',function($scope, $http, $modalInstance, items, MyService,$filter,$modal,dato,datosCuenta,toaster,$state) {
 
      var result = [];
-    $scope.estados = ['soltero(a)','casado(a)','divorciado(a)','viudo(a)'];
+
     $scope.nacionalidades = ['V','E'];
   $scope.anos=[];
         for (var i = 0; i < 88; ++i)
@@ -160,17 +153,30 @@
       data: []
                                                      
     };
-    $scope.guardar = function(item){
-    // $scope.pop();
-     item.letra="a";
-      item.tipo="Odontologo";
-      
-      item.nivel=3;
-    item.status='pendiente';
-    $http.post('http://54.202.62.62:1346/miembro/', item)
-    $modalInstance.close();
-    $state.go('access.ok');
+
+$scope.consultarContenido=function(item){
+  var item=[];
+  var identificador = MyService.data.idenContenido;
+  $scope.datosContenido={};
+  $http.get('http://54.202.62.62:1346/contenido/'+identificador).success(function(respuesta){        
+    item=respuesta;
+    $scope.item=item;
+  });
+  item=$scope.item;
+  $scope.item=item;
 };
+
+$scope.consultarContenido();
+    $scope.okNuevoContenido = function(item){
+    item.idCapacitacion=MyService.data.identificadorItem;
+    $http.post('http://54.202.62.62:1346/contenido/', item).success(function(data) {
+              $modalInstance.close();
+              $scope.popNuevoContenido();
+          });
+
+    // $state.go('access.ok');
+};
+
 $scope.okContacto= function (item) {
   var configAct = {};
       configAct.direccion=item.direccion;
@@ -254,19 +260,6 @@ $scope.borrarComite=function(item){
         currentPage: 1
     }; 
    
-    $scope.getPagedDataAsync = function (pageSize, page, searchText) {
-        setTimeout(function () {
-           var data ;
-          $http.get('http://54.202.62.62:1346/miembro/').then(function (resp2) {
-            $scope.miembros = resp2.data.results;
-          });
-          data = $scope.miembros;
-     
-        }, 100);
-    };
-
-    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-
     $scope.$watch('pagingOptions', function (newVal, oldVal) {
         if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
           $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
@@ -292,18 +285,7 @@ $scope.borrarComite=function(item){
     $scope.mensajeBorrado="Al borrar este profesional, se perderá de manera permanente toda la información referente al mismo, está seguro de querer borrarlo?";
     $scope.mensajeBorradoProfesional="Al borrar este profesional, se perderá de manera permanente toda la información referente al mismo, está seguro de querer borrarlo?";
 
-    $scope.okNuevoMiembro = function (item) {
-
-      item.status="pendiente";
-      item.letra="a";
-      item.tipo="odontologo";
-      
-      item.nivel=3;
-      $http.post('http://54.202.62.62:1346/miembro/' ,item); 
-        $modalInstance.close();
-             $state.go('access.ok');
-
-    };
+  
 
     $scope.okNuevaSolicitud = function (item) {
       item.estado="Pendiente";
@@ -339,39 +321,70 @@ $scope.borrarComite=function(item){
       $modalInstance.close();
     };
 
-    
-$scope.okAprobacion = function (item) {
-    var identificador = MyService.data.idenMiembro;
-    var miembroAct={};
-    miembroAct.status="validado";
-    miembroAct.cot=item.cot;
-    miembroAct.especialidad=item.especialidad;
-    miembroAct.universidadEgresoEspecialidad=item.universidadEgresoEspecialidad;
-    miembroAct.anoDeEgresoEspecialidad=item.anoDeEgresoEspecialidad;
-    $http.put('http://54.202.62.62:1346/miembro/'+identificador, miembroAct);
-    $modalInstance.close();
-    setTimeout(function() { 
-      $http.get('http://54.202.62.62:1346/miembro/' ).success(function(respuesta){
-      $scope.miembros = respuesta.results; 
-        MyService.data.miembros=$scope.miembros;
-    });}, 300);
-   
-    $scope.popAprobacion();
+  $scope.openBorrar = function (item) {
+    var item=[];
+    var dato="";
+    var datosCuenta="";
+    var modalInstance = $modal.open({
+    templateUrl: 'modalBorrar.html',
+    controller: 'ModalInstanceCtrl',
+    size: 'lg',
+    resolve: {
 
- };
+           dato: function  () {
+            return item;
+            // body...
+          },
+           datosCuenta: function  () {
+            return datosCuenta;
+            // body...
+          },
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+    modalInstance.result.then(function (selectedItem,timeout) {
+      }, function () {
+    });
+     
+  };;
+  // var indiceItems =0;
+  // var identifItems =0;
+  //   // $scope.tbOptionsContenido = {
+    //   bDestroy: true,
+    //   pageLength: 150,
+    //   data: []                     
+    // };
+// $scope.consultaItems=function(){
+//  var result3 = [];
+//     $scope.itemsContenido=[];
+//     var indiceItems = MyService.data.identificadorItem;
+//     $http.get('http://54.202.62.62:1346/contenido/?idCapacitacion='+indiceItems).then(function (resp) {
+//     $scope.itemsContenido = resp.data.results;
+//       for (var i  = 0; i<$scope.itemsContenido.length;i++){
+//         identifItems=$scope.itemsContenido[i].id;  
+//         $scope.itemsContenido[i].acciones="<button onclick=\"angular.element(this).scope().Edicion('" +identifItems +"')\"  class=\"btn btn-info btn-xs\" ui-toggle-class=\"show inline\" target=\"#spin\"> <span class=\"text\">Editar</span>  <span class=\"text-active\">Cargando...</span></button> <i class=\"fa fa-spin fa-spinner hide\" id=\"spin\"></i><button onclick=\"angular.element(this).scope().Borrado('" +identifItems +"')\"  class=\"btn btn-danger btn-xs\" ui-toggle-class=\"show inline\" target=\"#spin\"> <span class=\"text\">Borrar</span>  <span class=\"text-active\">Cargando...</span></button> <i class=\"fa fa-spin fa-spinner hide\" id=\"spin\"></i>";                        
+//         result3.push($scope.itemsContenido[i]);
+//         $scope.itemsContenidoV=result3;
+//         $scope.tbOptionsContenido.data = $scope.itemsContenidoV;
+//         $scope.tbOptionsContenido.aaData = $scope.itemsContenidoV;
+//         $scope.tbOptionsContenido.aoColumns=[
+//           {mData:'descripcion'},
+//           {mData:'acciones'} 
+//           ];
+//       };
+
+//     }); 
+// };
  $scope.okEdicion = function (item) {
-    var identificador = MyService.data.idenMiembro;
-    var miembroAct={};
-    miembroAct.status=item.status;
-
-    $http.put('http://54.202.62.62:1346/miembro/'+identificador, miembroAct);
-    $modalInstance.close();
-    setTimeout(function() { 
-      $http.get('http://54.202.62.62:1346/miembro/' ).success(function(respuesta){
-      $scope.miembros = respuesta.results; 
-        MyService.data.miembros=$scope.miembros;
-    });}, 300);
-    $scope.popEdicion();
+    var identificador = MyService.data.idenContenido;
+    var contenidoAct={};
+    contenidoAct.descripcion=item.descripcion;
+    $http.put('http://54.202.62.62:1346/contenido/'+identificador, contenidoAct).success(function(data) {
+              $modalInstance.close();
+              $scope.popEdicion();
+          });
  };
 
 $scope.okAreaConocimiento= function (item) {
@@ -379,7 +392,8 @@ $scope.okAreaConocimiento= function (item) {
       $http.post('http://54.202.62.62:1346/areaConocimiento/' ,item);       
       $modalInstance.close();
     };
-    $scope.okObligacion= function (item) {
+
+$scope.okObligacion= function (item) {
 
       item.idUsuario=MyService.data.idUsuario;
       $http.post('http://54.202.62.62:1346/obligacion/' ,item);       
@@ -428,7 +442,7 @@ $scope.okActividad = function (item) {
 
 
     type3: 'info',
-    text3: 'Estado de miembro editado con éxito',
+    text3: 'Contenido editado con éxito',
     title3: 'Información',
     
     type4: 'success',
@@ -448,7 +462,7 @@ $scope.okActividad = function (item) {
     title7: 'Cuidado',
 
     type8: 'info',
-    text8: 'miembro borrado con exito',
+    text8: 'Item de Contenido borrado con exito',
     title8: 'Información',
     type9: 'info',
     text9: 'Actividad editada con exito',
@@ -456,12 +470,19 @@ $scope.okActividad = function (item) {
     type10: 'success',
     text10: 'Actividad agregada con exito',
     title10: 'Éxito',
+
+     type11: 'success',
+    text11: 'Contenido agregado con exito',
+    title11: 'Éxito',
   };
       $scope.popAprobacion = function(){
     toaster.pop($scope.toaster.type, $scope.toaster.title, $scope.toaster.text);
   };
    $scope.popNuevoEvento = function(){
     toaster.pop($scope.toaster.type10, $scope.toaster.title10, $scope.toaster.text10);
+  };
+   $scope.popNuevoContenido = function(){
+    toaster.pop($scope.toaster.type11, $scope.toaster.title11, $scope.toaster.text11);
   };
    $scope.popEditEvento = function(){
     toaster.pop($scope.toaster.type9, $scope.toaster.title9, $scope.toaster.text9);
@@ -472,21 +493,18 @@ $scope.okActividad = function (item) {
   $scope.popBorrado = function(){
     toaster.pop($scope.toaster.type8, $scope.toaster.title8, $scope.toaster.text8);
   };
-    $scope.okBorrarMiembro = function (item,timeout) { 
+    $scope.okBorrarContenido = function (item,timeout) { 
       var dato="";
-      dato = MyService.data.idenMiembro;
-      $http.delete('http://54.202.62.62:1346/miembro/'+dato); 
-      $scope.popBorrado();
-      $modalInstance.close();
-      setTimeout(function() {
-        $state.go('app.dashboard-v1');
-      }, 100);
-      
+      dato = MyService.data.idenContenido;
+      $http.delete('http://54.202.62.62:1346/contenido/'+dato).success(function(data) {
+              $modalInstance.close();
+               $scope.popBorrado();
+          }); 
     };
    
-    $scope.okConfirmProfesional = function (item) { 
-      var idProfesional=MyService.data.identificador;
-      $http.delete('http://54.202.62.62:1346/miembro/'+idProfesional , item)
+    $scope.okConfirmCapacitacion = function (item) { 
+      var idCapacitacion=MyService.data.identificador;
+      $http.delete('http://54.202.62.62:1346/capacitacion/'+idCapacitacion , item)
       $scope.items = null;
       $scope.item = null; 
       $modalInstance.close();

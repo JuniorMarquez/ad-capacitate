@@ -294,9 +294,12 @@ a.list-group-item.hover {
 .list-group-item.active a {
   color: #fff;
 }
-
-.list-group-item.focus {
+/*color de celda en seleccion*/
+/*.list-group-item.focus {
   background-color: #e4eaec !important;
+}*/
+.list-group-item.focus {
+  background-color: #DBEEF9 !important;
 }
 
 .list-group-item.select {
@@ -4799,6 +4802,10 @@ a.text-#000000:hover {
   border-radius: 500px;
 }
 
+.avatar2 img {
+  width: 100%;
+  border-radius: 0px;
+}
 .avatar i {
   position: absolute;
   top: 0;
@@ -4868,6 +4875,9 @@ a.text-#000000:hover {
 
 .w-sm {
   width: 150px;
+}
+.w-sm3 {
+  width: 10px;
 }
 .w-sm2 {
   width: 250px;

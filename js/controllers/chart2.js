@@ -50,12 +50,8 @@ app
     $http.get('http://54.202.62.62:1346/comite').then(function (resp) {
     $scope.listadoComite = resp.data.results;
   });
-$scope.estados = ['soltero(a)','casado(a)','divorciado(a)','viudo(a)'];
+
  $scope.nacionalidades = ['V','E'];
-// $scope.municipios = ['libertad','independencia','cordova','san cristobal'];
-// $scope.universidades =[ 'ULA','LUZ'];
-// $scope.especialidades = [ 'Ortodoncia','Endodoncia'];
-        
         $scope.anos=[];
         for (var i = 0; i < 88; ++i)
           {
@@ -68,7 +64,7 @@ $scope.estados = ['soltero(a)','casado(a)','divorciado(a)','viudo(a)'];
   $scope.nombre=MyService.data.nombre;
 
 $scope.cargaInicial=function  () {
-  $scope.estados = ['soltero(a)','casado(a)','divorciado(a)','viudo(a)'];
+
   $scope.anos=[];
         for (var i = 0; i < 88; ++i)
           {
