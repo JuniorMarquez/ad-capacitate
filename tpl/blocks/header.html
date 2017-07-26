@@ -23,6 +23,20 @@
             <div ng-include="'tpl/modalTipoCapacitacion.html'"></div>
           </script>
 
+          <script type="text/ng-template" id="modalListadoTiposNoticias.html">
+            <div ng-include="'tpl/modalListadoTiposNoticias.html'"></div>
+          </script> 
+          <script type="text/ng-template" id="modalTipoNoticia.html">
+            <div ng-include="'tpl/modalTipoNoticia.html'"></div>
+          </script>
+
+          <script type="text/ng-template" id="modalListadoTiposPublicaciones.html">
+            <div ng-include="'tpl/modalListadoTiposPublicaciones.html'"></div>
+          </script> 
+          <script type="text/ng-template" id="modalTipoPublicacion.html">
+            <div ng-include="'tpl/modalTipoPublicacion.html'"></div>
+          </script>
+
           <script type="text/ng-template" id="modalListadoAreasConocimiento.html">
             <div ng-include="'tpl/modalListadoAreasConocimiento.html'"></div>
           </script> 
@@ -40,7 +54,7 @@
         
           
           
-      <div class="navbar-header {{app.settings.navbarHeaderColor}}">
+      <div class="navbar-header ">
         <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
           <i class="glyphicon glyphicon-cog"></i>
         </button>
@@ -192,7 +206,37 @@
                     </div>
                   </div>
                 </div>
-            
+                <div class="col-sm-4" >
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="glyphicon  glyphicon-bullhorn text-muted m-r-xs"></i>Tipos de Noticias <!-- <span class="badge badge-sm bg-success">10</span> --></div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <ul class="list-unstyled l-h-2x">
+                        <li>
+                          <a ng-click="openTipoNoticia()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar Tipo de Noticia</a>
+                        </li>
+                        <li>
+                          <a ng-click="openListadoTiposNoticias()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver listado</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  </div>
+
+                      <div class="col-sm-4" >
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold"> <i class="fa  fa-share-alt text-muted m-r-xs"></i>Tipos de Publicaciones <!-- <span class="badge badge-sm bg-success">10</span> --></div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <ul class="list-unstyled l-h-2x">
+                        <li>
+                          <a ng-click="openTipoPublicacion()"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Agregar Tipo de Publicación</a>
+                        </li>
+                        <li>
+                          <a ng-click="openListadoTiposPublicaciones()" href><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Ver listado</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  </div>
           
               </div>
             </div>

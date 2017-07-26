@@ -85,6 +85,13 @@ angular.module('app')
                       'vendor/modules/angular-bootstrap-nav-tree/abn_tree.css'
                   ]
               },
+                {
+                  name: 'xeditable',
+                  files: [
+                      'vendor/modules/angular-xeditable/dist/js/xeditable.min.js',
+                      'vendor/modules/angular-xeditable/dist/css/xeditable.css'
+                  ]
+              },
               {
                   name: 'toaster',
                   files: [

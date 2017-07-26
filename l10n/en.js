@@ -25,6 +25,8 @@
     "EMAIL" : "Email",
     "DISCOS" : "Discos",
     "WIDGETS" : "Widgets",
+    "FACILITADORES":"Facilitadores",
+        "SUSCRIPCIONES":"Suscripciones",
     "Consultores" : {
       "Inventario" : "Consultants",
       "Administrar" : "Manage"
@@ -45,6 +47,24 @@
         "SOLICITUDES" : "Solicitudes",
         "LISTADO" : "Listado",
         "TODAS" : "Todas"
+      },
+        "cap" : {
+        "CAPACITACIONES" : "Capacitaciones",
+        "CAP_AGREGAR" : "Agregar",
+        "CAP_LISTADO" : "Listado",
+        "CAP_GESTIONAR" : "Gestionar"
+      },
+       "not" : {
+        "NOTICIAS" : "Noticias",
+        "NOT_AGREGAR" : "Agregar",
+        "NOT_LISTADO" : "Listado",
+        "NOT_GESTIONAR" : "Gestionar"
+      },
+        "pub" : {
+        "PUBLICACIONES" : "Publicaciones",
+        "PUB_AGREGAR" : "Agregar",
+        "PUB_LISTADO" : "Listado",
+        "PUB_GESTIONAR" : "Gestionar"
       },
       "ui_kits" : {
         "UI_KITS" : "UI Kits",
@@ -69,6 +89,7 @@
         "FORM_VALIDATION" : "Form validation",
         "FORM_WIZARD" : "Form wizard"
       },
+    
       "CHART" : "Chart",
       "pages" : {
         "PAGES" : "Pages",

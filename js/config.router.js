@@ -253,7 +253,7 @@ angular.module('app')
                       }]
                   }
               })
-              // form
+    
               .state('app.form', {
                   url: '/form',
                   template: '<div ui-view class="fade-in"></div>',
@@ -264,6 +264,10 @@ angular.module('app')
                       }]
                   }
               })
+
+                 
+
+
               // .state('app.form.ajustes', {
               //     url: '/ajustes',
               //     templateUrl: 'tpl/form_ajustes.html'
@@ -279,6 +283,27 @@ angular.module('app')
               .state('app.form.wizard', {
                   url: '/wizard',
                   templateUrl: 'tpl/form_wizard.html'
+              })
+              //  .state('app.form.xeditable', {
+              //     url: '/xeditable',
+              //     templateUrl: 'tpl/form_xeditable.html',
+              //     controller: 'XeditableCtrl',
+              //     resolve: load(['xeditable','js/controllers/xeditable.js'])
+              // })
+               .state('app.form.xeditable', {
+                  url: '/xeditable',
+                  templateUrl: 'tpl/form_xeditable.html',
+                  controller: 'XeditableCtrl',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad){
+                          return $ocLazyLoad.load('xeditable').then(
+                              function(){
+                                 return $ocLazyLoad.load('js/controllers/xeditable.js');
+                              }
+                          );
+                      }]
+                  }
               })
               .state('app.form.fileupload', {
                   url: '/fileupload',
@@ -716,8 +741,64 @@ angular.module('app')
                       }]
                   }
               })
-              .state('apps.capacitaciones', {
-                  url: '/capacitaciones',
+              .state('apps.facilitadores', {
+                  url: '/facilitadores',
+                  templateUrl: 'tpl/apps_facilitadores.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                  'js/controllers/chart2.js',
+                                'js/controllers/bootstrap.js',
+                                'js/app/facilitadores/facilitadores.js'
+                                                  ]);
+                              }
+                          );
+                      }]
+                  }
+                 
+              })
+              .state('apps.suscripciones', {
+                  url: '/suscripciones',
+                  templateUrl: 'tpl/apps_suscripciones.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                  'js/controllers/chart2.js',
+                                'js/controllers/bootstrap.js',
+                                'js/app/suscripciones/suscripciones.js'
+                                                  ]);
+                              }
+                          );
+                      }]
+                  }
+                 
+              })
+        .state('app.agregarcap', {
+                  url: '/agregarcap',
+                  templateUrl: 'tpl/apps_agregarCapacitacion.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster','angularFileUpload']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                  'js/controllers/chart2.js',
+                                'js/controllers/bootstrap.js',
+                                'js/app/capacitaciones/agregarcap.js',
+                                'js/controllers/file-upload.js']);
+                              }
+                          );
+                      }]
+                  }
+                  })
+              .state('apps.capgestionar', {
+                  url: '/gestionar',
                   templateUrl: 'tpl/apps_capacitaciones.html',
                    resolve: {
                       deps: ['$ocLazyLoad',
@@ -733,8 +814,141 @@ angular.module('app')
                           );
                       }]
                   }
-                 
-              })
+                  })
+                   .state('apps.caplistado', {
+                  url: '/listado',
+                  templateUrl: 'tpl/apps_listadoCapacitacines.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster','angularFileUpload']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                  'js/controllers/chart2.js',
+                                'js/controllers/bootstrap.js',
+                                'js/app/capacitaciones/capacitaciones.js',
+                                'js/controllers/file-upload.js']);
+                              }
+                          );
+                      }]
+                  }
+                })
+                   // ############################################
+                   .state('app.agregarnot', {
+                  url: '/agregarnot',
+                  templateUrl: 'tpl/apps_agregarNoticia.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster','angularFileUpload']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                  'js/controllers/chart2.js',
+                                'js/controllers/bootstrap.js',
+                                'js/app/noticias/agregarnot.js',
+                                'js/controllers/file-upload.js']);
+                              }
+                          );
+                      }]
+                  }
+                  })
+              .state('apps.notgestionar', {
+                  url: '/gestionarnot',
+                  templateUrl: 'tpl/apps_noticias.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster','angularFileUpload']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                  'js/controllers/chart2.js',
+                                'js/controllers/bootstrap.js',
+                                'js/app/noticias/noticias.js',
+                                'js/controllers/file-upload.js']);
+                              }
+                          );
+                      }]
+                  }
+                  })
+                   .state('apps.notlistado', {
+                  url: '/listadonot',
+                  templateUrl: 'tpl/apps_listadoNoticias.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster','angularFileUpload']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                  'js/controllers/chart2.js',
+                                'js/controllers/bootstrap.js',
+                                'js/app/noticias/noticias.js',
+                                'js/controllers/file-upload.js']);
+                              }
+                          );
+                      }]
+                  }
+                })
+                   // ###############################################
+
+
+                                      // ############################################
+                   .state('app.agregarpub', {
+                  url: '/agregarpub',
+                  templateUrl: 'tpl/apps_agregarPublicacion.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster','angularFileUpload']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                  'js/controllers/chart2.js',
+                                'js/controllers/bootstrap.js',
+                                'js/app/publicaciones/agregarpub.js',
+                                'js/controllers/file-upload.js']);
+                              }
+                          );
+                      }]
+                  }
+                  })
+              .state('apps.pubgestionar', {
+                  url: '/gestionarpub',
+                  templateUrl: 'tpl/apps_publicaciones.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster','angularFileUpload']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                  'js/controllers/chart2.js',
+                                'js/controllers/bootstrap.js',
+                                'js/app/publicaciones/publicaciones.js',
+                                'js/controllers/file-upload.js']);
+                              }
+                          );
+                      }]
+                  }
+                  })
+                   .state('apps.publistado', {
+                  url: '/listadopub',
+                  templateUrl: 'tpl/apps_listadoPublicaciones.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster','angularFileUpload']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                //   'js/controllers/chart2.js',
+                                // 'js/controllers/bootstrap.js',
+                                'js/app/publicaciones/publicaciones2.js',
+                                'js/controllers/file-upload.js']);
+                              }
+                          );
+                      }]
+                  }
+                })
+                   // ###############################################
+
+
               .state('apps.detallesSolicitud', {
                   url: '/detallesSolicitud',
                   templateUrl: 'tpl/apps_detallesSolicitud.html',

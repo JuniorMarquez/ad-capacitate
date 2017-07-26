@@ -5,9 +5,9 @@
 app
   // Flot Chart controller 
   .controller('FlotChartDemoCtrl', ['$scope', '$http','$modal','MyService','$state','$filter','datepickerConfig','toaster',function($scope,$http,$modal,MyService,$state,$filter,datepickerConfi,toaster) {
-//       if (typeof MyService.data.email==="undefined"){
-//   $state.go('access.signin');
-// }
+      if (typeof MyService.data.email==="undefined"){
+  $state.go('access.signin');
+}
   $scope.toaster = {
     title: 'Exito',
     type: 'success',
@@ -242,6 +242,64 @@ $scope.guardar = function(item){
       // $log.info('Modal dismissed at: ' + new Date());
     });
   };
+   $scope.openListadoTiposNoticias = function (item) {
+    // var identificador=item.id;
+    // MyService.data.identificador = identificador;
+      var modalInstance = $modal.open({
+        templateUrl: 'modalListadoTiposNoticias.html',
+        controller: 'ModalInstanceCtrl',
+        size: 'md',
+        resolve: {
+
+           dato: function  () {
+            return item;
+            // body...
+          },
+           datosCuenta: function  () {
+            return datosCuenta;
+            // body...
+          },
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      // $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+
+   $scope.openListadoTiposPublicaciones = function (item) {
+    // var identificador=item.id;
+    // MyService.data.identificador = identificador;
+      var modalInstance = $modal.open({
+        templateUrl: 'modalListadoTiposPublicaciones.html',
+        controller: 'ModalInstanceCtrl',
+        size: 'md',
+        resolve: {
+
+           dato: function  () {
+            return item;
+            // body...
+          },
+           datosCuenta: function  () {
+            return datosCuenta;
+            // body...
+          },
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      // $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
 
     $scope.openEmail = function (item) {
 
@@ -383,6 +441,61 @@ $scope.guardar = function(item){
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
+
+  $scope.openTipoNoticia= function (item) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modalTipoNoticia.html',
+        controller: 'ModalInstanceCtrl',
+        size: 'sm',
+        resolve: {
+              dato: function  () {
+            return item;
+            // body...
+          },
+           datosCuenta: function  () {
+            return datosCuenta;
+            // body...
+          },
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+$scope.openTipoPublicacion= function (item) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modalTipoPublicacion.html',
+        controller: 'ModalInstanceCtrl',
+        size: 'sm',
+        resolve: {
+              dato: function  () {
+            return item;
+            // body...
+          },
+           datosCuenta: function  () {
+            return datosCuenta;
+            // body...
+          },
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+
 
     $scope.openListadoDirectiva = function (item) {
     // var identificador=item.id;

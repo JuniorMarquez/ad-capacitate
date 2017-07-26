@@ -27,7 +27,7 @@ angular.module('app')
           black:   '#1c2b36'
         },
         settings: {
-          themeID: 1,
+          themeID: 2,
           navbarHeaderColor: 'bg-black',
           navbarCollapseColor: 'bg-black',
           asideColor: 'bg-black',

@@ -16,14 +16,14 @@
     </a>
   </li>
   <!-- <li ui-sref-active="active" ng-show="{{app.nivel == '1'}}"> -->
-  <li ui-sref-active="active" >
+<!--   <li ui-sref-active="active" >
     <a ui-sref="app.miembros">
 
        <i class="fa fa-users icon "></i>
       <span class="font-bold"  translate="aside.nav.MIEMBROS"
       >Enlaces</span>
     </a>
-  </li>
+  </li> -->
   <!-- <li ui-sref-active="active" ng-show="{{app.nivel == '1'}}"> -->
 <!--   <li ui-sref-active="active">
     <a ui-sref="app.enlaces">
@@ -33,14 +33,113 @@
     </a>
   </li> -->
   <!-- <li ui-sref-active="active" ng-show="{{app.nivel == '1'}}"> -->
-  <li ui-sref-active="active" >
+ <!--  <li ui-sref-active="active" >
     <a ui-sref="app.calendar">
       <i class="glyphicon glyphicon-calendar icon "></i>
       <span class="font-bold" translate="aside.nav.CALENDAR">Calendario</span>
     </a>
+  </li> -->
+  <li ng-class="{active:$state.includes('apps.cap')}" >
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-tags"></i>
+      <span translate="aside.nav.components.cap.CAPACITACIONES" class="font-bold">Capacitaciones</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.components.cap.CAPACITACIONES">Capacitaciones</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.agregarcap">
+          <span translate="aside.nav.components.cap.CAP_AGREGAR">Agregar</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="apps.capgestionar">
+          <span translate="aside.nav.components.cap.CAP_GESTIONAR">Gestionar</span>
+        </a>
+      </li>
+     <!--  <li ui-sref-active="active">
+        <a ui-sref="apps.caplistado">
+          <span translate="aside.nav.components.cap.CAP_LISTADO">Listado</span>
+        </a>
+      </li> -->
+    </ul>
   </li>
+
+<li ng-class="{active:$state.includes('apps.not')}" >
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon  glyphicon-bullhorn"></i>
+      <span translate="aside.nav.components.not.NOTICIAS" class="font-bold">Noticias</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.components.not.NOTICIAS">Noticias</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.agregarnot">
+          <span translate="aside.nav.components.not.NOT_AGREGAR">Agregar</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="apps.notgestionar">
+          <span translate="aside.nav.components.not.NOT_GESTIONAR">Gestionar</span>
+        </a>
+      </li>
+     <!--  <li ui-sref-active="active">
+        <a ui-sref="apps.notlistado">
+          <span translate="aside.nav.components.not.NOT_LISTADO">Listado</span>
+        </a>
+      </li> -->
+    </ul>
+  </li>
+
+  <li ng-class="{active:$state.includes('apps.pub')}" >
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="fa  fa-share-alt "></i>
+      <span translate="aside.nav.components.pub.PUBLICACIONES" class="font-bold">Publicaciones</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.components.pub.PUBLICACIONES">Publicaciones</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.agregarpub">
+          <span translate="aside.nav.components.pub.PUB_AGREGAR">Agregar</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="apps.pubgestionar">
+          <span translate="aside.nav.components.pub.PUB_GESTIONAR">Gestionar</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="apps.publistado">
+          <span translate="aside.nav.components.pub.PUB_LISTADO">Listado</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+
   <!-- <li ui-sref-active="active" ng-show="{{app.nivel == '1'}}"> -->
-  <li ui-sref-active="active" >
+<!--   <li ui-sref-active="active" >
     <a ui-sref="apps.capacitaciones">
 
        <i class="glyphicon glyphicon-tags"></i>
@@ -49,7 +148,7 @@
 
       >Capacitaciones</span>
     </a>
-  </li>
+  </li> -->
  
 
 
@@ -101,7 +200,26 @@
       </li>     
     </ul>
   </li>
+ <li ui-sref-active="active" >
+    <a ui-sref="apps.facilitadores">
 
+       <i class="fa  fa-users icon"></i>
+      <span class="font-bold"  translate="aside.nav.FACILITADORES"
+      
+
+      >Facilitadores</span>
+    </a>
+  </li>
+  <li ui-sref-active="active" >
+    <a ui-sref="apps.suscripciones">
+
+       <i class="fa fa-rss-square icon"></i>
+      <span class="font-bold"  translate="aside.nav.SUSCRIPCIONES"
+      
+
+      >Suscripciones</span>
+    </a>
+  </li>
 
   <!-- <li ng-class="{active:$state.includes('app.ui')}">
     <a href class="auto">
@@ -184,7 +302,7 @@
     </ul>
   </li> -->
 
-  <li ng-class="{active:$state.includes('app.form')}">
+ <!--  <li ng-class="{active:$state.includes('app.form')}">
     <a href class="auto">
       <span class="pull-right text-muted">
         <i class="fa fa-fw fa-angle-right text"></i>
@@ -239,13 +357,24 @@
           <span>Editor</span>
         </a>
       </li>
+        <li ui-sref-active="active">
+        <a ui-sref="app.form.xeditable">
+          <span>Xeditable</span>
+        </a>
+      </li>
     </ul>
-  </li>
+  </li> -->
+
 
 
   
  </ul>
 
+
+
+
+
+ 
 
 
 <!-- <ul class="nav"  ng-show="{{app.status == 'pendiente'}}" >

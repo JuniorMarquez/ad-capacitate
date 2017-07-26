@@ -25,6 +25,8 @@
     "EMAIL" : "Email",
     "DISCOS" : "Discos",
     "WIDGETS" : "Widgets",
+        "FACILITADORES":"Facilitadores",
+         "SUSCRIPCIONES":"Suscripciones",
     "Consultores" : {
       "Consultores" : "Consultores",
       "Administrar" : "Administrar"
@@ -67,6 +69,24 @@
         "FORM_ELEMENTS" : "Form elements",
         "FORM_VALIDATION" : "Form validation",
         "FORM_WIZARD" : "Form wizard"
+      },
+        "cap" : {
+        "CAPACITACIONES" : "Capacitaciones",
+        "CAP_AGREGAR" : "Agregar",
+        "CAP_LISTADO" : "Listado",
+        "CAP_GESTIONAR" : "Gestionar"
+      },
+      "not" : {
+        "NOTICIAS" : "Noticias",
+        "NOT_AGREGAR" : "Agregar",
+        "NOT_LISTADO" : "Listado",
+        "NOT_GESTIONAR" : "Gestionar"
+      },
+      "pub" : {
+        "PUBLICACIONES" : "Publicaciones",
+        "PUB_AGREGAR" : "Agregar",
+        "PUB_LISTADO" : "Listado",
+        "PUB_GESTIONAR" : "Gestionar"
       },
       "CHART" : "Chart",
       "pages" : {
