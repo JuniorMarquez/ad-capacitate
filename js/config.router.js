@@ -760,9 +760,9 @@ angular.module('app')
                   }
                  
               })
-              .state('apps.suscripciones', {
+              .state('app.suscripciones', {
                   url: '/suscripciones',
-                  templateUrl: 'tpl/apps_suscripciones.html',
+                  templateUrl: 'tpl/app_suscripciones.html',
                    resolve: {
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad ){

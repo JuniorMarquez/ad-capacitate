@@ -59,8 +59,6 @@ var uploader = $scope.uploader = new FileUploader({
     };
 
     console.info('uploader', uploader);
-
-
   $scope.toaster = {
         
     type3: 'info',

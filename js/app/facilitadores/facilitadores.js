@@ -1,8 +1,5 @@
 'use strict';
 
-app.controller('IndexController', ['$scope', '$http', '$filter', '$modal', 'MyService', 'filterFilter', 'datepickerConfig','dato','datosCuenta',function($scope, $http, $filter,$modal, MyService,filterFilter, datepickerConfig,dato,datosCuenta) {
-$scope.date = moment();
-}]);
 app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$modal', 'MyService', 'filterFilter', 'toaster','$timeout',  function($scope,  $state ,$http, $filter,$modal, MyService, filterFilter, toaster,$timeout) {
  $scope.nivel=MyService.data.nivel;
   var dato="";
@@ -74,14 +71,14 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
   $scope.format = 'shortDate';
     $scope.nacionalidades = ['V','E'];
   $scope.carga = function (){
-    $http.get('http://54.202.62.62:1346/especialidad/').then(function (resp) {
-      $scope.especialidades = resp.data.results;
+    $http.get('http://54.202.62.62:1346/facilitador/').then(function (resp) {
+      $scope.facilitadores = resp.data.results;
     });
   };
 
 
-  $http.get('http://54.202.62.62:1346/especialidad/').then(function (resp) {
-    $scope.especialidades = resp.data.results;
+  $http.get('http://54.202.62.62:1346/facilitador/').then(function (resp) {
+    $scope.facilitadores = resp.data.results;
   });
 
   $scope.closeAlert = function(index) {
@@ -116,19 +113,10 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
     }
   };
 
-  $scope.consultar = function(item){
-  MyService.data.consultorConsultado = null;
-  MyService.data.consultorConsultado = item;
-  if (MyService.data.consultorConsultado.sexo==="Hembra"){
-    $state.go('apps.historicoConsultor');
-    }
-  if (MyService.data.consultorConsultado.sexo==="Macho"){
-    $state.go('apps.historicoConsultorMacho');
-    }
-  };
+
   $scope.carga = function(){
-    $http.get('http://54.202.62.62:1346/especialidad/').then(function (resp) {
-      $scope.especialidades = resp.data.results;
+    $http.get('http://54.202.62.62:1346/facilitador/').then(function (resp) {
+      $scope.facilitadores = resp.data.results;
     });
   };
  
@@ -216,7 +204,7 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
 
     modalInstance.result.then(function (selectedItem) {
       $scope.selected = selectedItem;
-       $scope.especialidades.splice($scope.especialidades.indexOf(item), 1);
+       $scope.facilitadores.splice($scope.facilitadores.indexOf(item), 1);
         $scope.item = null;  
         // $scope.items = null;  
         $scope.pop8();
@@ -251,11 +239,11 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
     $scope.country.selected = undefined;
   };
 
-  $scope.createEspecialidad = function(){
-    var especialidad = {nombre: 'Nueva especialidad'};          
-    especialidad.nombre = $scope.checkItem(especialidad, $scope.especialidades, 'nombre');
-    especialidad.idUsuario = MyService.data.idUsuario;
-    $scope.especialidades.push(especialidad);
+  $scope.createFacilitador = function(){
+    var facilitador = {nombre: 'Nuevo facilitador'};          
+    facilitador.nombre = $scope.checkItem(facilitador, $scope.facilitadores, 'nombre');
+    facilitador.idUsuario = MyService.data.idUsuario;
+    $scope.facilitadores.push(facilitador);
   };
 
   $scope.checkItem = function(obj, arr, key){
@@ -273,9 +261,9 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
     return obj[key] + (i ? ' '+i : '');
   };
 
-  $scope.deleteEspecialidad = function(item){
-    $http.delete('http://54.202.62.62:1346/especialidad/'+item.id , item)
-    $scope.especialidades.splice($scope.especialidades.indexOf(item), 1);
+  $scope.deleteFacilitador = function(item){
+    $http.delete('http://54.202.62.62:1346/facilitador/'+item.id , item)
+    $scope.facilitadores.splice($scope.facilitadores.indexOf(item), 1);
   };
 
   $http.get('http://54.202.62.62:1346/facilitador/').then(function (resp) {
@@ -292,20 +280,20 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
 
 
 
-  $scope.selectEspecialidad = function(item){   
-    MyService.data.especialidad=item.nombre;
-    angular.forEach($scope.especialidades, function(item) {
+  $scope.selectFacilitador = function(item){   
+    MyService.data.facilitador=item.nombre;
+    angular.forEach($scope.facilitadores, function(item) {
       item.selected = false;
     });
-    $scope.especialidad = item;
-    $scope.especialidad.selected = true;
+    $scope.facilitador = item;
+    $scope.facilitador.selected = true;
     $scope.filter = item.nombre;
     $http.get('http://54.202.62.62:1346/facilitador/').then(function (resp) {
       $scope.items = resp.data.results;
       // alert("aqui");
        for (var i = 0; i < $scope.items.length; ++i) {
-        if(typeof($scope.items[i].especialidad) == "undefined"){
-        $scope.items[i].especialidad="ODONTOLOGÍA GENERAL";
+        if(typeof($scope.items[i].facilitador) == "undefined"){
+        $scope.items[i].facilitador="ODONTOLOGÍA GENERAL";
       }
     }    
       $scope.item = null;  
@@ -334,9 +322,9 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
      
       });
      var pas = item.id;
-    $scope.profesionalesFiltrados = $scope.profesionales.filter(function (profesional) {
-      return (profesional.idprofesional == pas );
-      });
+    // $scope.profesionalesFiltrados = $scope.profesionales.filter(function (profesional) {
+    //   return (profesional.idprofesional == pas );
+    //   });
     setTimeout(function() {}, 500);
     
   };
@@ -368,11 +356,11 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
     $scope.items.push(item);
     $scope.selectItem(item);
     $scope.item.editing = true;
-    $scope.item.especialidad = MyService.data.especialidad;
+    $scope.item.facilitador = MyService.data.facilitador;
     $scope.item.mensajeNuevo=null;
     $scope.item.idUsuario = MyService.data.idUsuario;
-    $http.get('http://54.202.62.62:1346/especialidad/').then(function (resp) {
-    $scope.especialidades = resp.data.results;
+    $http.get('http://54.202.62.62:1346/facilitador/').then(function (resp) {
+    $scope.facilitadores = resp.data.results;
     }); 
   };
 
@@ -382,22 +370,22 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
     }
   };
 
-  $scope.doneEditingEspecialidad = function(item){
+  $scope.doneEditingFacilitador = function(item){
     item.editing = false;
-    var especialidadAct= {};
-    MyService.data.idenEspecialidad= item.id;
-    especialidadAct.nombre=item.nombre;
-    especialidadAct.idEstablecimiento=item.idEstablecimiento;
-    especialidadAct.idUsuario=item.idUsuario;
-    especialidadAct.idUsuarioAct=MyService.data.idUsuario;
+    var facilitadorAct= {};
+    MyService.data.idenFacilitador= item.id;
+    facilitadorAct.nombre=item.nombre;
+    facilitadorAct.idEstablecimiento=item.idEstablecimiento;
+    facilitadorAct.idUsuario=item.idUsuario;
+    facilitadorAct.idUsuarioAct=MyService.data.idUsuario;
     item.id=null;
-    especialidadAct.selected=item.selected;
-    especialidadAct.editing=item.editing;
-    if (MyService.data.idenEspecialidad){
-      $http.put('http://54.202.62.62:1346/especialidad/'+MyService.data.idenEspecialidad, especialidadAct)
+    facilitadorAct.selected=item.selected;
+    facilitadorAct.editing=item.editing;
+    if (MyService.data.idenFacilitador){
+      $http.put('http://54.202.62.62:1346/facilitador/'+MyService.data.idenFacilitador, facilitadorAct)
     }
     else {
-      $http.post('http://54.202.62.62:1346/especialidad/', especialidadAct)
+      $http.post('http://54.202.62.62:1346/facilitador/', facilitadorAct)
     }
   
     $scope.items = null;
@@ -429,9 +417,9 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
     profesionalAct.universidadEgreso=item.universidadEgreso;
     profesionalAct.anoDeEgreso=item.anoDeEgreso;
 
-    profesionalAct.especialidad=item.especialidad;
-    profesionalAct.anoDeEgresoEspecialidad=item.anoDeEgresoEspecialidad;
-    profesionalAct.universidadEgresoEspecialidad=item.universidadEgresoEspecialidad;
+    // profesionalAct.facilitador=item.especialidad;
+    // profesionalAct.anoDeEgresoEspecialidad=item.anoDeEgresoEspecialidad;
+    // profesionalAct.universidadEgresoEspecialidad=item.universidadEgresoEspecialidad;
 
     profesionalAct.cuentaI=item.cuentaI;
     profesionalAct.cuentaF=item.cuentaF;
@@ -458,8 +446,8 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
       $scope.pop3();;
       $http.post('http://54.202.62.62:1346/facilitador/', profesionalAct)
     }
-    $http.get('http://54.202.62.62:1346/especialidad/').then(function (resp) {
-      $scope.especialidades = resp.data.results;
+    $http.get('http://54.202.62.62:1346/facilitadores/').then(function (resp) {
+      $scope.facilitadores = resp.data.results;
     });
     $http.get('http://54.202.62.62:1346/facilitador/').then(function (resp) {
       $scope.app.states = resp.data.results;

@@ -352,7 +352,7 @@ $scope.carga();
     $scope.tipoCapacitacion = item;
     $scope.tipoCapacitacion.selected = true;
     $scope.filter = item.nombre;
-    $scope.items.length=0;
+    // $scope.items.length=0;
     $scope.item=null;
   };
 
