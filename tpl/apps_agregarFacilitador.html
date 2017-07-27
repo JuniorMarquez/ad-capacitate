@@ -129,17 +129,23 @@
         </div>
           <div class="row">
          <div class="col-sm-3" >
-          </p>Email:
-          <input type="text" placeholder="Email" class="form-control  font-bold" ng-model="item.email" >
+          </p>Facebook:
+          <input type="text" placeholder="Facebook" class="form-control  font-bold" ng-model="item.facebook" >
         </div>
         <div class="col-sm-3" >
-          </p>Teléfono de Habitación:
-          <input type="text" placeholder="Teléfono de Habitación" class="form-control  font-bold" ng-model="item.telefono" >
+          </p>Instagram:
+          <input type="text" placeholder="Instagram" class="form-control  font-bold" ng-model="item.instagram" >
         </div>
         <div class="col-sm-3" >
-          </p>Teléfono Personal:
-          <input type="text" placeholder="Teléfono personal" class="form-control  font-bold" ng-model="item.movil" >
+          </p>Twitter:
+          <input type="text" placeholder="Twitter" class="form-control  font-bold" ng-model="item.twitter" >
         </div>
+        </div>
+        <div class="row">
+<div class="col-sm-12">
+      </p>Direccion:
+           <textarea class="form-control" rows="4" name="Dirección"   ng-model="item.direccion" placeholder="Dirección" required="true"></textarea>
+      </div>
         </div>
        <!--  <p>Your age:</p>
         <input type="number" name="age" class="form-control" ng-model="age" required>
@@ -150,7 +156,7 @@
         </div>
       </form>
     </tab>
-    <tab heading="Otra información" disabled="step2.$invalid" active="steps.step3" select="steps.percent=60">
+    <tab heading="Observaciones" disabled="step2.$invalid" active="steps.step3" select="steps.percent=60">
       <!-- <p class="m-b">Congraduations! You got the last step.</p> -->
       <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
       <!-- <p>Just one click to finish it.</p> -->
