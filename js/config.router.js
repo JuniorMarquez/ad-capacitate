@@ -760,6 +760,24 @@ angular.module('app')
                   }
                  
               })
+              .state('app.agregarfac', {
+                  url: '/agregarfac',
+                  templateUrl: 'tpl/apps_agregarFacilitador.html',
+                   resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['ui.select','toaster','angularFileUpload']).then(
+                              function(){
+                                return $ocLazyLoad.load( [
+                                  'js/controllers/chart2.js',
+                                'js/controllers/bootstrap.js',
+                                'js/app/facilitadores/agregarfac.js',
+                                'js/controllers/file-upload.js']);
+                              }
+                          );
+                      }]
+                  }
+                  })
               .state('app.suscripciones', {
                   url: '/suscripciones',
                   templateUrl: 'tpl/app_suscripciones.html',
