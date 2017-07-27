@@ -7,7 +7,7 @@ app.controller('AgregarfacCtrl', ['$scope', '$state','$http', '$filter', '$modal
 
 
 var uploader = $scope.uploader = new FileUploader({
-        url: 'js/controllers/upload.php'
+        url: 'js/controllers/facilitadores/upload.php'
 
     });
     // FILTERS
