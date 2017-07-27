@@ -4,7 +4,7 @@
 <div class="wrapper-md" ng-controller="AgregarfacCtrl">
  <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
   <tabset class="tab-container" ng-init="steps={percent:20, step1:true, step2:false, step3:false}">
-    <tab heading="Datos de la Noticia" active="steps.step1" select="steps.percent=10">
+    <tab heading="Datos Personales" active="steps.step1" select="steps.percent=10">
       <!-- <p class="m-b"></p> -->
       <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
       <!-- <h4>Validate Form</h4> -->
@@ -13,30 +13,46 @@
                   <div  class="h5">
                    
                   
-                     <div class="col-sm-9" >
-                      </p>Titulo o tema23
-                      :
-                      <input type="text" placeholder="Titulo" class="form-control  font-bold" ng-model="item.titulo" >
+                     <div class="col-sm-3" >
+                      </p>Primer Nombre:
+                      <input type="text" placeholder="Primer nombre" class="form-control  font-bold" ng-model="item.primerNombre" >
+                    </div>
+                    <div class="col-sm-3" >
+                      </p>Segundo Nombre:
+                      <input type="text" placeholder="Segundo Nombre" class="form-control  font-bold" ng-model="item.segundoNombre" >
+                    </div>
+                    <div class="col-sm-3" >
+                      </p>Primer Apellido:
+                      <input type="text" placeholder="Primer Apellido" class="form-control  font-bold" ng-model="item.primerApellido" >
+                    </div>
+                    <div class="col-sm-3" >
+                      </p>Segundo Apellido:
+                      <input type="text" placeholder="Segundo Apelido" class="form-control  font-bold" ng-model="item.segundoApellido" >
                     </div>
                    
-                       <div class="col-sm-3" >
-                      </p>Estado:
-                      <ui-select ng-model="item.status" theme="bootstrap" >
-                        <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
-                        <ui-select-choices group-by="" repeat="item in estados | filter: $select.search">
-                          <span ng-bind-html="item | highlight: $select.search"></span>
-                        </ui-select-choices>
-                      </ui-select>
-                    </div> 
-                     <div class="col-sm-6" >
-                    </p>Tipo de Noticia:
-                    <ui-select ng-model="item.tipoNoticia" theme="bootstrap" >
-                      <ui-select-match placeholder="Seleccione...">{{$select.selected.nombre}}</ui-select-match>
-                      <ui-select-choices group-by="'nombre'" repeat="item.nombre as item in tiposNoticias | filter: $select.search">
-                      <span ng-bind-html="item.nombre | highlight: $select.search"></span>
+                                 <div class="col-sm-2">
+              <p>Nacionalidad:</p>
+                    <ui-select ng-model="item.nacionalidad" theme="bootstrap" >
+                      <ui-select-match placeholder="V/E">{{$select.selected}}</ui-select-match>
+                      <ui-select-choices group-by="'name'" repeat="item in nacionalidades | filter: $select.search">
+                        <span ng-bind-html="item | highlight: $select.search"></span>
                       </ui-select-choices>
                     </ui-select>
-                  </div>  
+                  </div> 
+                      <div class="col-sm-3" >
+                      <p>Identificación:</p>
+                      <input type="text" placeholder="Identificación" class="form-control  font-bold" ng-model="item.identificacion" >
+                    </div>
+
+                      <div class="col-xs-4">
+                    <p>Fecha de Nac.</p>
+                      <p class="input-group" ng-controller="DatepickerDemoCtrl">
+                      <input type="text" class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="item.fechaNacimiento" is-open="opened" max-date="minDate" ng-change="" datepicker-options="dateOptions" ng-required="true"  close-text="Ok"/>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                  </div>
                    
                   </div>
 
@@ -92,17 +108,39 @@
         </br>
       </form>
     </tab>
-    <tab heading="Contenido" disabled="step1.$invalid" active="steps.step2" select="steps.percent=30">
+    <tab heading="Datos de Contacto" disabled="step1.$invalid" active="steps.step2" select="steps.percent=30">
       <form name="step2" class="form-validation">
         <!-- <p class="m-b">Continue the next step</p> -->
         <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
         
-        
-        <div ng-repeat="item in itemsContenido">
-          <textarea class="form-control" rows="5"  ng-model="item.contenido"placeholder="{{item.contenidoPlaceholder}}" required="true"></textarea>
-          </br>
-  
-      </div>
+        <div class="row">
+         <div class="col-sm-3" >
+          </p>Email:
+          <input type="text" placeholder="Email" class="form-control  font-bold" ng-model="item.email" >
+        </div>
+        <div class="col-sm-3" >
+          </p>Teléfono de Habitación:
+          <input type="text" placeholder="Teléfono de Habitación" class="form-control  font-bold" ng-model="item.telefono" >
+        </div>
+        <div class="col-sm-3" >
+          </p>Teléfono Personal:
+          <input type="text" placeholder="Teléfono personal" class="form-control  font-bold" ng-model="item.movil" >
+        </div>
+        </div>
+          <div class="row">
+         <div class="col-sm-3" >
+          </p>Email:
+          <input type="text" placeholder="Email" class="form-control  font-bold" ng-model="item.email" >
+        </div>
+        <div class="col-sm-3" >
+          </p>Teléfono de Habitación:
+          <input type="text" placeholder="Teléfono de Habitación" class="form-control  font-bold" ng-model="item.telefono" >
+        </div>
+        <div class="col-sm-3" >
+          </p>Teléfono Personal:
+          <input type="text" placeholder="Teléfono personal" class="form-control  font-bold" ng-model="item.movil" >
+        </div>
+        </div>
        <!--  <p>Your age:</p>
         <input type="number" name="age" class="form-control" ng-model="age" required>
  -->

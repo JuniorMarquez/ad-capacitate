@@ -11,7 +11,7 @@ var uploader = $scope.uploader = new FileUploader({
 
     });
     // FILTERS
-
+ $scope.nacionalidades = ['V','E'];
     uploader.filters.push({
         name: 'customFilter',
         fn: function(item /*{File|FileLikeObject}*/, options) {
