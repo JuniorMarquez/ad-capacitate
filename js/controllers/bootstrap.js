@@ -539,6 +539,13 @@ $scope.okActividad = function (item) {
       $scope.item = null; 
       $modalInstance.close();
     };
+     $scope.okConfirmFacilitador = function (item) { 
+      var idFacilitador=MyService.data.identificadorFacilitador;
+      $http.delete('http://54.202.62.62:1346/facilitador/'+idFacilitador , item)
+      $scope.items = null;
+      $scope.item = null; 
+      $modalInstance.close();
+    };
 
     $scope.okConfirm2 = function (item) { 
      var idEspecialidad=MyService.data.identificador;

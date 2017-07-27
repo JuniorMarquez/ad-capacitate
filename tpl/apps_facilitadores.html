@@ -50,21 +50,19 @@
         </div>
       </div>
       <div class="wrapper b-t text-center" >
-       <!--  <a tooltip="Agregar Profesional" href class="btn btn-xs btn-default btn-addon" ng-click="createItem()" ng-show="items"><i class="fa fa-plus fa-fw m-r-xs"></i> Profesional</a> -->
+
       </div>
     </div>
   </div>
-  <!-- /column -->
 
-  <!-- column -->
   <div class="col bg-white-only">
     <div class="vbox">
       <div class="wrapper-sm b-b">
        <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
         <div class="m-t-n-xxs m-b-n-xxs m-l-xs">
-          <a  class="btn btn-xs btn-default pull-right" ng-hide="!item" ng-click="openConfirmBorrarProfesional(item)"><i tooltip="Borrar profesional" tooltip-placement="left" class="fa fa-times"></i></a>
+          <a  class="btn btn-xs btn-default pull-right" ng-hide="!item" ng-click="openConfirmBorrarFacilitador(item)"><i tooltip="Borrar Facilitador" tooltip-placement="left" class="fa fa-times"></i></a>
           <a class="btn btn-xs btn-primary" ng-hide="item.editing || !item" ng-click="editItem(item)">Editar</a>
-          <a class="btn btn-xs btn-success" ng-show="item.editing" ng-click="doneEditingProfesional(item)">Guardar cambios</a>
+          <a class="btn btn-xs btn-success" ng-show="item.editing" ng-click="doneEditingFacilitador(item)">Guardar cambios</a>
         </div>
       </div>
       <div class="row-row">
@@ -94,7 +92,7 @@
                 <strong> Identificacion: </strong>
                        {{item.nacionalidad}}- <span class="form-control-static" >{{item.identificacion}}.</span>
 
-                <strong> Estado Civil: </strong><span class="form-control-static" > {{item.estadoCivil}}.</span>
+            <!--     <strong> Estado Civil: </strong><span class="form-control-static" > {{item.estadoCivil}}.</span> -->
 
 
                         <p></p>
@@ -104,10 +102,7 @@
                 <strong> Fecha de Nacimiento: </strong>
                 <span class="form-control-static" >{{item.fechaNacimiento | date:YYYY}} .</span>
                 <p></p>
-                  <!-- <strong> Especialidad: </strong>
-                        <span class="form-control-static" >{{item.especialidad}}</span>
-
-            <p></p> -->
+               
          
                 </div>
                 <div class="colEditada v-middle font-thin">                     
@@ -147,18 +142,6 @@
 
 
 
-                  <div class="row col-sm-12">
-               
-                    <div class="col-sm-4" ng-show="item.editing">
-                    <p>Estado Civil</p>
-                    <ui-select ng-model="item.estadoCivil" theme="bootstrap" ng-show="item.editing">
-                      <ui-select-match placeholder="Estado civil">{{$select.selected}}</ui-select-match>
-                      <ui-select-choices group-by="'name'" repeat="item in estados | filter: $select.search">
-                        <span ng-bind-html="item | highlight: $select.search"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>  
-        </div>
                          
             <p></p><p></p>
                 </div>
@@ -241,118 +224,7 @@
             </p>
           </accordion-group>
          
-       <!--   <accordion-group heading="Datos profesionales"  is-disabled="status.isFirstDisabled">
-            <p>
-            <div ng-show="!item.editing">
-            <div class="col-sm-2"> 
-                <b>Universidad:</b>
-              </div>
-              <div class="col-sm-9"> 
-               <strong> Universidad de egreso: </strong>
-                <span class="form-control-static" >{{item.universidadEgreso}} .</span>
-                
-                <strong> Año de egreso: </strong>
-                <span class="form-control-static" >{{item.anoDeEgreso}} .</span>
-               
-              </div>
-       <div class="col-sm-2"> 
-                <b>Especialidad:</b>
-              </div>
-            
-            <div class="col-sm-9" ng-hide="{{item.especialidad=='ODONTOLOGÍA GENERAL'}}"> 
-               {{item.especialidad}}
-                 
-              </div>
-
-              <div class="col-sm-12">  
-              <strong> Universidad de egreso: </strong>
-                              <span class="form-control-static" >{{item.universidadEgresoEspecialidad}} .</span>
-                <b>Año de egreso:</b> {{item.anoDeEgresoEspecialidad}}
-              </div>
-              
-              <div class="col-sm-10">
-              </br>
-                <b>Dirección de trabajo:</b> 
-                {{item.direccionTrabajo}}
-              </div>
-               <div class="col-sm-6"> 
-                <b>Teléfono trabajo:</b> {{item.telefonoTrabajo}}
-              </div>
-              <div class="col-sm-10">
-                <b>Municipio:</b> 
-                {{item.municipio}}
-              </div>
-               <div class="row">
-              
-            </div> 
-            </div>
-          
-          
-
-           <div ng-show="item.editing" class="col-sm-6">
-              Año de egreso
-              <input type="text" class="form-control input-sm"   placeholder="Año de egreso" ng-model="item.AnoDeEgreso" style="" >
-            </div>
-            <div ng-show="item.editing" class="col-sm-6">
-              COV
-              <input type="text" class="form-control input-sm"   placeholder="COV" ng-model="item.cov" style="" >
-            </div>
-            <div ng-show="item.editing" class="col-sm-6">
-              MSAS
-              <input type="text" class="form-control input-sm"   placeholder="MSAS" ng-model="item.msas" style="" >
-            </div>
-             <div ng-show="item.editing" class="col-sm-6">
-              Teléfono de trabajo
-              <input type="text" class="form-control input-sm"   placeholder="Teléfono de trabajo" ng-model="item.telefonoTrabajo" style="" >
-            </div>
-            <div class="row">
-
-                 <div class="form-group col-md-12" ng-hide="!item.especialidad && !item.editing">
-                  <div class="col-sm-12" ng-show="item.editing">
-                    <i class="icon-drawer "></i> Especialidad
-                    <ui-select ng-model="item.especialidad" theme="bootstrap" ng-show="item.editing">
-                      <ui-select-match placeholder="Seleccione...">{{$select.selected.nombre}}</ui-select-match>
-                      <ui-select-choices group-by="'nombre'" repeat="item.nombre as item in especialidades | filter: $select.search">
-                        <span ng-bind-html="item.nombre | highlight: $select.search"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div>
-              </div>
-              <div ng-show="item.editing" class="col-md-12">
-            Universidad de egreso especialidad:
-            <input type="text" class="form-control input-sm"   placeholder="Universidad de egreso especialidad" ng-model="item.universidadEgresoEspecialidad" style="" >
-            </div>
-            <div ng-show="item.editing" class="col-md-12">
-              Año de egreso especialidad
-              <input type="text" class="form-control input-sm"   placeholder="Año de egreso especialidad" ng-model="item.AnoDeEgresoEspecialidad" style="" >
-            </div>
-  
-
-            <div ng-show="item.editing" class="col-sm-12">
-              Dirección de trabajo:
-              <textarea rows="2" class="form-control input-sm"   placeholder="Direccion de trabajo" ng-model="item.direccionTrabajo" style="" > </textarea>
-            </div>
-    
-              <div class="row">
-              <div class="form-group col-md-12" ng-hide="!item.especialidad && !item.editing">
-                  <div class="col-sm-12" ng-show="item.editing">
-                    <i class=" icon-pointer"></i> Municipio
-                    <ui-select ng-model="item.municipio" theme="bootstrap" ng-show="item.editing">
-                      <ui-select-match placeholder="Seleccione...">{{$select.selected.name}}</ui-select-match>
-                      <ui-select-choices group-by="'name'" repeat="item.name as item in municipios | filter: $select.search">
-                        <span ng-bind-html="item.name | highlight: $select.search"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div> 
-            
-            </div> 
-
-
-
-            
-          </accordion-group>           -->
+      
   
 
            <accordion-group heading="Datos de ingreso"  is-disabled="status.isFirstDisabled">
