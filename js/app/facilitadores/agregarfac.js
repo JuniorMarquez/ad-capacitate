@@ -67,9 +67,9 @@ var uploader = $scope.uploader = new FileUploader({
     text3: 'Publicación agregada con éxito',
     title3: 'Información',
     
-    type4: 'success',
-    text4: 'Publicación agregada con exito',
-    title4: 'Exito',
+      typeNF: 'success',
+    textNF: 'Facilitador agregado con exito',
+    titleNF: 'Exito',
     
     type5: 'info',
     text5: 'capacitacion editada con exito',
@@ -130,8 +130,8 @@ var uploader = $scope.uploader = new FileUploader({
   $scope.pop2 = function(){
     toaster.pop($scope.toaster.type3, $scope.toaster.title3, $scope.toaster.text3);
   };
-  $scope.pop3 = function(){
-    toaster.pop($scope.toaster.type4, $scope.toaster.title4, $scope.toaster.text4);
+ $scope.popNuevoFacilitador = function(){
+    toaster.pop($scope.toaster.typeNF, $scope.toaster.titleNF, $scope.toaster.textNF);
   };
   $scope.pop4 = function(){
     toaster.pop($scope.toaster.type5, $scope.toaster.title5, $scope.toaster.text5);
@@ -199,19 +199,17 @@ var uploader = $scope.uploader = new FileUploader({
     $scope.address.selected = undefined;
     $scope.country.selected = undefined;
   };
-  $scope.guardar = function(item){
-    var publicacionAct = {};
-    publicacionAct.titulo=item.titulo;
-    publicacionAct.status=item.status;
-    publicacionAct.tipoPublicacion=item.tipoPublicacion;
-    publicacionAct.img=MyService.data.nombreImagen
-    item.itemsContenido=$scope.itemsContenido;
-    publicacionAct.itemsContenido=item.itemsContenido;
-    publicacionAct.idUsuario=MyService.data.idUsuario;
-    publicacionAct.observaciones=item.observaciones;
-      $scope.pop3();
-      $http.post('http://54.202.62.62:1346/publicacion/', publicacionAct).success(function(data){
-          $state.go('apps.pubgestionar'); 
+  $scope.guardarFacilitador = function(item){
+     var facilitadorAct = {};
+    facilitadorAct=item;
+    
+    facilitadorAct.img=MyService.data.nombreImagen
+
+    facilitadorAct.idUsuario=MyService.data.idUsuario;
+  
+      $scope.popNuevoFacilitador();
+      $http.post('http://54.202.62.62:1346/facilitador/', facilitadorAct).success(function(data){
+          $state.go('apps.facilitadores'); 
       });
   };
 
