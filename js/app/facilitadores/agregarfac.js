@@ -7,7 +7,7 @@ app.controller('AgregarfacCtrl', ['$scope', '$state','$http', '$filter', '$modal
 
 
 var uploader = $scope.uploader = new FileUploader({
-        url: 'js/controllers/facilitadores/upload.php'
+        url: 'js/controllers/uploads/facilitadores/upload.php'
 
     });
     // FILTERS
@@ -18,7 +18,6 @@ var uploader = $scope.uploader = new FileUploader({
           // alert("nombre archivo: " +item.name);
           MyService.data.nombreImagen=item.name;
             return this.queue.length < 10;
-
         }
     });
 

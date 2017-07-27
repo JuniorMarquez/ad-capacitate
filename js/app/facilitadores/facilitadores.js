@@ -271,7 +271,7 @@ app.controller('FacilitadoresCtrl', ['$scope', '$state','$http', '$filter', '$mo
       // alert("aqui");
        for (var i = 0; i < $scope.items.length; ++i) {
         
-        $scope.items[i].img2="js/controllers/uploads/facilitadores"+$scope.items[i].img;
+        $scope.items[i].img2="js/controllers/uploads/facilitadores/uploads/"+$scope.items[i].img;
         $scope.items[i].img=$scope.items[i].img2;
       
     }    
