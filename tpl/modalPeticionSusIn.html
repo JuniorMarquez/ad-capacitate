@@ -1,7 +1,7 @@
 <div class="modal-header" ng-init="consultaSuscripcion()">
     <h3 class="modal-title">Aceptar Suscripcion en Incompany<p>
    </p></h3>
-    {{item.nombreEmpresa}}
+
 </div>
 <div class="modal-body">
     	
@@ -10,7 +10,7 @@
           <accordion-group heading="Datos de la Empresa"   is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" >
             <p>
             <div ng-show="!item.editing">
-              <div class="col-sm-12" ng-show="{{item.tipoSuscripcion=='incompany'}}" ui-refresh="item"> 
+              <div class="col-sm-12" > 
                 <b>Nombre de la Empresa:</b> {{item.nombreEmpresa}}
               </div>
               <div class="col-sm-12">
@@ -29,7 +29,7 @@
          <accordion-group heading="Datos de Contacto"  is-disabled="status.isFirstDisabled">
             <p>
             <div >
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <b>Telefono:</b>
                 {{item.telefono}}
               </div>
@@ -48,39 +48,21 @@
               <div class="col-sm-12">
                 <b>Dirección:</b> 
                 {{item.direccion}}
-              </div> 
-            
-           
-              
-            </div>
-          
-          
-
-         
-          
-     
-
-
-
-            
+              </div>           
+            </div>            
+          </accordion-group>     
+          <accordion-group heading="Intereses"  is-disabled="status.isFirstDisabled">
+            <p>
+            <div >
+            <div class="col-sm-12">
+              <b>Area de conocimiento de interés:</b>
+                {{item.area}}
+              </div>
+                    
+            </div>            
           </accordion-group>          
   
-
-      <!--      <accordion-group heading="Datos de ingreso"  is-disabled="status.isFirstDisabled">
-            <p>
-            <div ng-show="!item.editing">
-              
-              <div class="col-sm-6"> 
-                <b>Contraseña:</b> {{item.password}}
-              </div>
-            </div>
-          
-            <div ng-show="item.editing" class="col-sm-6">
-            Contraseña
-            <input type="text" class="form-control input-sm"   placeholder="Contraseña" ng-model="item.password" style="" >
-            </div>
-            </p>
-          </accordion-group>   -->        
+    
    
         </accordion>
        

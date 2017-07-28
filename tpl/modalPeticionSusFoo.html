@@ -1,23 +1,28 @@
 <div class="modal-header" ng-init="consultaSuscripcion()">
     <h3 class="modal-title">Aceptar Suscripcion en Pie de Pagina<p>
    </p></h3>
-    {{item.nombreEmpresa}}
+
 </div>
 <div class="modal-body">
     	
   <div ng-controller="AccordionDemoCtrl"  >
 <accordion close-others="oneAtATime" >
-          <accordion-group heading="Datos de la Empresa"   is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" >
+          <accordion-group heading="Datos del Suscriptor"   is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" >
             <p>
             <div ng-show="!item.editing">
-              <div class="col-sm-12" ng-show="{{item.tipoSuscripcion=='incompany'}}" ui-refresh="item"> 
-                <b>Nombre de la Empresa:</b> {{item.nombreEmpresa}}
+              <div class="col-sm-12" > 
+                <b>Nombre </b> {{item.nombre}}
               </div>
-              <div class="col-sm-12">
-              <b>Persona de contacto:</b>
-                {{item.personaContacto}}
+              <div class="col-sm-6">
+              <b>Email:</b>
+                {{item.email}}
               </div>
-                
+              <div class="col-sm-6">
+              <b>Telefono:</b>
+                {{item.telefono}}
+              </div>
+                  
+
 
             </div>
            
@@ -26,61 +31,7 @@
             </p>
           </accordion-group>
          
-         <accordion-group heading="Datos de Contacto"  is-disabled="status.isFirstDisabled">
-            <p>
-            <div >
-            <div class="col-sm-6">
-              <b>Telefono:</b>
-                {{item.telefono}}
-              </div>
-            <div class="col-sm-6">
-              <b>Instagram:</b>
-                {{item.cuentaI}}
-              </div>
-               <div class="col-sm-6">
-              <b>Facebook:</b>
-                {{item.cuentaF}}
-              </div>
-               <div class="col-sm-6">
-              <b>Twitter:</b>
-                {{item.cuentaT}}
-              </div>
-              <div class="col-sm-12">
-                <b>Dirección:</b> 
-                {{item.direccion}}
-              </div> 
-            
-           
-              
-            </div>
-          
-          
-
-         
-          
-     
-
-
-
-            
-          </accordion-group>          
-  
-
-      <!--      <accordion-group heading="Datos de ingreso"  is-disabled="status.isFirstDisabled">
-            <p>
-            <div ng-show="!item.editing">
-              
-              <div class="col-sm-6"> 
-                <b>Contraseña:</b> {{item.password}}
-              </div>
-            </div>
-          
-            <div ng-show="item.editing" class="col-sm-6">
-            Contraseña
-            <input type="text" class="form-control input-sm"   placeholder="Contraseña" ng-model="item.password" style="" >
-            </div>
-            </p>
-          </accordion-group>   -->        
+      
    
         </accordion>
        
