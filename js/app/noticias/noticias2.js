@@ -160,7 +160,7 @@ $scope.noticias = [];
           $scope.tbOptionsAutorizadas.aoColumns=[
             { mData: 'createdAtFormateada'},
           {mData:'titulo'},
-          {mData:'idUsuario'}
+          {mData:'accion2'}
           ];
       });
  

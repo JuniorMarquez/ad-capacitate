@@ -672,7 +672,7 @@ pre {
 }
 
 .modal-backdrop {
-  background-color: #312E6D;
+  background-color: #000;
 }
 
 .modal-backdrop.in {
