@@ -888,7 +888,7 @@ angular.module('app')
                       }]
                   }
                   })
-                   .state('apps.notlistado', {
+                   .state('app.notlistado', {
                   url: '/listadonot',
                   templateUrl: 'tpl/apps_listadoNoticias.html',
                    resolve: {
@@ -899,7 +899,7 @@ angular.module('app')
                                 return $ocLazyLoad.load( [
                                   'js/controllers/chart2.js',
                                 'js/controllers/bootstrap.js',
-                                'js/app/noticias/noticias.js',
+                                'js/app/noticias/noticias2.js',
                                 'js/controllers/file-upload.js']);
                               }
                           );
@@ -946,7 +946,7 @@ angular.module('app')
                       }]
                   }
                   })
-                   .state('apps.publistado', {
+                   .state('app.publistado', {
                   url: '/listadopub',
                   templateUrl: 'tpl/apps_listadoPublicaciones.html',
                    resolve: {
