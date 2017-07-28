@@ -302,7 +302,7 @@ $scope.openBorrarSuscripcion = function (item) {
 
  
 
- $scope.openPeticionSus = function (item) {
+ $scope.openPeticionSusIn = function (item) {
     // var identificador=item.id;
     // MyService.data.identificador = identificador;
     // MyService.data.idenSuscripcion=item;
@@ -312,7 +312,76 @@ $scope.openBorrarSuscripcion = function (item) {
 
     
       var modalInstance = $modal.open({
-        templateUrl: 'modalPeticionSus.html',
+        templateUrl: 'modalPeticionSusIn.html',
+        controller: 'ModalInstanceCtrl',
+        size: 'md',
+        resolve: {
+
+           dato: function  () {
+            return item;
+            // body...
+          },
+           datosCuenta: function  () {
+            return datosCuenta;
+            // body...
+          },
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+      modalInstance.result.then(function (selectedItem,timeout) {
+          $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
+      }, function () {
+      // $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+$scope.openPeticionSusCap= function (item) {
+    // var identificador=item.id;
+    // MyService.data.identificador = identificador;
+    // MyService.data.idenSuscripcion=item;
+  var item=[];
+  var dato="";
+  var datosCuenta="";
+
+    
+      var modalInstance = $modal.open({
+        templateUrl: 'modalPeticionSusCap.html',
+        controller: 'ModalInstanceCtrl',
+        size: 'md',
+        resolve: {
+
+           dato: function  () {
+            return item;
+            // body...
+          },
+           datosCuenta: function  () {
+            return datosCuenta;
+            // body...
+          },
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+      modalInstance.result.then(function (selectedItem,timeout) {
+          $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
+      }, function () {
+      // $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+$scope.openPeticionSusFoo = function (item) {
+    // var identificador=item.id;
+    // MyService.data.identificador = identificador;
+    // MyService.data.idenSuscripcion=item;
+  var item=[];
+  var dato="";
+  var datosCuenta="";
+
+    
+      var modalInstance = $modal.open({
+        templateUrl: 'modalPeticionSusFoo.html',
         controller: 'ModalInstanceCtrl',
         size: 'md',
         resolve: {
@@ -338,9 +407,19 @@ $scope.openBorrarSuscripcion = function (item) {
   };
 
 
+
+
+
  $scope.Aprobacion = function (iden) {
   MyService.data.idenSuscripcion=iden;
-  $scope.openPeticionSus(iden);
+var item=[];
+  $http.get("http://54.202.62.62:1346/suscripcion/"+iden).success(function(respuesta){        
+    item=respuesta;
+ if (item.tipoSuscripcion=="incompany"){$scope.openPeticionSusIn(iden);};
+  if (item.tipoSuscripcion=="capacitacion"){$scope.openPeticionSusCap(iden);};
+  if (item.tipoSuscripcion=="footer"){$scope.openPeticionSusFoo(iden);};
+  });
+ 
 };
 $scope.Edicion = function (iden) {
   MyService.data.idenMiembro=iden;
