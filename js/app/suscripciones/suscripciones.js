@@ -127,7 +127,7 @@ $scope.suscripciones = [];
                 result.push($scope.suscripciones[i]);
                 }
              if ( $scope.suscripciones[i].status == "pendiente"){
-              $scope.suscripciones[i].accion=" <button onclick=\"angular.element(this).scope().Aprobacion('" +identif +"')\"  class=\"btn btn-success btn-xs\" ui-toggle-class=\"show inline\" target=\"#spin\"> <span class=\"text\">Validar</span>  <span class=\"text-active\">Cargando...</span></button> <i class=\"fa fa-spin fa-spinner hide\" id=\"spin\"></i>";                                  
+              $scope.suscripciones[i].accion=" <button onclick=\"angular.element(this).scope().Aprobacion('" +identif +"')\"  class=\"btn btn-success btn-xs\" ui-toggle-class=\"show inline\" target=\"#spin\"> <span class=\"text\">Aceptar</span>  <span class=\"text-active\">Cargando...</span></button> <i class=\"fa fa-spin fa-spinner hide\" id=\"spin\"></i>";                                  
                 result3.push($scope.suscripciones[i]);
                 }
             }
@@ -232,14 +232,14 @@ $scope.suscripciones = [];
     };
     $scope.getSuscripciones();
 
-$scope.openBorrar = function (item) {
+$scope.openBorrarSuscripcion = function (item) {
     var item=[];
   var dato="";
   var datosCuenta="";
   var modalInstance = $modal.open({
-    templateUrl: 'modalBorrar.html',
+    templateUrl: 'modalBorrarSuscripcion.html',
     controller: 'ModalInstanceCtrl',
-    size: 'lg',
+    size: 'sm',
     resolve: {
 
            dato: function  () {
@@ -302,17 +302,17 @@ $scope.openBorrar = function (item) {
 
  
 
- $scope.openPeticionCot = function (item) {
+ $scope.openPeticionSus = function (item) {
     // var identificador=item.id;
     // MyService.data.identificador = identificador;
-    MyService.data.idenMiembro=item;
+    // MyService.data.idenSuscripcion=item;
   var item=[];
   var dato="";
   var datosCuenta="";
 
     
       var modalInstance = $modal.open({
-        templateUrl: 'modalPeticionCot.html',
+        templateUrl: 'modalPeticionSus.html',
         controller: 'ModalInstanceCtrl',
         size: 'md',
         resolve: {
@@ -339,16 +339,16 @@ $scope.openBorrar = function (item) {
 
 
  $scope.Aprobacion = function (iden) {
-  MyService.data.idenMiembro=iden;
-  $scope.openPeticionCot(iden);
+  MyService.data.idenSuscripcion=iden;
+  $scope.openPeticionSus(iden);
 };
 $scope.Edicion = function (iden) {
   MyService.data.idenMiembro=iden;
   $scope.openEdicion(iden);
 };
  $scope.Borrado = function (iden) {
-  MyService.data.idenMiembro=iden;
-  $scope.openBorrar();
+  MyService.data.idenSuscripcion=iden;
+  $scope.openBorrarSuscripcion();
 };
 
 }]);

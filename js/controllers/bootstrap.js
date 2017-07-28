@@ -101,6 +101,17 @@
 
   app.controller('ModalInstanceCtrl', ['$scope', '$http', '$modalInstance', 'items', 'MyService', '$filter','$modal','dato','datosCuenta','toaster', '$state',function($scope, $http, $modalInstance, items, MyService,$filter,$modal,dato,datosCuenta,toaster,$state) {
 
+
+
+ $scope.okBorrarSuscripcion = function (item,timeout) { 
+      var dato="";
+      dato = MyService.data.idenSuscripcion;
+      $http.delete('http://54.202.62.62:1346/suscripcion/'+dato).success(function(data) {
+              $modalInstance.close();
+               $scope.popSuscripcionBorrada();
+          }); 
+    };
+
      var result = [];
 
     $scope.nacionalidades = ['V','E'];
@@ -162,6 +173,28 @@
                                                      
     };
 
+$scope.consultarContenido=function(item){
+  var item=[];
+  var identificador = MyService.data.idenContenido;
+  $scope.datosContenido={};
+  $http.get('http://54.202.62.62:1346/contenido/'+identificador).success(function(respuesta){        
+    item=respuesta;
+    $scope.item=item;
+  });
+  item=$scope.item;
+  $scope.item=item;
+};
+$scope.consultaSuscripcion=function(item){
+  var item=[];
+  var identificador = MyService.data.idenSuscripcion;
+  $scope.datosContenido={};
+  $http.get('http://54.202.62.62:1346/suscripcion/'+identificador).success(function(respuesta){        
+    item=respuesta;
+    $scope.item=item;
+  });
+  item=$scope.item;
+  $scope.item=item;
+};
 $scope.consultarContenido=function(item){
   var item=[];
   var identificador = MyService.data.idenContenido;
@@ -494,6 +527,11 @@ $scope.okActividad = function (item) {
     type8: 'info',
     text8: 'Item de Contenido borrado con exito',
     title8: 'Información',
+
+typeSB: 'info',
+    textSB: 'Suscripcion borrada con Exito',
+    titleSB: 'Información',
+
     type9: 'info',
     text9: 'Actividad editada con exito',
     title9: 'Información',
@@ -523,6 +561,9 @@ $scope.okActividad = function (item) {
   $scope.popBorrado = function(){
     toaster.pop($scope.toaster.type8, $scope.toaster.title8, $scope.toaster.text8);
   };
+   $scope.popSuscripcionBorrada = function(){
+    toaster.pop($scope.toaster.typeSB, $scope.toaster.titleSB, $scope.toaster.textSB);
+  };
     $scope.okBorrarContenido = function (item,timeout) { 
       var dato="";
       dato = MyService.data.idenContenido;
@@ -531,6 +572,7 @@ $scope.okActividad = function (item) {
                $scope.popBorrado();
           }); 
     };
+    
    
     $scope.okConfirmCapacitacion = function (item) { 
       var idCapacitacion=MyService.data.identificador;
