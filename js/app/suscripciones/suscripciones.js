@@ -257,6 +257,7 @@ $scope.openBorrarSuscripcion = function (item) {
       });
     modalInstance.result.then(function (selectedItem,timeout) {
       }, function () {
+        $scope.getSuscripciones();
     });
      
   };
@@ -292,8 +293,9 @@ $scope.openBorrarSuscripcion = function (item) {
         }
       });
       modalInstance.result.then(function (selectedItem,timeout) {
-  
+  $scope.getSuscripciones();
       }, function () {
+        $scope.getSuscripciones();
       // $log.info('Modal dismissed at: ' + new Date());
     });
   };
@@ -331,8 +333,9 @@ $scope.openBorrarSuscripcion = function (item) {
         }
       });
       modalInstance.result.then(function (selectedItem,timeout) {
-          $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
+          // $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
       }, function () {
+        $scope.getSuscripciones();
       // $log.info('Modal dismissed at: ' + new Date());
     });
   };
@@ -366,8 +369,9 @@ $scope.openPeticionSusCap= function (item) {
         }
       });
       modalInstance.result.then(function (selectedItem,timeout) {
-          $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
+          // $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
       }, function () {
+        $scope.getSuscripciones();
       // $log.info('Modal dismissed at: ' + new Date());
     });
   };
@@ -400,8 +404,10 @@ $scope.openPeticionSusFoo = function (item) {
         }
       });
       modalInstance.result.then(function (selectedItem,timeout) {
-          $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
+        // $scope.getSuscripciones();
+        //   $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
       }, function () {
+        $scope.getSuscripciones();
       // $log.info('Modal dismissed at: ' + new Date());
     });
   };
