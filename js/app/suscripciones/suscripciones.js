@@ -333,6 +333,7 @@ $scope.openBorrarSuscripcion = function (item) {
         }
       });
       modalInstance.result.then(function (selectedItem,timeout) {
+         $scope.getSuscripciones();
           // $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
       }, function () {
         $scope.getSuscripciones();
@@ -369,6 +370,7 @@ $scope.openPeticionSusCap= function (item) {
         }
       });
       modalInstance.result.then(function (selectedItem,timeout) {
+         $scope.getSuscripciones();
           // $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
       }, function () {
         $scope.getSuscripciones();
@@ -404,6 +406,8 @@ $scope.openPeticionSusFoo = function (item) {
         }
       });
       modalInstance.result.then(function (selectedItem,timeout) {
+setTimeout(function() {$scope.getSuscripciones();}, 500);
+         
         // $scope.getSuscripciones();
         //   $scope.suscripcionesPendientes.splice($scope.suscripcionesPendientes.indexOf(selectedItem), 1);
       }, function () {
