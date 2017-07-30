@@ -119,6 +119,14 @@
                $scope.popSuscripcionBorrada();
           }); 
     };
+    $scope.okBorrarPublicacion= function (item,timeout) { 
+      var dato="";
+      dato = MyService.data.idenPublicacion;
+      $http.delete('http://54.202.62.62:1346/publicacion/'+dato).success(function(data) {
+              $modalInstance.close();
+               $scope.popPublicacionBorrada();
+          }); 
+    };
 
      var result = [];
 
@@ -208,6 +216,17 @@ $scope.consultaNoticia=function(item){
   var identificador = MyService.data.idenNoticia;
   $scope.datosContenido={};
   $http.get('http://54.202.62.62:1346/noticia/'+identificador).success(function(respuesta){        
+    item=respuesta;
+    $scope.item=item;
+  });
+  item=$scope.item;
+  $scope.item=item;
+};
+$scope.consultaPublicacion=function(item){
+  var item=[];
+  var identificador = MyService.data.idenPublicacion;
+  $scope.datosContenido={};
+  $http.get('http://54.202.62.62:1346/publicacion/'+identificador).success(function(respuesta){        
     item=respuesta;
     $scope.item=item;
   });
@@ -485,6 +504,15 @@ $scope.okAprobacion = function (item) {
     $scope.popAprobacionNoticia();
 
  };
+  $scope.okAprobacionPublicacion = function (item) {
+    var identificador = MyService.data.idenPublicacion;
+    var publicacionAct={};
+    publicacionAct.status="activa";  
+    $http.put('http://54.202.62.62:1346/publicacion/'+identificador, publicacionAct);
+    $modalInstance.close();  
+    $scope.popAprobacionPublicacion();
+
+ };
  $scope.okEdicion = function (item) {
     var identificador = MyService.data.idenContenido;
     var contenidoAct={};
@@ -576,10 +604,16 @@ $scope.okActividad = function (item) {
 typeSB: 'info',
     textSB: 'Suscripcion borrada con Exito',
     titleSB: 'Información',
+    typePB: 'info',
+    textPB: 'Publicacion borrada con Exito',
+    titlePB: 'Información',
 
     typeAN: 'success',
     textAN: 'Noticia Activada con Exito',
     titleAN: 'Éxito',
+    typeAP: 'success',
+    textAP: 'Publicacion Activada con Exito',
+    titleAP: 'Éxito',
 
     type9: 'info',
     text9: 'Actividad editada con exito',
@@ -597,6 +631,9 @@ typeSB: 'info',
   };
         $scope.popAprobacionNoticia = function(){
     toaster.pop($scope.toaster.typeAN, $scope.toaster.titleAN, $scope.toaster.textAN);
+  };
+   $scope.popAprobacionPublicacion = function(){
+    toaster.pop($scope.toaster.typeAP, $scope.toaster.titleAP, $scope.toaster.textAP);
   };
    $scope.popNuevoEvento = function(){
     toaster.pop($scope.toaster.type10, $scope.toaster.title10, $scope.toaster.text10);

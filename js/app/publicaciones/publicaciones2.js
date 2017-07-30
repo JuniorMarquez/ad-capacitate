@@ -5,11 +5,11 @@ app.controller('publicaciones2Ctrl', ['$scope', '$http', '$filter', '$modal', 'M
    $scope.toaster = {
     title: 'Exito',
     type: 'success',
-    text: 'Publicación autorizada con exito',
+    text: 'Publicacion autorizada con exito',
 
     title2: 'Exito',
     type2: 'info',
-    text2: 'Publicación borrada con exito'   
+    text2: 'Publicacion borrada con exito'   
   };
 $scope.publicaciones = [];
     $scope.today = function() {
@@ -72,7 +72,7 @@ $scope.publicaciones = [];
     };
    
  $scope.vigilante=MyService.data.contador;
-    $scope.getPublicaciones = function () {
+    $scope.getPublicacion = function () {
       // alert("se ejecuta");
       $scope.publicaciones=null;
       // setTimeout(function() {
@@ -109,10 +109,10 @@ $scope.publicaciones = [];
             var conversationDate=Date.parse(conversationDate1);
               identif=$scope.publicaciones[i].id;  
             if (conversationDate ){
-              if ( $scope.publicaciones[i].status == "activo"){
+              if ( $scope.publicaciones[i].status == "activa"){
                 result.push($scope.publicaciones[i]);
                 }
-             if ( $scope.publicaciones[i].status == "inactivo"){
+             if ( $scope.publicaciones[i].status == "inactiva"){
               $scope.publicaciones[i].accion=" <button onclick=\"angular.element(this).scope().Aprobacion('" +identif +"')\"  class=\"btn btn-success btn-xs\" ui-toggle-class=\"show inline\" target=\"#spin\"> <span class=\"text\">Validar</span>  <span class=\"text-active\">Cargando...</span></button> <i class=\"fa fa-spin fa-spinner hide\" id=\"spin\"></i>";                                  
                 result3.push($scope.publicaciones[i]);
                 }
@@ -160,15 +160,15 @@ $scope.publicaciones = [];
           $scope.tbOptionsAutorizadas.aoColumns=[
             { mData: 'createdAtFormateada'},
           {mData:'titulo'},
-          {mData:'idUsuario'}
+          {mData:'accion2'}
           ];
       });
  
 // }, 100);
     };
-    $scope.getPublicaciones();
+    $scope.getPublicacion();
 
-$scope.openBorrarPubliacion = function (item) {
+$scope.openBorrarPublicacion = function (item) {
     var item=[];
   var dato="";
   var datosCuenta="";
@@ -202,14 +202,14 @@ $scope.openBorrarPubliacion = function (item) {
  $scope.openEdicionPublicacion = function (item) {
     // var identificador=item.id;
     // MyService.data.identificador = identificador;
-    MyService.data.idenMiembro=item;
+    MyService.data.idenPublicacion=item;
   var item=[];
   var dato="";
   var datosCuenta="";
 
     
       var modalInstance = $modal.open({
-        templateUrl: 'modalEdicionPublicacion.html',
+        templateUrl: 'modalEdicionNoticia.html',
         controller: 'ModalInstanceCtrl',
         size: 'md',
         resolve: {
@@ -238,17 +238,17 @@ $scope.openBorrarPubliacion = function (item) {
 
  
 
- $scope.openPeticionCot = function (item) {
+ $scope.openPeticionSusPub= function (item) {
     // var identificador=item.id;
     // MyService.data.identificador = identificador;
-    MyService.data.idenMiembro=item;
+    MyService.data.idenPublicacion=item;
   var item=[];
   var dato="";
   var datosCuenta="";
 
     
       var modalInstance = $modal.open({
-        templateUrl: 'modalPeticionCot.html',
+        templateUrl: 'modalPeticionSusPub.html',
         controller: 'ModalInstanceCtrl',
         size: 'md',
         resolve: {
@@ -276,7 +276,7 @@ $scope.openBorrarPubliacion = function (item) {
 
  $scope.Aprobacion = function (iden) {
   MyService.data.idenPublicacion=iden;
-  $scope.openPeticionCot(iden);
+  $scope.openPeticionSusPub(iden);
 };
 $scope.Edicion = function (iden) {
   MyService.data.idenPublicacion=iden;

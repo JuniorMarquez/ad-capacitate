@@ -7,7 +7,9 @@ app.controller('AgregarpubCtrl', ['$scope', '$state','$http', '$filter', '$modal
 
 
 var uploader = $scope.uploader = new FileUploader({
-        url: 'js/controllers/upload.php'
+        url: 'js/controllers/uploads/publicaciones/upload.php'
+
+
 
     });
     // FILTERS
@@ -123,7 +125,7 @@ var uploader = $scope.uploader = new FileUploader({
   $scope.initDate = new Date('2016-15-20');
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.format = 'shortDate';
-    $scope.estados = ['activo','inactivo'];
+    $scope.estados = ['activa','inactiva'];
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
@@ -211,7 +213,7 @@ var uploader = $scope.uploader = new FileUploader({
     publicacionAct.observaciones=item.observaciones;
       $scope.pop3();
       $http.post('http://54.202.62.62:1346/publicacion/', publicacionAct).success(function(data){
-          $state.go('apps.pubgestionar'); 
+          $state.go('apps.publistado'); 
       });
   };
 

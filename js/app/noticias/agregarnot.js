@@ -8,6 +8,7 @@ app.controller('AgregarnotCtrl', ['$scope', '$state','$http', '$filter', '$modal
 
 var uploader = $scope.uploader = new FileUploader({
         url: 'js/controllers/uploads/noticias/upload.php'
+        
 
     });
     // FILTERS

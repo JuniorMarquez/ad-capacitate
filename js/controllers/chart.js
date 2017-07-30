@@ -21,7 +21,26 @@ if ($scope.app.status=="actualizado"){$scope.vigilante="si"};
   };
     $scope.item={};
         var result = [];
+        var bandera="";
+        var bandera2="";
+        var identif="";
+  $http.get('http://54.202.62.62:1346/mensaje').then(function (resp) {
+    $scope.mensajes = resp.data.results;
+ if ($scope.mensajes){
+        for (var i  = 0; i<$scope.mensajes.length;i++){
+          bandera = $scope.mensajes[i].createdAt;
+          bandera2=$filter('date')(new Date(bandera),'dd/MM/yyyy');
+          $scope.mensajes[i].createdAtFormateada=bandera2;
+           identif=$scope.mensajes[i].id;  
+             $scope.mensajes[i].accion2="<button onclick=\"angular.element(this).scope().Borrado('" +identif +"')\"  class=\"btn btn-danger btn-xs\" ui-toggle-class=\"show inline\" target=\"#spin\"> <span class=\"text\">Borrar</span>  <span class=\"text-active\">Cargando...</span></button> <i class=\"fa fa-spin fa-spinner hide\" id=\"spin\"></i>";                        
+          
+          identif=$scope.mensajes[i].id;  
+    }
+        }
 
+
+
+  });
   $http.get('http://54.202.62.62:1346/obligacion').then(function (resp) {
     $scope.obligaciones = resp.data.results;
   });

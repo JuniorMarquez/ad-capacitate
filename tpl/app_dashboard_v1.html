@@ -171,6 +171,15 @@
         </tab-heading>
         <div class="wrapper-md">
           <div class="m-b-sm text-md">Mensajes</div>
+          <div class="streamline b-l m-b" ng-controller="FlotChartDemoCtrl">
+        <div class="sl-item" ng-repeat="item in mensajes" >
+          <div class="m-l">
+            <div class="text-muted">{{item.createdAtFormateada}}</div>
+            <p><a href class="text-info">{{item.nombre}}</a> {{item.mensaje}}</p>
+            <!-- </a> {{item.accion2}}</p> -->
+          </div>
+</div>
+</div>
         <!--   <ul class="list-group no-borders pull-in auto">
             <li class="list-group-item">
               <span class="pull-left thumb-sm m-r"><img src="img/a1.jpg" alt="..." class="img-circle"></span>
