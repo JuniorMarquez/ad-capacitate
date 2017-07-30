@@ -25,7 +25,7 @@
       </div>
     </div>
     <!-- / main header -->
-<div class="wrapper-md" ng-show="!totalOdontologos" ui-refresh="totalOdontologos" ng-controller="FlotChartDemoCtrl">
+<div class="wrapper-md" ng-show="!total" ui-refresh="totalSuscripciones" ng-controller="FlotChartDemoCtrl">
       <!-- stats -->
       <div class="text-center">
          <i class="fa fa-spin fa-spinner fa-2x "></i> Cargando estadisticas ...
@@ -42,7 +42,7 @@
           <div class="row row-sm text-center">
 
             <div class="col-xs-6">
-                <a ui-sref="app.suscripciones" class="block panel padder-v bg-warning item" >
+                <a ui-sref="app.suscripciones" class="block panel padder-v bg-info item" >
                 <span class="text-white font-thin h1 block">{{total}}</span>
                 <span class="text-muted text-xs">suscripciones</span>
                 <span class="bottom text-right w-full">
@@ -51,7 +51,7 @@
               </a>
             </div>
             <div class="col-xs-6">
-              <a ui-sref="apps.suscripciones" class="block panel padder-v bg-primary item" >
+              <a ui-sref="apps.suscripciones" class="block panel padder-v bg-warning item" >
                 <span class="text-white font-thin h1 block">{{totalPendientes}}</span>
                 <span class="text-muted text-xs">Suscripciones por Aceptar</span>
                 <span class="bottom text-right w-full">
@@ -60,7 +60,7 @@
               </a>
             </div>
             <div class="col-xs-6">
-              <a href class="block panel padder-v bg-info item">
+              <a href class="block panel padder-v bg-primary item">
                 <span class="text-white font-thin h1 block">{{totalCapacitacion}}</span>
                 <span class="text-muted text-xs">Suscripciones en Capacitaciones</span>
                 <span class="top text-left">
@@ -68,8 +68,17 @@
                 </span>
               </a>
             </div>
+             <div class="col-xs-6">
+              <a href class="block panel padder-v bg-primary item">
+                <span class="text-white font-thin h1 block">{{totalIncompany}}</span>
+                <span class="text-muted text-xs">Suscripciones en Incompany</span>
+                <span class="top text-left">
+                  <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                </span>
+              </a>
+            </div>
             <div class="col-xs-6">
-              <div class="panel padder-v item">
+              <div class="panel padder-v bg-primary item">
                 <div class="font-thin h1">{{totalFooter}}</div>
                 <span class="text-muted text-xs">Suscripciones en Pie de Pagina</span>
                 <div class="bottom text-left">
@@ -77,24 +86,22 @@
                 </div>
               </div>
             </div>
-            <div class="col-xs-6">
-              <div class="panel padder-v item">
-                <div class="font-thin h1"><i class="fa fa-instagram fa-1x text-instagram m-r-sm"></i>{{totalInstagram}}</div>
-                <span class="text-muted text-xs">  Registros con Instagram</span>
-               
-              </div>
-            </div>
-            <div class="col-xs-6">
-              <div class="panel padder-v item">
-                <div class="font-thin h1"> <i class="fa fa-facebook fa-1x text-facebook m-r-sm"></i> {{totalFacebook}}</div>
-                <span class="text-muted text-xs">Registros con Facebook</span>
-            
+           <div class="col-md-6 text-center">
+              <div class="panel padder-v bg-black item">
+                <div class="h1 text-white font-thin h1">
+                 <i class="fa fa-phone fa-1x text-white m-r-sm"></i>{{agenda}}</div>
+                <span class="text-muted text-xs">
+               Miembros en agenda telefónica</span>
+                <div class="top text-right w-full">
+                  <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                </div>
               </div>
             </div>
            
+           
           </div>
         </div>
-      <div class="col-md-6">
+<!--       <div class="col-md-6">
           <div class="panel wrapper">
         <div class="row">
           <div class="col">            
@@ -140,13 +147,39 @@
           </div>
         </div>
       </div>
-    </div>
-          <div class="col-md-6 text-center">
-              <div class="panel padder-v bg-black item">
-                <div class="h1 text-white font-thin h1">
-                 <i class="fa fa-phone fa-1x text-white m-r-sm"></i>{{agenda}}</div>
+    </div> -->
+          
+
+            <div class="col-md-6 text-center">
+              <div class="panel padder-v item">
+                <div class="h1  font-thin h1">
+                <i class="fa fa-instagram fa-1x text-instagram m-r-sm"></i>{{totalInstagram}}</div>
                 <span class="text-muted text-xs">
-               Miembros en agenda telefónica</span>
+               Suscriptores con Instagram</span>
+                <div class="top text-right w-full">
+                  <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 text-center">
+              <div class="panel padder-v item">
+                <div class="h1  font-thin h1">
+                <i class="fa fa-facebook fa-1x text-facebook m-r-sm"></i>{{totalFacebook}}</div>
+                <span class="text-muted text-xs">
+               Suscriptores con Facebook</span>
+                <div class="top text-right w-full">
+                  <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 text-center">
+              <div class="panel padder-v item">
+                <div class="h1  font-thin h1">
+                <i class="fa fa-twitter fa-1x text-twitter m-r-sm"></i>{{totalTwitter}}</div>
+                <span class="text-muted text-xs">
+               Suscriptores con Twitter</span>
                 <div class="top text-right w-full">
                   <i class="fa fa-caret-down text-warning m-r-sm"></i>
                 </div>

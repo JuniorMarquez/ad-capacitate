@@ -116,7 +116,7 @@ $scope.cargaInicial=function  () {
  for (var i = 0;i<$scope.suscripciones.length;i++){
 
  if(typeof($scope.suscripciones[i].cuentaI) != "undefined"){totalInstagram=totalInstagram+1;}
-  if(typeof($scope.suscripciones[i].cuentaT) != "undefined"){totalTwitter=totalTwitter1;}
+  if(typeof($scope.suscripciones[i].cuentaT) != "undefined"){totalTwitter=totalTwitter+ 1;}
  if(typeof($scope.suscripciones[i].telefono) != "undefined" || typeof($scope.suscripciones[i].movil) != "undefined"){agenda=agenda+1;}
  if(typeof($scope.suscripciones[i].cuentaF) != "undefined"){totalFacebook=totalFacebook+1;}
     if ($scope.suscripciones[i].tipo=='Odontologo'){
@@ -136,8 +136,10 @@ $scope.cargaInicial=function  () {
  $scope.totalSuscripciones=totalSuscripciones;
  $scope.totalCapacitacion=totalCapacitacion;
   $scope.totalFacebook=totalFacebook;
+    $scope.totalTwitter=totalTwitter;
    $scope.totalInstagram=totalInstagram;
  $scope.totalFooter=totalFooter;
+  $scope.totalIncompany=totalIncompany;
  $scope.totalValidados=totalValidados;
  $scope.app.porcentajeOdontologos=(totalValidados/totalSuscripciones)*100;
  $scope.agenda=agenda;
