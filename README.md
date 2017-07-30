@@ -1,7 +1,7 @@
-# ad-capacitate
-# Panel de Control Sistema On-line Centro Educativo Capacitate C.A.
 
-## Class Features
+# ad-capacitate. Panel de Control Sistema On-line Centro Educativo Capacitate C.A.
+
+## Features
 - Capacitaciones
 - Congresos
 - Cursos
@@ -14,6 +14,6 @@
 - Noticias
 - Publicaciones
 
- capacitatevzla.com
-Junior Márquez.
+ 
+Autor: Junior Márquez.
 
