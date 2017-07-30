@@ -7,7 +7,7 @@ app.controller('AgregarnotCtrl', ['$scope', '$state','$http', '$filter', '$modal
 
 
 var uploader = $scope.uploader = new FileUploader({
-        url: 'js/controllers/noticias/upload.php'
+        url: 'js/controllers/uploads/noticias/upload.php'
 
     });
     // FILTERS
@@ -123,7 +123,7 @@ var uploader = $scope.uploader = new FileUploader({
   $scope.initDate = new Date('2016-15-20');
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.format = 'shortDate';
-    $scope.estados = ['activo','inactivo'];
+    $scope.estados = ['activa','inactiva'];
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };

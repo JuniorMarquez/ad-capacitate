@@ -109,10 +109,10 @@ $scope.noticias = [];
             var conversationDate=Date.parse(conversationDate1);
               identif=$scope.noticias[i].id;  
             if (conversationDate ){
-              if ( $scope.noticias[i].status == "activo"){
+              if ( $scope.noticias[i].status == "activa"){
                 result.push($scope.noticias[i]);
                 }
-             if ( $scope.noticias[i].status == "inactivo"){
+             if ( $scope.noticias[i].status == "inactiva"){
               $scope.noticias[i].accion=" <button onclick=\"angular.element(this).scope().Aprobacion('" +identif +"')\"  class=\"btn btn-success btn-xs\" ui-toggle-class=\"show inline\" target=\"#spin\"> <span class=\"text\">Validar</span>  <span class=\"text-active\">Cargando...</span></button> <i class=\"fa fa-spin fa-spinner hide\" id=\"spin\"></i>";                                  
                 result3.push($scope.noticias[i]);
                 }

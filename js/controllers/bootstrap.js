@@ -476,6 +476,15 @@ $scope.okAprobacion = function (item) {
     $scope.popAprobacion();
 
  };
+ $scope.okAprobacionNoticia = function (item) {
+    var identificador = MyService.data.idenNoticia;
+    var noticiaAct={};
+    noticiaAct.status="activa";  
+    $http.put('http://54.202.62.62:1346/noticia/'+identificador, noticiaAct);
+    $modalInstance.close();  
+    $scope.popAprobacionNoticia();
+
+ };
  $scope.okEdicion = function (item) {
     var identificador = MyService.data.idenContenido;
     var contenidoAct={};
@@ -568,6 +577,10 @@ typeSB: 'info',
     textSB: 'Suscripcion borrada con Exito',
     titleSB: 'Información',
 
+    typeAN: 'success',
+    textAN: 'Noticia Activada con Exito',
+    titleAN: 'Éxito',
+
     type9: 'info',
     text9: 'Actividad editada con exito',
     title9: 'Información',
@@ -581,6 +594,9 @@ typeSB: 'info',
   };
       $scope.popAprobacion = function(){
     toaster.pop($scope.toaster.type, $scope.toaster.title, $scope.toaster.text);
+  };
+        $scope.popAprobacionNoticia = function(){
+    toaster.pop($scope.toaster.typeAN, $scope.toaster.titleAN, $scope.toaster.textAN);
   };
    $scope.popNuevoEvento = function(){
     toaster.pop($scope.toaster.type10, $scope.toaster.title10, $scope.toaster.text10);
