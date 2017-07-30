@@ -1,6 +1,10 @@
 # ad-capacitate
 Panel de Control Sistema On-line Centro Educativo Capacitate C.A.
 Capacitaciones
+---- CHUNK ----
+736\r\n
+........................
+\r\n
 \r\n-Congresos
 \r\n-Cursos
 \r\n-Diplomados
