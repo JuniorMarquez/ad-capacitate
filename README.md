@@ -1,7 +1,7 @@
 # ad-capacitate
-PAnel de Control Sistema On-line Centro Educativo Capacitate C.A.
+Panel de Control Sistema On-line Centro Educativo Capacitate C.A.
 Capacitaciones
--Congresos
+/n-Congresos
 -Cursos
 -Diplomados
 -Foros
