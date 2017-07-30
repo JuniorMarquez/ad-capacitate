@@ -111,6 +111,14 @@
                $scope.popSuscripcionBorrada();
           }); 
     };
+     $scope.okBorrarNoticia = function (item,timeout) { 
+      var dato="";
+      dato = MyService.data.idenNoticia;
+      $http.delete('http://54.202.62.62:1346/noticia/'+dato).success(function(data) {
+              $modalInstance.close();
+               $scope.popSuscripcionBorrada();
+          }); 
+    };
 
      var result = [];
 
@@ -189,6 +197,17 @@ $scope.consultaSuscripcion=function(item){
   var identificador = MyService.data.idenSuscripcion;
   $scope.datosContenido={};
   $http.get('http://54.202.62.62:1346/suscripcion/'+identificador).success(function(respuesta){        
+    item=respuesta;
+    $scope.item=item;
+  });
+  item=$scope.item;
+  $scope.item=item;
+};
+$scope.consultaNoticia=function(item){
+  var item=[];
+  var identificador = MyService.data.idenNoticia;
+  $scope.datosContenido={};
+  $http.get('http://54.202.62.62:1346/noticia/'+identificador).success(function(respuesta){        
     item=respuesta;
     $scope.item=item;
   });

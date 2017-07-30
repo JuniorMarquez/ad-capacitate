@@ -238,17 +238,17 @@ $scope.openBorrarNoticia = function (item) {
 
  
 
- $scope.openPeticionCot = function (item) {
+ $scope.openPeticionSusNot = function (item) {
     // var identificador=item.id;
     // MyService.data.identificador = identificador;
-    MyService.data.idenMiembro=item;
+    MyService.data.ideNoticia=item;
   var item=[];
   var dato="";
   var datosCuenta="";
 
     
       var modalInstance = $modal.open({
-        templateUrl: 'modalPeticionCot.html',
+        templateUrl: 'modalPeticionSusNot.html',
         controller: 'ModalInstanceCtrl',
         size: 'md',
         resolve: {
@@ -276,7 +276,7 @@ $scope.openBorrarNoticia = function (item) {
 
  $scope.Aprobacion = function (iden) {
   MyService.data.idenNoticia=iden;
-  $scope.openPeticionCot(iden);
+  $scope.openPeticionSusNot(iden);
 };
 $scope.Edicion = function (iden) {
   MyService.data.idenNoticia=iden;

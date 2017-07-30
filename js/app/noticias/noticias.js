@@ -1,13 +1,10 @@
 'use strict';
 
-app.controller('IndexController', ['$scope', '$http', '$filter', '$modal', 'MyService', 'filterFilter', 'datepickerConfig','dato','datosCuenta',function($scope, $http, $filter,$modal, MyService,filterFilter, datepickerConfig,dato,datosCuenta) {
-$scope.date = moment();
-}]);
 app.controller('CapacitacionesCtrl', ['$scope', '$state','$http', '$filter', '$modal', 'MyService', 'filterFilter', 'toaster','$timeout', 'FileUploader', function($scope,  $state ,$http, $filter,$modal, MyService, filterFilter, toaster,$timeout, FileUploader) {
 
 
 var uploader = $scope.uploader = new FileUploader({
-        url: 'js/controllers/upload.php'
+        url: 'js/controllers/noticias/upload.php'
 
     });
     // FILTERS
@@ -175,19 +172,19 @@ var uploader = $scope.uploader = new FileUploader({
     });
   };
  
-  $scope.carga = function(){
-    $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
-      $scope.tiposCapacitaciones = resp.data.results;
-    });
-      $scope.item=null;
-  };
-  $scope.capacitaciones=[];
- $scope.cargaCapacitaciones=function(){
-  $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
-      $scope.capacitaciones = resp.data.results;
-      // alert("tamaño capacitaciones: "+$scope.capacitaciones.length);
-        });
-};
+//   $scope.carga = function(){
+//     $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
+//       $scope.tiposCapacitaciones = resp.data.results;
+//     });
+//       $scope.item=null;
+//   };
+//   $scope.capacitaciones=[];
+//  $scope.cargaCapacitaciones=function(){
+//   $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
+//       $scope.capacitaciones = resp.data.results;
+//       // alert("tamaño capacitaciones: "+$scope.capacitaciones.length);
+//         });
+// };
 
 $scope.cargaCapacitaciones();
 $scope.carga();
@@ -334,58 +331,58 @@ $scope.carga();
     return obj[key] + (i ? ' '+i : '');
   };
 
-  $scope.deleteTipoCapacitacion = function(item){
-    $http.delete('http://54.202.62.62:1346/tipoCapacitacion/'+item.id , item)
-    $scope.tiposCapacitaciones.splice($scope.tiposCapacitaciones.indexOf(item), 1);
-  };
+  // $scope.deleteTipoCapacitacion = function(item){
+  //   $http.delete('http://54.202.62.62:1346/tipoCapacitacion/'+item.id , item)
+  //   $scope.tiposCapacitaciones.splice($scope.tiposCapacitaciones.indexOf(item), 1);
+  // };
 
-  $scope.selectTipoCapacitacion = function(item){   
-    MyService.data.tipoCapacitacion=item.nombre;
-    angular.forEach($scope.tiposCapacitaciones, function(item) {
-      item.selected = false;
-      $scope.item=[];
-    });
-    $scope.items=null;
-      $http.get('http://54.202.62.62:1346/areaconocimiento/').then(function (resp) {
-      $scope.areasConocimiento = resp.data.results;
-    });
-    $scope.tipoCapacitacion = item;
-    $scope.tipoCapacitacion.selected = true;
-    $scope.filter = item.nombre;
-    $scope.items.length=0;
-    $scope.item=null;
-  };
+  // $scope.selectTipoCapacitacion = function(item){   
+  //   MyService.data.tipoCapacitacion=item.nombre;
+  //   angular.forEach($scope.tiposCapacitaciones, function(item) {
+  //     item.selected = false;
+  //     $scope.item=[];
+  //   });
+  //   $scope.items=null;
+  //     $http.get('http://54.202.62.62:1346/areaconocimiento/').then(function (resp) {
+  //     $scope.areasConocimiento = resp.data.results;
+  //   });
+  //   $scope.tipoCapacitacion = item;
+  //   $scope.tipoCapacitacion.selected = true;
+  //   $scope.filter = item.nombre;
+  //   $scope.items.length=0;
+  //   $scope.item=null;
+  // };
 
-  $scope.selectAreaConocimiento = function(item){  
-  $scope.cargaCapacitaciones(); 
-    MyService.data.areaConocimiento=item.nombre;
-    angular.forEach($scope.areasConocimiento, function(item) {
-      item.selected = false;
-      $scope.item=[];
-      $scope.itemsContenido=[];
-    });
-    $scope.items=[];
-    $scope.areaConocimiento = item;
-    $scope.areaConocimiento.selected = true;
-    $scope.filter2 = item.nombre;
-       for (var i = 0; i < $scope.capacitaciones.length; ++i) {
-        if ($scope.capacitaciones[i].area == $scope.filter2){
-        $scope.items.push($scope.capacitaciones[i]);
-      }
-    }    
-  };
-  var indiceItems =0;
-  var identifItems =0;
-    $scope.tbOptionsContenido = {
-       paging:   false,
-       // ordering: false,
-        searching: false,
-    ordering: false,
-      bDestroy: true,
-       info:     false,
-      // pageLength: 150,
-      data: []                     
-    };
+  // $scope.selectAreaConocimiento = function(item){  
+  // $scope.cargaCapacitaciones(); 
+  //   MyService.data.areaConocimiento=item.nombre;
+  //   angular.forEach($scope.areasConocimiento, function(item) {
+  //     item.selected = false;
+  //     $scope.item=[];
+  //     $scope.itemsContenido=[];
+  //   });
+  //   $scope.items=[];
+  //   $scope.areaConocimiento = item;
+  //   $scope.areaConocimiento.selected = true;
+  //   $scope.filter2 = item.nombre;
+  //      for (var i = 0; i < $scope.capacitaciones.length; ++i) {
+  //       if ($scope.capacitaciones[i].area == $scope.filter2){
+  //       $scope.items.push($scope.capacitaciones[i]);
+  //     }
+  //   }    
+  // };
+  // var indiceItems =0;
+  // var identifItems =0;
+  //   $scope.tbOptionsContenido = {
+  //      paging:   false,
+  //      // ordering: false,
+  //       searching: false,
+  //   ordering: false,
+  //     bDestroy: true,
+  //      info:     false,
+  //     // pageLength: 150,
+  //     data: []                     
+  //   };
   // $scope.cargaItems=function(){
   //   var result3 = [];
   //   $scope.itemsContenido=[];
@@ -546,88 +543,88 @@ $scope.openBorrar = function (item) {
   $scope.openBorrar(iden);
 };
 
-  $scope.deleteItem = function(item){
-    $http.delete('http://54.202.62.62:1346/capacitacion/'+item.id , item)
-    $scope.items.splice($scope.items.indexOf(item), 1);
-    $scope.item = $filter('orderBy')($scope.items, 'titulo')[0];
-    if($scope.item) $scope.item.selected = true;
-  };
+  // $scope.deleteItem = function(item){
+  //   $http.delete('http://54.202.62.62:1346/capacitacion/'+item.id , item)
+  //   $scope.items.splice($scope.items.indexOf(item), 1);
+  //   $scope.item = $filter('orderBy')($scope.items, 'titulo')[0];
+  //   if($scope.item) $scope.item.selected = true;
+  // };
 
-  $scope.deleteCapacitacion = function(capacitacion){
-    $http.delete('http://54.202.62.62:1346/capacitacion/'+capacitacion.id , capacitacion)
-    $scope.capacitacionesFiltrados.splice($scope.capacitaciones.indexOf(capacitacion), 1);
-    $scope.capacitacion = $filter('orderBy')($scope.capacitaciones, 'titulo')[0];
-    if($scope.capacitacion) $scope.capacitacion.selected = true;
-  };
+  // $scope.deleteCapacitacion = function(capacitacion){
+  //   $http.delete('http://54.202.62.62:1346/capacitacion/'+capacitacion.id , capacitacion)
+  //   $scope.capacitacionesFiltrados.splice($scope.capacitaciones.indexOf(capacitacion), 1);
+  //   $scope.capacitacion = $filter('orderBy')($scope.capacitaciones, 'titulo')[0];
+  //   if($scope.capacitacion) $scope.capacitacion.selected = true;
+  // };
 
-  $scope.createItem = function(){
-    var item = {
-      titulo:'titulo',
-      avatar:'img/avatar.png',
-      mensajeNuevo:"Presione \"Editar\" para ingresar datos",
-      // idEstablecimiento: MyService.data.idEstablecimiento,
-      // nivel:2
-    };
+  // $scope.createItem = function(){
+  //   var item = {
+  //     titulo:'titulo',
+  //     avatar:'img/avatar.png',
+  //     mensajeNuevo:"Presione \"Editar\" para ingresar datos",
+  //     // idEstablecimiento: MyService.data.idEstablecimiento,
+  //     // nivel:2
+  //   };
     
-    $scope.items.push(item);
-    $scope.selectItem(item);
-    $scope.item.editing = true;
-    $scope.item.tipoCapacitacion = MyService.data.tipoCapacitacion;
-    $scope.item.mensajeNuevo=null;
-    $scope.item.idUsuario = MyService.data.idUsuario;
-    $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
-    $scope.tiposCapacitaciones = resp.data.results;
-    }); 
-  };
+  //   $scope.items.push(item);
+  //   $scope.selectItem(item);
+  //   $scope.item.editing = true;
+  //   $scope.item.tipoCapacitacion = MyService.data.tipoCapacitacion;
+  //   $scope.item.mensajeNuevo=null;
+  //   $scope.item.idUsuario = MyService.data.idUsuario;
+  //   $http.get('http://54.202.62.62:1346/tipoCapacitacion/').then(function (resp) {
+  //   $scope.tiposCapacitaciones = resp.data.results;
+  //   }); 
+  // };
 
-  $scope.editItem = function(item){
-    if(item && item.selected){
-      item.editing = true;
-    }
-  };
+  // $scope.editItem = function(item){
+  //   if(item && item.selected){
+  //     item.editing = true;
+  //   }
+  // };
 
-  $scope.doneEditingCapacitacion = function(item){
-    // $scope.items.length=0;
-    // $scope.areasConocimiento=null;
-    // $scope.tiposCapacitaciones=null;
-    // $scope.capacitaciones.length=0;
-    item.editing = false;
-    $scope.item.selected = true;
-      // $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
-      // $scope.capacitaciones = resp.data.results;
-      // });
-    // $scope.carga();
-    // $scope.cargaCapacitaciones();
-    var capacitacionAct = {};
-    MyService.data.idenCapacitacion=item.id;
+//   $scope.doneEditingCapacitacion = function(item){
+//     // $scope.items.length=0;
+//     // $scope.areasConocimiento=null;
+//     // $scope.tiposCapacitaciones=null;
+//     // $scope.capacitaciones.length=0;
+//     item.editing = false;
+//     $scope.item.selected = true;
+//       // $http.get('http://54.202.62.62:1346/capacitacion/').then(function (resp) {
+//       // $scope.capacitaciones = resp.data.results;
+//       // });
+//     // $scope.carga();
+//     // $scope.cargaCapacitaciones();
+//     var capacitacionAct = {};
+//     MyService.data.idenCapacitacion=item.id;
     
-$scope.areasConocimiento=[];
-$scope.items=[];
-$scope.item=[];
-$scope.tiposCapacitaciones=[];
-$scope.carga();
-    capacitacionAct.titulo=item.titulo;
-    capacitacionAct.subtitulo=item.subtitulo;
-    capacitacionAct.status=item.status;
-    capacitacionAct.codigo=item.codigo;
-    capacitacionAct.area=item.area;
-    capacitacionAct.tipoCapacitacion=item.tipoCapacitacion;
-    capacitacionAct.tipoObligacion=item.tipoObligacion;
-    capacitacionAct.img=MyService.data.nombreImagen
-    capacitacionAct.itemsContenido=item.itemsContenido;
+// $scope.areasConocimiento=[];
+// $scope.items=[];
+// $scope.item=[];
+// $scope.tiposCapacitaciones=[];
+// $scope.carga();
+//     capacitacionAct.titulo=item.titulo;
+//     capacitacionAct.subtitulo=item.subtitulo;
+//     capacitacionAct.status=item.status;
+//     capacitacionAct.codigo=item.codigo;
+//     capacitacionAct.area=item.area;
+//     capacitacionAct.tipoCapacitacion=item.tipoCapacitacion;
+//     capacitacionAct.tipoObligacion=item.tipoObligacion;
+//     capacitacionAct.img=MyService.data.nombreImagen
+//     capacitacionAct.itemsContenido=item.itemsContenido;
     
-    capacitacionAct.idUsuario=item.idUsuario;
- $scope.items.splice($scope.items.indexOf(item), 1);
-    if (MyService.data.idenCapacitacion){
-      $scope.pop4();
-      $http.put('http://54.202.62.62:1346/capacitacion/'+MyService.data.idenCapacitacion , capacitacionAct)
-    }
-    else {
-      $scope.pop3();;
-      $http.post('http://54.202.62.62:1346/capacitacion/', capacitacionAct)
-    }
-    $scope.cargaCapacitaciones();
+//     capacitacionAct.idUsuario=item.idUsuario;
+//  $scope.items.splice($scope.items.indexOf(item), 1);
+//     if (MyService.data.idenCapacitacion){
+//       $scope.pop4();
+//       $http.put('http://54.202.62.62:1346/capacitacion/'+MyService.data.idenCapacitacion , capacitacionAct)
+//     }
+//     else {
+//       $scope.pop3();;
+//       $http.post('http://54.202.62.62:1346/capacitacion/', capacitacionAct)
+//     }
+//     $scope.cargaCapacitaciones();
     
-  };
+//   };
 
 }]);

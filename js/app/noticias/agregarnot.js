@@ -7,7 +7,7 @@ app.controller('AgregarnotCtrl', ['$scope', '$state','$http', '$filter', '$modal
 
 
 var uploader = $scope.uploader = new FileUploader({
-        url: 'js/controllers/upload.php'
+        url: 'js/controllers/noticias/upload.php'
 
     });
     // FILTERS
@@ -211,7 +211,7 @@ var uploader = $scope.uploader = new FileUploader({
     noticiaAct.observaciones=item.observaciones;
       $scope.pop3();
       $http.post('http://54.202.62.62:1346/noticia/', noticiaAct).success(function(data){
-          $state.go('apps.notgestionar'); 
+          $state.go('apps.notlistado'); 
       });
   };
 
