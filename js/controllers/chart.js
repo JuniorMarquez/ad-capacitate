@@ -61,12 +61,12 @@ if ($scope.app.status=="actualizado"){$scope.vigilante="si"};
       var dato="";
   var datosCuenta="";
   $scope.nombre=MyService.data.nombre;
-$scope.consultaMiembroDeArchivo=function(){
+$scope.consultaSuscripcionDeArchivo=function(){
   var item2=[];
   var elemento=[];
-  // var identificador = MyService.data.idenMiembro;
-  $scope.datosMiembroDeArchivo={};
-  $http.get('js/controllers/miembro.json').success(function(respuesta){        
+  // var identificador = MyService.data.idensuscripcion;
+  $scope.datosSuscripcionesDeArchivo={};
+  $http.get('js/controllers/suscripcion.json').success(function(respuesta){        
     item2=respuesta.results;
     $scope.item2=item2;
       setTimeout(function() {
@@ -76,7 +76,7 @@ $scope.consultaMiembroDeArchivo=function(){
     elemento=$scope.item2[i];
           
               // alert("elemento:"+elemento.primerNombre);
-            $http.post('http://54.202.62.62:1346/miembro/',elemento);
+            $http.post('http://54.202.62.62:1346/suscripcion/',elemento);
             
            
           // a=a+1;
@@ -92,62 +92,66 @@ $scope.consultaMiembroDeArchivo=function(){
 };
 $scope.cargador=function()
 {
-  $scope.consultaMiembroDeArchivo();
+  $scope.consultaSuscripcionDeArchivo();
   // alert("array:" +$scope.item2[2].primerNombre);
 
 };
 $scope.cargaInicial=function  () {
- var totalOdontologos=0;
- var totalAsistentes=0;
+ var totalSuscripciones=0;
+ var totalCapacitacion=0;
  var totalInstagram=0;
+  var totalTwitter=0;
  var totalFacebook=0;
- var totalClinicasConsultorios=0;
+ var totalFooter=0;
  var totalPendientes=0;
+  var totalIncompany=0
  var totalValidados=0;
  var pendientes=0;
  var agenda = 0;
-    $http.get('http://54.202.62.62:1346/miembro').then(function (resp) {
-    $scope.miembros = resp.data.results;
- var numero = $scope.miembros.length;
+    $http.get('http://54.202.62.62:1346/suscripcion').then(function (resp) {
+    $scope.suscripciones = resp.data.results;
+ var numero = $scope.suscripciones.length;
  var letra = "";
  $scope.total= numero;
- for (var i = 0;i<$scope.miembros.length;i++){
+ for (var i = 0;i<$scope.suscripciones.length;i++){
 
- if(typeof($scope.miembros[i].cuentaI) != "undefined"){totalInstagram=totalInstagram+1;}
- if(typeof($scope.miembros[i].telefonoTrabajo) != "undefined" || typeof($scope.miembros[i].telefonoCelular) != "undefined"){agenda=agenda+1;}
- if(typeof($scope.miembros[i].cuentaF) != "undefined"){totalFacebook=totalFacebook+1;}
-    if ($scope.miembros[i].tipo=='Odontologo'){
-      totalOdontologos=totalOdontologos+1;
-        // letra=$scope.miembros[i].primerNombre.charAt(0);
+ if(typeof($scope.suscripciones[i].cuentaI) != "undefined"){totalInstagram=totalInstagram+1;}
+  if(typeof($scope.suscripciones[i].cuentaT) != "undefined"){totalTwitter=totalTwitter1;}
+ if(typeof($scope.suscripciones[i].telefono) != "undefined" || typeof($scope.suscripciones[i].movil) != "undefined"){agenda=agenda+1;}
+ if(typeof($scope.suscripciones[i].cuentaF) != "undefined"){totalFacebook=totalFacebook+1;}
+    if ($scope.suscripciones[i].tipo=='Odontologo'){
+      totalSuscripciones=totalSuscripciones+1;
+        // letra=$scope.suscripciones[i].primerNombre.charAt(0);
         // if (letra=="A"){
-        //   $scope.agenda[indA]=$scope.miembros[i];indA=indA+1;
+        //   $scope.agenda[indA]=$scope.suscripciones[i];indA=indA+1;
         // }
     }    
-    if ($scope.miembros[i].tipo=='Clinica/consultorio'){totalClinicasConsultorios=totalClinicasConsultorios+1};
-    if ($scope.miembros[i].tipo=='Asistente'){totalAsistentes=totalAsistentes+1;} 
-    if ($scope.miembros[i].status=='pendiente'){totalPendientes=totalPendientes+1;}    
-     if ($scope.miembros[i].status=='validado'){totalValidados=totalValidados+1;}  
+    if ($scope.suscripciones[i].tipoSuscripcion=='footer'){totalFooter=totalFooter+1};
+    if ($scope.suscripciones[i].tipoSuscripcion=='capacitacion'){totalCapacitacion=totalCapacitacion+1;} 
+        if ($scope.suscripciones[i].tipoSuscripcion=='incompany'){totalIncompany=totalIncompany+1;} 
+    if ($scope.suscripciones[i].status=='pendiente'){totalPendientes=totalPendientes+1;}    
+     if ($scope.suscripciones[i].status=='validada'){totalValidados=totalValidados+1;}  
  }
   $scope.totalPendientes=totalPendientes;
- $scope.totalOdontologos=totalOdontologos;
- $scope.totalAsistentes=totalAsistentes;
+ $scope.totalSuscripciones=totalSuscripciones;
+ $scope.totalCapacitacion=totalCapacitacion;
   $scope.totalFacebook=totalFacebook;
    $scope.totalInstagram=totalInstagram;
- $scope.totalClinicasConsultorios=totalClinicasConsultorios;
+ $scope.totalFooter=totalFooter;
  $scope.totalValidados=totalValidados;
- $scope.app.porcentajeOdontologos=(totalValidados/totalOdontologos)*100;
+ $scope.app.porcentajeOdontologos=(totalValidados/totalSuscripciones)*100;
  $scope.agenda=agenda;
   });
 };
 
-// $scope.cargaInicial();
+$scope.cargaInicial();
 
 
 
 $scope.guardar = function(item){
     $scope.pop();
     item.status='actualizado';
-    $http.put('http://54.202.62.62:1346/miembro/'+MyService.data.idUsuario, item)
+    $http.put('http://54.202.62.62:1346/suscripcion/'+MyService.data.idUsuario, item)
     $state.go('app.dashboard-v1');
 };
   $scope.today = function() {
@@ -168,20 +172,20 @@ $scope.guardar = function(item){
       $scope.minDate = $scope.minDate ? null : new Date();
     };
     $scope.toggleMin();
-    $scope.totalMiembros=0;
+    $scope.totalSuscripciones=0;
     $scope.consultores=[];
-    $scope.cargaMiembros = function(){
-      $http.get('http://54.202.62.62:1346/miembro/').then(function (resp) {
-        $scope.miembros = resp.data.results;
+    $scope.cargaSuscripciones = function(){
+      $http.get('http://54.202.62.62:1346/suscripcion/').then(function (resp) {
+        $scope.suscripciones = resp.data.results;
         // for (var i=0;i<$scope.consultores.length;++i){
         //   if($scope.consultores[i].sexo=='Macho'){
         //     $scope.consultores.push($scope.consultores[i]);
         //   }
         // }
-        $scope.totalMiembros=$scope.miembros.length;
+        $scope.totalSuscripciones=$scope.suscripciones.length;
       });
     };
-  // $scope.cargaMiembros();
+  // $scope.cargaSuscripciones();
   $scope.openContacto = function () {
 
 // var dato="";

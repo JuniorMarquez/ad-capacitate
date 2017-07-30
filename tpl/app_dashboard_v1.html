@@ -14,7 +14,7 @@
         <div class="col-sm-6 text-right hidden-xs">
         
           <div class="inline text-left">
-            <div class="m-b-xs">{{totalMiembros}} <span class="text-muted">Suscripciones</span></div>
+            <div class="m-b-xs">{{total}} <span class="text-muted">Suscripciones</span></div>
             <div ng-init="data2=[ 105,102,106,107,105,104,101,99,98,109,105,100,108,110,105,110,109 ]" 
               ui-jq="sparkline" 
               ui-options="{{data2}}, {type:'bar', height:20, barWidth:5, barSpacing:1, barColor:'#dce5ec'}" 
@@ -34,7 +34,7 @@
       
     </div>
 
-    <div class="wrapper-md" ng-show="totalOdontologos" ui-refresh="totalOdontologos" ng-controller="FlotChartDemoCtrl">
+    <div class="wrapper-md" ng-show="suscripciones" ui-refresh="totalSuscripciones" ng-controller="FlotChartDemoCtrl">
       <!-- stats -->
       <div class="row">
         <div class="col-md-6">
@@ -42,27 +42,27 @@
           <div class="row row-sm text-center">
 
             <div class="col-xs-6">
-                <a ui-sref="app.miembros" class="block panel padder-v bg-warning item" >
-                <span class="text-white font-thin h1 block">{{totalPendientes}}</span>
-                <span class="text-muted text-xs">Miembros por validar</span>
+                <a ui-sref="app.suscripciones" class="block panel padder-v bg-warning item" >
+                <span class="text-white font-thin h1 block">{{total}}</span>
+                <span class="text-muted text-xs">suscripciones</span>
                 <span class="bottom text-right w-full">
-                  <i class="icon-users  text-muted m-r-sm"></i>
+                  <i class="fa  fa-rss-square text-muted m-r-sm"></i>
                 </span>
               </a>
             </div>
             <div class="col-xs-6">
-              <a ui-sref="apps.profesionales" class="block panel padder-v bg-primary item" >
-                <span class="text-white font-thin h1 block">{{totalOdontologos}}</span>
-                <span class="text-muted text-xs">Odontólogos</span>
+              <a ui-sref="apps.suscripciones" class="block panel padder-v bg-primary item" >
+                <span class="text-white font-thin h1 block">{{totalPendientes}}</span>
+                <span class="text-muted text-xs">Suscripciones por Aceptar</span>
                 <span class="bottom text-right w-full">
-                  <i class="icon-users  text-muted m-r-sm"></i>
+                  <i class="fa  fa-rss  text-muted m-r-sm"></i>
                 </span>
               </a>
             </div>
             <div class="col-xs-6">
               <a href class="block panel padder-v bg-info item">
-                <span class="text-white font-thin h1 block">{{totalAsistentes}}</span>
-                <span class="text-muted text-xs">Asistentes</span>
+                <span class="text-white font-thin h1 block">{{totalCapacitacion}}</span>
+                <span class="text-muted text-xs">Suscripciones en Capacitaciones</span>
                 <span class="top text-left">
                   <i class="fa fa-caret-up text-warning m-l-sm"></i>
                 </span>
@@ -70,8 +70,8 @@
             </div>
             <div class="col-xs-6">
               <div class="panel padder-v item">
-                <div class="font-thin h1">{{totalClinicasConsultorios}}</div>
-                <span class="text-muted text-xs">Clínicas / Consultorios</span>
+                <div class="font-thin h1">{{totalFooter}}</div>
+                <span class="text-muted text-xs">Suscripciones en Pie de Pagina</span>
                 <div class="bottom text-left">
                   <i class="fa fa-caret-up text-warning m-l-sm"></i>
                 </div>
