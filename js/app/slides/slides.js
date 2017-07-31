@@ -35,13 +35,13 @@ app.controller('SlidesCtrl', ['$scope', '$state','$http', '$filter', '$modal', '
   $scope.mensajePrenez = 'Registrar / anular estado de preñéz del consultor';
    
 
-$scope.cargaFacilitadores=function () {
-    $http.get('http://54.202.62.62:1346/facilitador/').then(function (resp) {
+$scope.cargaSlides=function () {
+    $http.get('http://54.202.62.62:1346/slide/').then(function (resp) {
       $scope.items = resp.data.results;
       // alert("aqui");
        for (var i = 0; i < $scope.items.length; ++i) {
         
-        $scope.items[i].img2="js/controllers/uploads/facilitadores/uploads/"+$scope.items[i].img;
+        $scope.items[i].img2="js/controllers/uploads/slides/uploads/"+$scope.items[i].img;
         $scope.items[i].img=$scope.items[i].img2;
       
     }    
@@ -51,7 +51,7 @@ $scope.cargaFacilitadores=function () {
 
 
 
-$scope.cargaFacilitadores();
+$scope.cargaSlides();
 
   $scope.today = function() {
     $scope.fechaNacimiento = new Date();

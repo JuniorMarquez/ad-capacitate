@@ -4800,6 +4800,13 @@ a.text-#000000:hover {
   border-radius: 500px;
 }
 
+.avatar2 {
+  position: relative;
+  display: block;
+  white-space: nowrap;
+  /*border-radius: 500px;*/
+}
+
 .avatar img {
   width: 100%;
   border-radius: 500px;
@@ -4879,6 +4886,9 @@ a.text-#000000:hover {
 .w-sm {
   width: 150px;
 }
+.w-sm4 {
+  width: 900px;
+}
 .w-sm3 {
   width: 10px;
 }
@@ -4957,6 +4967,10 @@ a.text-#000000:hover {
 .thumb-xl {
   display: inline-block;
   width: 128px;
+}
+.thumb-xl2 {
+  display: inline-block;
+  width: 600px;
 }
 
 .thumb-lg {
