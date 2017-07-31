@@ -26,6 +26,7 @@
     "DISCOS" : "Discos",
     "WIDGETS" : "Widgets",
         "FACILITADORES":"Facilitadores",
+        "SLIDES":"Slides",
          "SUSCRIPCIONES":"Suscripciones",
     "Consultores" : {
       "Consultores" : "Consultores",
