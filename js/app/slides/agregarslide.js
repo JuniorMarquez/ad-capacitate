@@ -67,7 +67,7 @@ var uploader = $scope.uploader = new FileUploader({
     title3: 'Información',
     
       typeNF: 'success',
-    textNF: 'Facilitador agregado con exito',
+    textNF: 'Slide agregada con exito',
     titleNF: 'Exito',
     
     type5: 'info',
@@ -129,7 +129,7 @@ var uploader = $scope.uploader = new FileUploader({
   $scope.pop2 = function(){
     toaster.pop($scope.toaster.type3, $scope.toaster.title3, $scope.toaster.text3);
   };
- $scope.popNuevoFacilitador = function(){
+ $scope.popNuevaSlide = function(){
     toaster.pop($scope.toaster.typeNF, $scope.toaster.titleNF, $scope.toaster.textNF);
   };
   $scope.pop4 = function(){
@@ -198,16 +198,16 @@ var uploader = $scope.uploader = new FileUploader({
     $scope.address.selected = undefined;
     $scope.country.selected = undefined;
   };
-  $scope.guardarFacilitador = function(item){
-     var facilitadorAct = {};
-    facilitadorAct=item;
+  $scope.guardarSlide = function(item){
+     var slideAct = {};
+    slideAct=item;
     
-    facilitadorAct.img=MyService.data.nombreImagen
+    slideAct.img=MyService.data.nombreImagen
 
-    facilitadorAct.idUsuario=MyService.data.idUsuario;
+    slideAct.idUsuario=MyService.data.idUsuario;
   
-      $scope.popNuevoFacilitador();
-      $http.post('http://54.202.62.62:1346/facilitador/', facilitadorAct).success(function(data){
+      $scope.popNuevaSlide();
+      $http.post('http://54.202.62.62:1346/slide/', slideAct).success(function(data){
           $state.go('apps.facilitadores'); 
       });
   };
