@@ -677,6 +677,13 @@ typeSB: 'info',
       $scope.item = null; 
       $modalInstance.close();
     };
+     $scope.okConfirmSlide = function (item) { 
+      var idSlide=MyService.data.identificadorSlide;
+      $http.delete('http://54.202.62.62:1346/slide/'+idSlide , item)
+      $scope.items = null;
+      $scope.item = null; 
+      $modalInstance.close();
+    };
 
     $scope.okConfirm2 = function (item) { 
      var idEspecialidad=MyService.data.identificador;

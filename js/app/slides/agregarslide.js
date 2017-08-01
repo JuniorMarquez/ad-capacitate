@@ -208,7 +208,7 @@ var uploader = $scope.uploader = new FileUploader({
   
       $scope.popNuevaSlide();
       $http.post('http://54.202.62.62:1346/slide/', slideAct).success(function(data){
-          $state.go('apps.facilitadores'); 
+          $state.go('apps.slides'); 
       });
   };
 

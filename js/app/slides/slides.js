@@ -6,9 +6,9 @@ app.controller('SlidesCtrl', ['$scope', '$state','$http', '$filter', '$modal', '
   var datosCuenta="";
   $scope.toaster = {
         
-    type3: 'info',
-    text3: 'El profesional ha sido borrado',
-    title3: 'Información',
+    typeBS: 'info',
+    textBS: 'El Slide ha sido borrado',
+    titleBS: 'Información',
     
     type4: 'success',
     text4: 'Profesional agregado con exito',
@@ -93,8 +93,8 @@ $scope.cargaSlides();
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
-  $scope.pop2 = function(){
-    toaster.pop($scope.toaster.type3, $scope.toaster.title3, $scope.toaster.text3);
+  $scope.popBS = function(){
+    toaster.pop($scope.toaster.typeBS, $scope.toaster.titleBS, $scope.toaster.textBS);
   };
   $scope.pop3 = function(){
     toaster.pop($scope.toaster.type4, $scope.toaster.title4, $scope.toaster.text4);
@@ -157,11 +157,11 @@ $scope.cargaSlides();
   };
 
 
-   $scope.openConfirmBorrarFacilitador = function (item) {
+   $scope.openConfirmBorrarSlide = function (item) {
     var identificador=item.id;
-    MyService.data.identificadorFacilitador = identificador;
+    MyService.data.identificadorSlide = identificador;
       var modalInstance = $modal.open({
-        templateUrl: 'modalConfirmBorrarFacilitador.html',
+        templateUrl: 'modalConfirmBorrarSlide.html',
         controller: 'ModalInstanceCtrl',
         size: 'sm',
         resolve: {
@@ -181,7 +181,7 @@ $scope.cargaSlides();
     modalInstance.result.then(function (selectedItem) {
       $scope.selected = selectedItem;
         $scope.item = null;  
-        $scope.pop2();
+        $scope.popBS();
         $scope.items.splice($scope.items.indexOf(selectedItem), 1);
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
