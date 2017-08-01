@@ -282,6 +282,7 @@ $scope.entrar2=function(item){
         datosContacto.telefonoMovil=respuesta.results[0].telefonoMovil;
         datosContacto.instagram=respuesta.results[0].instagram;  
         datosContacto.facebook=respuesta.results[0].facebook; 
+        datosContacto.twitter=respuesta.results[0].twitter; 
         datosContacto.contactoLineal=respuesta.results[0].contactoLineal; 
         datosContacto.emailContacto=respuesta.results[0].emailContacto; 
         
