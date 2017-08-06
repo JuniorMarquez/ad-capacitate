@@ -211,6 +211,7 @@ var uploader = $scope.uploader = new FileUploader({
     capacitacionAct.subtitulo=item.subtitulo;
     capacitacionAct.status=item.status;
     capacitacionAct.codigo=item.codigo;
+    capacitacionAct.inversion=item.inversion;
     capacitacionAct.area=item.area;
     capacitacionAct.tipoCapacitacion=item.tipoCapacitacion;
     capacitacionAct.tipoObligacion=item.tipoObligacion;
@@ -219,6 +220,7 @@ var uploader = $scope.uploader = new FileUploader({
     capacitacionAct.itemsContenido=item.itemsContenido;
     capacitacionAct.idUsuario=item.idUsuario;
     capacitacionAct.observaciones=item.observaciones;
+    capacitacionAct.duracion=item.duracion;
       $scope.pop3();
       $http.post('http://54.202.62.62:1346/capacitacion/', capacitacionAct).success(function(data){
           

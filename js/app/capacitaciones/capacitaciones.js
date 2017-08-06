@@ -611,6 +611,7 @@ $scope.carga();
     capacitacionAct.status=item.status;
     capacitacionAct.codigo=item.codigo;
     capacitacionAct.area=item.area;
+    capacitacionAct.inversion=item.inversion;
     capacitacionAct.tipoCapacitacion=item.tipoCapacitacion;
     capacitacionAct.tipoObligacion=item.tipoObligacion;
     capacitacionAct.img=MyService.data.nombreImagen

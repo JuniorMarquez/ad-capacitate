@@ -20,11 +20,11 @@
                       </p>Titulo o tema:
                       <input type="text" placeholder="Titulo" class="form-control  font-bold" ng-model="item.titulo" >
                     </div>
-                    <div class="col-sm-9" > 
+                    <div class="col-sm-8" > 
                       </p>Subtitulo:
                       <input type="text" placeholder="Subtitulo" class="form-control font-bold" ng-model="item.subtitulo" >
                     </div>
-                       <div class="col-sm-3" >
+                       <div class="col-sm-2" >
                       </p>Estado:
                       <ui-select ng-model="item.status" theme="bootstrap" >
                         <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
@@ -33,6 +33,10 @@
                         </ui-select-choices>
                       </ui-select>
                     </div> 
+                    <div class="col-sm-2" >
+                      </p>Inversion:
+                      <input type="number" placeholder="Iversion" class="form-control  font-bold" ng-model="item.inversion" >
+                    </div>
                      <div class="col-sm-6" >
                     </p>Tipo de Capacitación:
                     <ui-select ng-model="item.tipoCapacitacion" theme="bootstrap" >
@@ -159,8 +163,12 @@
                     </ui-select>
                   </div>  
        <div class="col-sm-12">
+     
+      </p>Duración:
+           <textarea class="form-control" rows="4" name="duracion"   ng-model="item.duracion" placeholder="Duración" required="true"></textarea>
+
       </p>Observaciones:
-           <textarea class="form-control" rows="4" name="observaciones"   ng-model="item.observaciones"placeholder="Observaciones" required="true"></textarea>
+           <textarea class="form-control" rows="4" name="observaciones"   ng-model="item.observaciones" placeholder="Observaciones" required="true"></textarea>
       </div>
            </div>
       <div class="m-t m-b">

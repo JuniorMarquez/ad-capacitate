@@ -174,12 +174,16 @@
                   <strong> Subtitulo: </strong>{{item.subtitulo}} 
                   <p></p>
                   <strong> Estado: </strong><span class="form-control-static" > {{item.status}}</span>
+                      <strong> Inversion: </strong><span class="form-control-static" > {{item.inversion}}</span>
                   <p></p>
                   <strong> Area de Conocimiento: </strong>
                   <span class="form-control-static" >{{item.area}} .</span>
                    <p></p>
                   <strong> Obligación empresarial: </strong>
-                  <span class="form-control-static" >{{item.tipoObligacion}} .</span>        
+                  <span class="form-control-static" >{{item.tipoObligacion}} .</span>    
+                   <p></p>
+                  <strong> Duración: </strong>
+                  <span class="form-control-static" >{{item.duracion}} .</span>        
                 </div>        
 
                 
@@ -214,11 +218,11 @@
                 <div class="colEditada v-middle font-thin">                     
                   <div ng-show="item.editing" class="h5">
                    
-                   <div class="col-sm-6" ng-show="item.editing">
+                   <div class="col-sm-3" ng-show="item.editing">
                    <p>Código:</p>
                     <input type="text" placeholder="COD" class="form-control w-auto  font-bold" ng-model="item.codigo" >
                     </div>
-                       <div class="col-sm-4" ng-show="item.editing">
+                       <div class="col-sm-3" ng-show="item.editing">
                       <p>Estado:</p>
                       <ui-select ng-model="item.status" theme="bootstrap" ng-show="item.editing">
                         <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
@@ -227,6 +231,10 @@
                         </ui-select-choices>
                       </ui-select>
                     </div> 
+                     <div class="col-sm-3" ng-show="item.editing">
+                   <p>Inversion:</p>
+                    <input type="number" placeholder="Inversion" class="form-control w-auto  font-bold" ng-model="item.inversion" >
+                    </div>
                   </div>
                   <div class="row col-sm-12">
                     
